@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:20:30 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/12 17:13:22 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/12 20:29:31 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void ft_init(t_game *game)
 {
+	game->total_color_num = 0;
 	game->path_num = 0;
 	game->texture_num[NO] = 0;
 	game->texture_num[SO] = 0;

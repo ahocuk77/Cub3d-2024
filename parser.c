@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 14:00:34 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/11 15:22:41 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/12 19:46:35 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 void	parser(t_game *game, int fd)
 {
 	p_texture(game, fd);
-	//p_color(game);
+	p_color(game, fd);
 	close(fd);
 }

@@ -6,12 +6,12 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 14:52:16 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/12 16:59:39 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/12 19:49:44 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <string.h>
+
 int path_number_check(t_game *game, char *path)
 {
 	int i;
@@ -126,10 +126,10 @@ void	p_texture(t_game *game, int fd)
 	while(1)
 	{
 		str = get_next_line(fd);
-		printf("trim once: %s$\n", str);
+		// printf("trim once: %s$\n", str);
 		str = trimreplace(str, " \t\n");
-		printf("trim sonra: %s$\n", str);
-		printf("sifir %c$\n", str[0]);
+		// printf("trim sonra: %s$\n", str);
+		// printf("sifir %c$\n", str[0]);
 		if (ft_strlen(str) != 0 && put_texture(game, str, path) == -1)
 			return (free(str), exit(1));
 		if (game->texture_num[NO] == 1 && game->texture_num[SO] == 1 
@@ -138,7 +138,7 @@ void	p_texture(t_game *game, int fd)
 			free(str);
 			break ;
 		}
-		printf("String: %s\n", str);
+		// printf("String: %s\n", str);
 		free(str);
 	}
 }

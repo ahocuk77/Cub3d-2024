@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:20:43 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/12 16:46:28 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/12 19:51:29 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,14 @@ typedef struct s_wall
 	xpm_t			*xpm[4];
 }t_wall;
 
+typedef struct s_rgb
+{
+	int	r;
+	int	g;
+	int	b;
+}t_rgb;
+
+
 typedef struct s_game 
 {
 	mlx_image_t	*img;
@@ -48,6 +56,11 @@ typedef struct s_game
 	int			color_num;
 	char 		*path[4];
 	int 		path_num;
+	t_rgb		f_color;
+	t_rgb		c_color;
+	int			f_color_num;
+	int			c_color_num;
+	int			total_color_num;
 	
 
 }				t_game;
@@ -57,5 +70,6 @@ int main(int argc, char **argv);
 void	parser(t_game *game, int fd);
 void	p_texture(t_game *game, int fd);
 char	*trimreplace(char *str, char *set);
+void	p_color(t_game *game, int fd);
 
 #endif
