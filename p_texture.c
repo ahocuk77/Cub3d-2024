@@ -6,16 +6,27 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 14:52:16 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/12 14:52:39 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/12 16:59:39 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
+#include <string.h>
 int path_number_check(t_game *game, char *path)
 {
-	game->path[game->path_num] = path;
-	printf("path bu: %s\n", game->path[game->path_num]);
+	int i;
+	int len;
+
+	i =  0;
+	len = 0;
+	game->path[game->path_num] = ft_strdup(path);
+	while(i < game->path_num)
+	{
+		len = ft_strlen(path);
+		if(ft_strncmp(game->path[game->path_num], game->path[i], len) == 0)
+			return (-1);	
+		i++;
+	}
 	game->path_num++;
 	return(0);
 }
@@ -59,7 +70,7 @@ char	*t_valid_check(t_game *game, char *str)
 	else
 	{
 		ft_putendl_fd("wrong direction or missing direction!\n", 2);
-		exit(1);
+		return NULL;
 	}
 	if(game->texture_num[NO] >1 || game->texture_num[SO] >1 
 		||game->texture_num[WE] >1 || game->texture_num[EA] >1)
@@ -77,7 +88,10 @@ int put_texture(t_game *game, char *str, char *path)
 {
 	path = t_valid_check(game, str);
 	if(path == NULL || path_number_check(game, path) == -1)
+	{
+		printf("%s\n", "path error");
 		return(-1);
+	}
 	if(ft_strncmp(str, "NO", 2) == 0)
 	{
 		game->wall.xpm[NO] = mlx_load_xpm42(path);
