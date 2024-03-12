@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:20:43 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/11 21:14:40 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/12 14:51:23 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct s_game
 	int			texture_num[4];
 	t_wall		wall;
 	int			color_num;
+	char 		*path[4];
+	int 		path_num;
 	
 
 }				t_game;

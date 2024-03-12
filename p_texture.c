@@ -6,15 +6,18 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 14:52:16 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/11 21:12:13 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/12 14:52:39 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int path_number_check(char *path)
+int path_number_check(t_game *game, char *path)
 {
-	
+	game->path[game->path_num] = path;
+	printf("path bu: %s\n", game->path[game->path_num]);
+	game->path_num++;
+	return(0);
 }
 
 int path_check(char *path)
@@ -73,7 +76,7 @@ char	*t_valid_check(t_game *game, char *str)
 int put_texture(t_game *game, char *str, char *path)
 {
 	path = t_valid_check(game, str);
-	if(path == NULL || path_number_check(path) == -1)
+	if(path == NULL || path_number_check(game, path) == -1)
 		return(-1);
 	if(ft_strncmp(str, "NO", 2) == 0)
 	{
