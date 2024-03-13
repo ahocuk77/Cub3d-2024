@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 18:06:47 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/13 17:41:57 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/13 21:11:22 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char	*c_valid_check(t_game *game, char *str)
 		return NULL;
 	while(game->color_numb[i] != NULL)
 		if(ft_atoi(game->color_numb[i++]) > 255)
-			exit(1);
+			return (str + 2);
 	return (str);
 }
 
@@ -86,6 +86,13 @@ int put_color(t_game *game, char *str)
 
 	if(c_valid_check(game, str) == NULL)
 		return -1;
+	if(c_valid_check(game, str) == str + 2)
+	{
+		free(game->color_numb[0]);
+		free(game->color_numb[1]);
+		free(game->color_numb[2]);
+		return -1;
+	}
 	if(ft_strncmp(str, "F", 1) == 0)
 	{
 		game->f_color.r = ft_atoi(game->color_numb[0]);

@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:20:30 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/13 17:18:05 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/13 20:53:44 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,11 @@ int main(int argc, char **argv)
 		return 1;
 	}
 	parser(&game, fd);
+	if(game.texture_check == 1 || game.color_check == 1)
+	{
+		free_all(&game);
+		return 1;
+	}
 	//game.mlx = mlx_init(WIN_W, WIN_H, "cub3D", false);
 	//game.img = mlx_new_image(game.mlx, WIN_W, WIN_H);
 

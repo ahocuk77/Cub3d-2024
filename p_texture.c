@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 14:52:16 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/13 14:52:56 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/13 20:52:16 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,10 @@ void	p_texture(t_game *game, int fd)
 		str = get_next_line(fd);
 		str = trimreplace(str, " \t\n");
 		if (ft_strlen(str) != 0 && put_texture(game, str, path) == -1)
-			return (free(str), exit(1));
+		{
+			game->texture_check = 1;
+			return (free(str));
+		}
 		if (game->texture_num[NO] == 1 && game->texture_num[SO] == 1 
 			&& game->texture_num[WE] == 1 && game->texture_num[EA] == 1)
 		{
