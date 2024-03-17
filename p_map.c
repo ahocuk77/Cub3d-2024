@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 14:55:33 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/17 18:32:58 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/17 18:37:09 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int put_map(t_game *game, char *str, int line)
 	int result;
 	char **temp;
 	int lastsize;
-	// line = line + 0;
 
 	result = m_valid_check(game, str);
 	if(result == -1)
@@ -55,8 +54,8 @@ int put_map(t_game *game, char *str, int line)
 	lastsize = game->map.size;
 	game->map.size = ft_strlen(str) + game->map.size;
 	temp = malloc(sizeof(char *) * game->map.size);
-	memcpy(temp, game->map.map, sizeof(char *) * lastsize);
-	temp[line] = strdup(str);
+	ft_memcpy(temp, game->map.map, sizeof(char *) * lastsize);
+	temp[line] = ft_strdup(str);
 	free(game->map.map);
 	game->map.map = temp;
 	return 0;
@@ -73,10 +72,8 @@ char	*new_line_checker(t_game *game, int fd)
 		{
 			free(str);
 			str = get_next_line(fd);
-			printf("fd: %d\n", fd);
 		}
 		game->new_line_checker = true;
-		printf("Start: %s\n", str);
 	}
 	return (str);
 
@@ -89,7 +86,6 @@ void	p_map(t_game *game, int fd)
 
 	str = new_line_checker(game, fd);
 	line = 0;
-	printf("Start2: %s\n", str);
 	while(1)
 	{
 		if(game->new_line_checker != true)
