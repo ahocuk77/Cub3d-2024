@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 18:06:47 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/13 21:11:22 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/17 14:48:43 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,22 +71,29 @@ char	*c_valid_check(t_game *game, char *str)
         ft_putendl_fd("ERROR: Invalid format\n", 2);
         return NULL;
     }
+	printf("test0: %s\n", str);
 	if(game->c_color_num > 1 || game->f_color_num > 1)
 		return NULL;
 	if (take_color(game, str) == NULL)
 		return NULL;
+	printf("test1: %s\n", str);
 	while(game->color_numb[i] != NULL)
 		if(ft_atoi(game->color_numb[i++]) > 255)
+		{
+			printf("test: %s\n", str);
 			return (str + 2);
+		}
 	return (str);
 }
 
 int put_color(t_game *game, char *str)
 {
+	char *result;
 
-	if(c_valid_check(game, str) == NULL)
+	result = c_valid_check(game, str);
+	if(result == NULL)
 		return -1;
-	if(c_valid_check(game, str) == str + 2)
+	else if (result == str + 2)
 	{
 		free(game->color_numb[0]);
 		free(game->color_numb[1]);
@@ -123,6 +130,7 @@ void	p_color(t_game *game, int fd)
 		str = trimreplace(str, " \t\n");
 		if (ft_strlen(str) != 0 && put_color(game, str) == -1)
 		{
+			printf("String: %s\n", str);
 			printf("String: %s\n", "put color error");
 			game->color_check = 1;
 			free(str);

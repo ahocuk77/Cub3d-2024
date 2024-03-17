@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:20:30 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/13 20:53:44 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/17 18:30:29 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void ft_init(t_game *game)
 	game->texture_num[SO] = 0;
 	game->texture_num[WE] = 0;
 	game->texture_num[EA] = 0;
+	game->map.size = 0;
+	game->new_line_checker = false;
 }
 
 int	ft_cubcheck(char *map)
@@ -56,6 +58,14 @@ void	free_all(t_game *game)
 	mlx_delete_xpm42(game->wall.xpm[1]);
 	mlx_delete_xpm42(game->wall.xpm[2]);
 	mlx_delete_xpm42(game->wall.xpm[3]);
+	i = 0;
+	while(game->map.map[i] != NULL)
+	{
+		free(game->map.map[i]);
+		i++;
+		if(game->map.map[i] == NULL)
+			free(game->map.map);
+	}
 
 }
 

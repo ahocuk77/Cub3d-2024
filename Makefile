@@ -6,13 +6,13 @@
 #    By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/10 16:26:01 by ahocuk            #+#    #+#              #
-#    Updated: 2024/03/13 14:50:53 by ahocuk           ###   ########.fr        #
+#    Updated: 2024/03/17 14:56:01 by ahocuk           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .SILENT:
 
-SRC = main.c parser.c p_texture.c utils1.c p_color.c utils2.c\
+SRC = main.c parser.c p_texture.c utils1.c p_color.c p_map.c utils2.c\
 
 OBJ = $(SRC:.c=.o)
 

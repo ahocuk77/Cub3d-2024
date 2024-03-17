@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:20:43 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/13 15:29:39 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/17 18:29:57 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,15 @@ typedef struct s_rgb
 	int	b;
 }t_rgb;
 
+typedef struct s_map
+{
+	char	**map;
+	char	player;
+	int		size;
+
+}t_map;
+
+
 
 typedef struct s_game 
 {
@@ -64,7 +73,9 @@ typedef struct s_game
 	char		*color_numb[3];
 	int			color_check;
 	int			texture_check;
-	
+	int			map_check;
+	t_map		map;
+	bool		new_line_checker;
 
 }				t_game;
 
@@ -75,5 +86,6 @@ void	p_texture(t_game *game, int fd);
 char	*trimreplace(char *str, char *set);
 void	p_color(t_game *game, int fd);
 char	**ft_split_custom(char *s);
+void	p_map(t_game *game, int fd);
 
 #endif
