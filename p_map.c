@@ -6,12 +6,11 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 14:55:33 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/18 15:37:38 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/19 21:34:29 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <string.h>
 int	m_valid_check(t_game *game, char *str)
 {
 	int i;
@@ -81,16 +80,25 @@ char	*new_line_checker(t_game *game, int fd)
 void	p_map(t_game *game, int fd)
 {
 	char *str;
+	int tmp;
 
 	str = new_line_checker(game, fd);
+	game->width = ft_strlen(str);
 	while(1)
 	{
 		if(game->new_line_checker != true)
 			str = get_next_line(fd);
 		game->new_line_checker = false;
 		str = trimreplace(str, "\0\n");
+		str = ft_strtrim_end(str);
 		if(str == NULL)
 			break ;
+		tmp = ft_strlen(str);
+		if(game->width < tmp)
+		{
+			game->width = ft_strlen(str);
+			while(str[])
+		}
 		if (ft_strlen(str) != 0 && put_map(game, str, game->height) == -1)
 		{
 			printf("String: %s\n", "put map error");
@@ -101,4 +109,5 @@ void	p_map(t_game *game, int fd)
 		free(str);
 		game->height++;
 	}
+	printf("width: %d\n", game->width);
 }

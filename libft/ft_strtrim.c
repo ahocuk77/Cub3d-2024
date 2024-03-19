@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 16:24:25 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/11 15:15:16 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/19 21:29:07 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,17 @@ char	*ft_strtrim(const char *s1, const char *set)
 		--end;
 	ab = ft_substr(start, 0, end - start);
 	return (ab);
+}
+
+char *ft_strtrim_end(const char *s1)
+{
+    if (!s1)
+        return NULL;
+
+    char *end = (char *)s1 + ft_strlen(s1) - 1;
+    
+    while (end >= s1 && (*end == ' '))
+        --end;
+
+    return ft_substr(s1, 0, end - s1 + 1);
 }

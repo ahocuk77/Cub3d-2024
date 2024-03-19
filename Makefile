@@ -6,14 +6,14 @@
 #    By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/10 16:26:01 by ahocuk            #+#    #+#              #
-#    Updated: 2024/03/17 18:42:55 by ahocuk           ###   ########.fr        #
+#    Updated: 2024/03/19 19:25:14 by ahocuk           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .SILENT:
 
 SRC = main.c parser.c p_texture.c utils1.c p_color.c p_map.c utils2.c \
-		map_check.c\
+		map_check.c horizontal_check.c vertical_check.c\
 
 OBJ = $(SRC:.c=.o)
 
@@ -28,7 +28,7 @@ NAME = cub3D
 
 CC		= 	cc
 RM		=   rm -f
-CFLAGS	= -Wall -Werror -Wextra 
+CFLAGS	= -Wall -Werror -Wextra -g
 
 all: $(NAME)
 

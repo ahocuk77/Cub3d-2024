@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 23:24:27 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/11 14:35:44 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/19 21:29:12 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,5 +131,5 @@ char	*ft_strjoin_gnl(char const *s1, char const *s2);
 int		read_to_buf(char **left, char **line, char **p_n, int *fd);
 char	*check_left(char **left, char **line, char **p_n);
 char	*get_next_line(int fd);
-
+char *ft_strtrim_end(const char *s1);
 #endif

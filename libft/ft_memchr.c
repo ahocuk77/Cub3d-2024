@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 15:18:24 by ahocuk            #+#    #+#             */
-/*   Updated: 2022/11/01 17:56:08 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/19 13:55:56 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*ft_memchr(const void *ptr, int c, size_t n)
 	{
 		if (((unsigned char *)ptr)[a] == (unsigned char)c)
 			return ((void *)(ptr + a));
-			a++;
+		a++;
 	}
 	return (0);
 }
