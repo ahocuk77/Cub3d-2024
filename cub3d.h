@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:20:43 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/17 18:29:57 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/18 15:31:10 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ typedef struct s_map
 
 typedef struct s_game 
 {
+	int			height;
+	int			len;
 	mlx_image_t	*img;
 	mlx_t		*mlx;
 	int			texture_num[4];
@@ -76,16 +78,15 @@ typedef struct s_game
 	int			map_check;
 	t_map		map;
 	bool		new_line_checker;
-
 }				t_game;
 
-int	ft_cubcheck(char *map);
-int main(int argc, char **argv);
+int		main(int argc, char **argv);
 void	parser(t_game *game, int fd);
 void	p_texture(t_game *game, int fd);
 char	*trimreplace(char *str, char *set);
 void	p_color(t_game *game, int fd);
 char	**ft_split_custom(char *s);
 void	p_map(t_game *game, int fd);
+void	map_check(t_game *game);
 
 #endif

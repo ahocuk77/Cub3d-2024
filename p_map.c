@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 14:55:33 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/17 18:37:09 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/18 15:37:38 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	m_valid_check(t_game *game, char *str)
 	int i;
 
 	i = 0;
-
 	if(str[0] == '\n')
 	{
 		printf("String: %s\n", "empty line");
@@ -82,10 +81,8 @@ char	*new_line_checker(t_game *game, int fd)
 void	p_map(t_game *game, int fd)
 {
 	char *str;
-	int line;
 
 	str = new_line_checker(game, fd);
-	line = 0;
 	while(1)
 	{
 		if(game->new_line_checker != true)
@@ -94,7 +91,7 @@ void	p_map(t_game *game, int fd)
 		str = trimreplace(str, "\0\n");
 		if(str == NULL)
 			break ;
-		if (ft_strlen(str) != 0 && put_map(game, str, line) == -1)
+		if (ft_strlen(str) != 0 && put_map(game, str, game->height) == -1)
 		{
 			printf("String: %s\n", "put map error");
 			game->map_check = 1;
@@ -102,6 +99,6 @@ void	p_map(t_game *game, int fd)
 			break ;
 		}
 		free(str);
-		line++;
+		game->height++;
 	}
 }

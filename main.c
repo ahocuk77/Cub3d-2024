@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:20:30 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/17 18:30:29 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/18 18:09:14 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void ft_init(t_game *game)
 	game->texture_num[EA] = 0;
 	game->map.size = 0;
 	game->new_line_checker = false;
+	game->height = 0;
+	game->len = 0;
 }
 
 int	ft_cubcheck(char *map)
@@ -74,7 +76,7 @@ int main(int argc, char **argv)
 	t_game game;
 	int fd;	
 	
-	atexit(&leaks);
+	//atexit(&leaks);
 	if(argc != 2 || ft_cubcheck(argv[1]) == 1)
 	{
 		ft_putstr_fd("ERROR\n", 2);
