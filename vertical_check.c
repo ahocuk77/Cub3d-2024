@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 18:58:52 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/19 21:09:58 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/20 16:14:54 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,20 @@ int vertical_space_skip(t_game *game, int y) // dikey yap
 	int x;
 
 	x = 0;
-	if(game->map.map[x][y] == '\t' || game->map.map[x][y] == ' ')
+	if(game->map.map[x][y] == ' ')
 	{
-		while(game->map.map[x][y] == '\t' || game->map.map[x][y] == ' ')
+		while(game->map.map[x][y] == ' ')
 			x++;
 	}
-	printf("xxxxxx %d\n", x);
+	printf("x EXIT %d\n", x);
+	printf("y EXIT %d\n", y);
 	return (x);
 }
 
 int vertical_validate(t_game *game, int x, int y, int len)
 {
 	printf("start1 \n");
-	while((game->map.map[x][y] != ' ' && game->map.map[x][y] != '\t') && x < len)
+	while(game->map.map[x][y] != ' ' && x < len)
 		x++;
 	printf("start2 \n");
 	if(game->map.map[x][y] == '\t')
@@ -44,10 +45,10 @@ int vertical_validate(t_game *game, int x, int y, int len)
 	{
 		if(game->map.map[x][y] != '1')
 		{
-			while(game->map.map[x][y] == ' ' || game->map.map[x][y] == '\t' || game->map.map[x][y] == '\n')
+			while(game->map.map[x][y] == ' ')
 				x--;
 		}
-		if(game->map.map[x][y] == '1')
+		if(game->map.map[x][y] == '1' || game->map.map[x][y] == '\0' || game->map.map[x][y] == '\n' || y > game->leng)
 				return -2;
 		return -1;
 	}
@@ -60,7 +61,7 @@ int vertical_validate(t_game *game, int x, int y, int len)
 		x++;
 	printf("xxxxxx in : %d\n", x);
 	printf("start6 \n");
-	if(game->map.map[x][y] != '1')
+	if(game->map.map[x][y] != '1' && game->map.map[x][y] != '\0' && game->map.map[x][y] != '\n')
 	{
 		printf("start in 6 \n");
 		printf("xxxxxx in 6: %d\n", x);
@@ -80,11 +81,16 @@ int vertical_validate(t_game *game, int x, int y, int len)
 				return x;
 			}
 			else
+			{
+				printf("start in 3333\n");
 				return -1;
-			printf("start in 3333\n");
+			}
 		}
 		else
+		{
+			printf("start in 55555\n");
 			return -1;
+		}
 	}
 	printf("start7 \n");
 	return x;
@@ -100,14 +106,13 @@ int vertical_length(char **map, int y)
     return length;
 }
 
-void	print_map(t_game *game)
-{
-	for (int row = 0; row < game->width -1; ++row) {
-		for (int col = 0; col < game->height -1 ; ++col) {
-			printf("%3d", game->map.map[row][col]);
-		}
-		printf("\n");
-	}
+
+int length_calc(char **map, int x) {
+    int length = 0;
+    while (map[x][length] != '\0') {
+        length++;
+    }
+    return length;
 }
 
 int vertical_check(t_game *game)
@@ -120,7 +125,10 @@ int vertical_check(t_game *game)
 	{
 		printf("String: %s\n", "vertical_check start");
 		x = vertical_space_skip(game, y);
-		if(game->map.map[x][y] != '1')
+		game->leng = length_calc(game->map.map, x);
+		printf("game->len:  %d\n", game->len);
+		printf("y return;  %3d\n", y);
+		if(game->map.map[x][y] != '1' && y < game->leng -2)
 		{
 			printf("y return;  %3d\n", y);
 			printf("x return;  %3d\n", x);
@@ -136,9 +144,13 @@ int vertical_check(t_game *game)
 		printf("game->len:  %d\n", game->len);
 		while(x <= game->len)
 		{
+			game->leng = length_calc(game->map.map, x);
 			printf("String: %s\n", "vertical_validate start");
 			if (vertical_validate(game, x, y, game->len) == -1)
 			{
+				printf("y return;  %3d\n", y);
+				printf("x return;  %3d\n", x);
+				printf("game->map.map[x][y];  %d\n", game->map.map[x][y]);
 				printf("return 2; \n");
 				return -1;
 			}

@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:20:30 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/18 18:09:14 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/20 13:08:09 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,16 @@ void	free_all(t_game *game)
 	mlx_delete_xpm42(game->wall.xpm[1]);
 	mlx_delete_xpm42(game->wall.xpm[2]);
 	mlx_delete_xpm42(game->wall.xpm[3]);
+	printf("%s\n", "walls deleted");
 	i = 0;
+	if(game->map.map == NULL)
+		return;
 	while(game->map.map[i] != NULL)
 	{
 		free(game->map.map[i]);
 		i++;
+
+		printf("%s\n", "map deleted");
 		if(game->map.map[i] == NULL)
 			free(game->map.map);
 	}

@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:20:43 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/19 19:24:38 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/20 14:57:03 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_game
 	int			height;
 	int			width;
 	int			len;
+	int			leng;
 	mlx_image_t	*img;
 	mlx_t		*mlx;
 	int			texture_num[4];
