@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 18:58:52 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/21 15:27:16 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/21 21:15:56 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int vertical_validate(t_game *game, int x, int y, int len)
  	printf("x return;  %3d\n", x);
 	if(x >= len)
 	{
-		if(game->map.map[x][y] != '1' && x < game->leng -1)
+		if(game->map.map[x][y] != '1' && x < game->len_width -1)
 		{
 			while(game->map.map[x][y] == ' ' || game->map.map[x][y] == '\0' || game->map.map[x][y] == '\n')
 				x--;
@@ -71,7 +71,7 @@ int vertical_validate(t_game *game, int x, int y, int len)
 	else
 	{
 		if(game->map.map[x][y] == ' ')
-			while(game->map.map[x][y] == ' ' && x < game->len )
+			while(game->map.map[x][y] == ' ' && x < game->len_width )
 				x++;
 		return x;
 	}
@@ -113,22 +113,22 @@ int vertical_check(t_game *game)
 	while(y < game->width)
 	{
 		x = vertical_space_skip(game, y);
-		game->leng = horizontal_length(game->map.map, x);
+		game->len_width = horizontal_length(game->map.map, x);
 		if(game->map.map[x][y] != '1' && y > game->width)
 			return -1;
 		printf("test\n");
-		game->len = vertical_length(game->map.map, y);
-		while(x <= game->len)
+		game->len_height = vertical_length(game->map.map, y);
+		while(x <= game->len_width)
 		{
 			printf("y return;  %3d\n", y);
  			printf("x return;  %3d\n", x);
 			printf("game->map.map[x][y];  %3d\n", game->map.map[x][y]);
-			if (vertical_validate(game, x, y, game->len) == -1)
+			if (vertical_validate(game, x, y, game->len_height) == -1)
 				return -1;
-			else if (vertical_validate(game, x, y, game->len) == -2)
+			else if (vertical_validate(game, x, y, game->len_height) == -2)
 				break;
 			else
-				x = vertical_validate(game, x, y, game->len);
+				x = vertical_validate(game, x, y, game->len_height);
 		}
 		y++;
 	}
