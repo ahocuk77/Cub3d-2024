@@ -1,0 +1,55 @@
+NAME				:= ex03
+
+CXX					:= g++
+
+CXXFLAGS			:= -std=c++98 -pedantic -Wall -Wextra -Werror
+LDFLAGS				:= -std=c++98 -pedantic 
+HEADERS				:=	-I ./include
+
+ifdef FSAN0
+	CXXFLAGS		+= -g3 -fsanitize=address
+	LDFLAGS			+= -g3 -fsanitize=address
+	LDFLAGS			+= -L ../../LeakSanitizer -llsan -lc++ -Wno-gnu-include-next
+	HEADERS			+= -I ../../LeakSanitizer
+endif
+
+ifdef FSAN1
+	CXXFLAGS		+= -g3 -fsanitize=address
+	LDFLAGS			+= -g3 -fsanitize=address
+	LDFLAGS			+= -L ../../LeakSanitizer -llsan -Wno-gnu-include-next
+	HEADERS			+= -I ../../LeakSanitizer
+endif
+
+SRC_DIR				:= ./src/
+
+SRCS				:=	main.cpp \
+						AMateria.cpp \
+						Character.cpp \
+						Cure.cpp \
+						Ice.cpp \
+						MateriaSource.cpp
+
+OBJ_DIR				:= ./obj/
+
+OBJS				:= $(addprefix $(OBJ_DIR), $(SRCS:.cpp=.o))
+
+all:				$(NAME)
+
+$(NAME):			$(OBJ_DIR) $(OBJS)
+	$(CXX) $(OBJS) -o $(NAME) $(LDFLAGS) && echo "Compilation of $(NAME) is successful"
+
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
+
+$(OBJ_DIR)%.o:		$(SRC_DIR)%.cpp
+	$(CXX) $(CXXFLAGS) $(HEADERS) -c $< -o $@
+
+clean:
+	rm -rf $(OBJ_DIR)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re
