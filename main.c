@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:20:30 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/20 13:08:09 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/21 13:32:09 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,31 @@ void	free_all(t_game *game)
 
 	i = 0;
 
+	printf("%s\n", "memory free start");
 	while(i < game->path_num)
 	{
+		printf("%s\n", game->path[i]);
 		free(game->path[i]);
 		i++;
 	}
-	mlx_delete_xpm42(game->wall.xpm[0]);
-	mlx_delete_xpm42(game->wall.xpm[1]);
-	mlx_delete_xpm42(game->wall.xpm[2]);
-	mlx_delete_xpm42(game->wall.xpm[3]);
+	i = 0;
+	if(game->path_num < 4 && game->path_num != 0)
+	{
+		while(i < game->path_num -1)
+		{
+			mlx_delete_xpm42(game->wall.xpm[i]);
+			i++;
+		}
+		mlx_delete_xpm42(game->wall.xpm[i]);
+	}
+	else
+	{
+		while(i < game->path_num)
+		{
+			mlx_delete_xpm42(game->wall.xpm[i]);
+			i++;
+		}
+	}
 	printf("%s\n", "walls deleted");
 	i = 0;
 	if(game->map.map == NULL)
@@ -81,7 +97,7 @@ int main(int argc, char **argv)
 	t_game game;
 	int fd;	
 	
-	//atexit(&leaks);
+	atexit(&leaks);
 	if(argc != 2 || ft_cubcheck(argv[1]) == 1)
 	{
 		ft_putstr_fd("ERROR\n", 2);

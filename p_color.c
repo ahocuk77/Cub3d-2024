@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 18:06:47 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/18 16:28:08 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/21 13:44:41 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,13 @@ char *take_color(t_game *game, char *str)
 	while (str_new[j] != NULL)
 		free (str_new[j++]);
 	free (str_new);
-	if(game->total_color_num > 3 || game->total_color_num < 3)
+	j = 0;
+	if(game->total_color_num > 3 || game->total_color_num < 3) // updated
+	{
+		while(j < game->total_color_num)
+			free(game->color_numb[j++]);
 		return NULL;
+	}
 	game->total_color_num = 0;
 	return (str);
 }

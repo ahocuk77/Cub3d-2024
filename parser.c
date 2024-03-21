@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 14:00:34 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/18 15:36:01 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/20 19:54:13 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	parser(t_game *game, int fd)
 		close(fd);
 		return ;
 	}
+	printf("color%s\n", "enter");
 	p_color(game, fd);
 	if(game->color_check == 1)
 	{

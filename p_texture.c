@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 14:52:16 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/13 20:52:16 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/20 20:10:17 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ int path_number_check(t_game *game, char *path)
 	{
 		len = ft_strlen(path);
 		if(ft_strncmp(game->path[game->path_num], game->path[i], len) == 0)
+		{
+			game->path_num++;
 			return (-1);	
+		}
 		i++;
 	}
 	game->path_num++;
@@ -87,9 +90,13 @@ char	*t_valid_check(t_game *game, char *str)
 int put_texture(t_game *game, char *str, char *path)
 {
 	path = t_valid_check(game, str);
+	if(path == NULL)
+		return -1;
 	if(path == NULL || path_number_check(game, path) == -1)
 	{
-		printf("%s\n", "path error");
+		if(path == NULL && game->path_num != 0)
+
+			printf("%s\n", "path error");
 		return(-1);
 	}
 	if(ft_strncmp(str, "NO", 2) == 0)
