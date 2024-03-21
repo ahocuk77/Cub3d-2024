@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:20:30 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/21 13:32:09 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/21 14:08:48 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int main(int argc, char **argv)
 	t_game game;
 	int fd;	
 	
-	atexit(&leaks);
+	//atexit(&leaks);
 	if(argc != 2 || ft_cubcheck(argv[1]) == 1)
 	{
 		ft_putstr_fd("ERROR\n", 2);

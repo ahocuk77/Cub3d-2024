@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 14:55:33 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/20 13:05:58 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/21 14:56:06 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,16 @@ char	*new_line_checker(t_game *game, int fd)
 
 }
 
+size_t	ft_strlen2(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i] != '\0') // maybe we can add \n 
+		i++;
+	return (i);
+}
+
 void	p_map(t_game *game, int fd)
 {
 	char *str;
@@ -95,10 +105,10 @@ void	p_map(t_game *game, int fd)
 		//str = ft_strtrim_end(str);
 		if(str == NULL)
 			break ;
-		tmp = ft_strlen(str);
+		tmp = ft_strlen2(str);
 		if(game->width < tmp)
 		{
-			game->width = ft_strlen(str);
+			game->width = ft_strlen2(str);
 			//while(str[])
 		}
 		if (ft_strlen(str) != 0 && put_map(game, str, game->height) == -1)
