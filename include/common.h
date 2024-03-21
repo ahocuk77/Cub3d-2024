@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   common.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:23:46 by musenov           #+#    #+#             */
-/*   Updated: 2024/03/21 20:53:41 by musenov          ###   ########.fr       */
+/*   Updated: 2024/03/21 21:11:27 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ typedef struct s_game
 {
 	int			height;
 	int			width;
-	int			len;
-	int			leng;
+	int			len_width;
+	int			len_height;
 	mlx_image_t	*img;
 	mlx_t		*mlx;
 	int			texture_num[4];
