@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 23:24:27 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/21 19:58:09 by musenov          ###   ########.fr       */
+/*   Updated: 2024/03/21 20:41:51 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char			**ft_split(char const *s, char c);
 
 char			*ft_strchr(const char *s, int c);
 
-// char			*ft_strdup(const char *s1);
+char			*ft_strdup(const char *s1);
 
 char			*ft_strjoin(char const *s1, char const *s2);
 

@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 19:48:54 by musenov           #+#    #+#             */
-/*   Updated: 2024/03/21 19:58:00 by musenov          ###   ########.fr       */
+/*   Updated: 2024/03/21 20:55:23 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ gcc -Wall -Wextra -Werror -D BUFF_SIZE=42 bonus2.c
 #  define BUFFER_SIZE 41
 # endif
 
+# include "common.h"
+
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
@@ -34,7 +36,7 @@ gcc -Wall -Wextra -Werror -D BUFF_SIZE=42 bonus2.c
 size_t	ft_strlen(const char *str);
 char	*ft_strnew(size_t size);
 char	*ft_strchr(const char *s, int c);
-char	*ft_strdup(char *s1);
+// char	*ft_strdup(char *s1);
 char	*ft_strjoin_gnl(char const *s1, char const *s2);
 
 int		read_to_buf(char **left, char **line, char **p_n, int *fd);

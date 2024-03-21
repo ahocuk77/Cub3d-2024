@@ -1,12 +1,24 @@
 .SILENT:
 
-NAME				:= cub3d
+NAME				:= cub3D
 
 CC					:= gcc
 
 CFLAGS				:= -Wall -Werror -Wextra
 LDFLAGS				:= -flto -O3 -march=nocona
 HEADERS				:=	-I ./include -I ./lib/MLX42/include/MLX42/
+
+ifdef FSAN0
+	CFLAGS			+= -g3 -fsanitize=address
+	LDFLAGS			+= -g3 -fsanitize=address
+endif
+
+ifdef FSAN1
+	CFLAGS			+= -g3
+	LDFLAGS			+= -g3
+	LDFLAGS			+= -L ../LeakSanitizer -llsan -lc++ -Wno-gnu-include-next
+	HEADERS			+= -I ../LeakSanitizer
+endif
 
 ifdef FSAN
 	CFLAGS			+= -g3 -fsanitize=address
@@ -61,9 +73,6 @@ $(NAME):			$(OBJ_DIR) $(OBJS) $(LIBFT_LIB)
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
-# $(OBJ_DIR)%.o:		$(SRCS)%.c
-# 	$(CC) $(CFLAGS) $(HEADERS) $(LIBMLX42) $(LIBGLFW) -c $< -o $@
-
 $(OBJ_DIR)%.o: %.c
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
@@ -71,9 +80,6 @@ $(OBJ_DIR)%.o: %.c
 $(LIBFT_LIB):
 	make bonus -C $(LIBFT) && make clean -C $(LIBFT)
 	echo "LIBFT compiled successfully"
-
-# clean:
-# 	rm -rf $(OBJ_DIR)
 
 clean:
 	${MAKE} -C $(LIBFT) fclean
