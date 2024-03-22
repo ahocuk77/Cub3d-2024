@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 14:00:34 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/21 21:16:22 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/22 13:16:57 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,5 @@ void	parser(t_game *game, int fd)
 		return ;
 	}
 	close(fd);
-	//map_check(game);
+	map_check(game);
 }

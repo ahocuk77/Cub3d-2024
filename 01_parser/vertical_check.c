@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+	/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   vertical_check.c                                   :+:      :+:    :+:   */
@@ -17,18 +17,15 @@ int vertical_space_skip(t_game *game, int y) // dikey yap
 	int x;
 
 	x = 0;
-	if(game->map.map[x][y] == ' ')
-	{
-		while(game->map.map[x][y] == ' ')
-			x++;
-	}
+	while(game->map.map[x][y] != '1' && game->map.map[x][y] != '0') // add player 
+		x++;
 	printf("x EXIT %d\n", x);
 	printf("y EXIT %d\n", y);
 	return (x);
 }
 int horizontal_length(char **map, int x) {
     int length = 0;
-    while (map[x][length] != '\0') {
+    while (map[x][length] != '\0' && map[x][length] != '\n' ) {
         length++;
     }
     return length;
@@ -43,64 +40,64 @@ int vertical_length(char **map, int y)
 	length--;
     return length;
 }
-int vertical_validate(t_game *game, int x, int y, int len)
+int vertical_validate(t_game *game, int x, int y)
 {
-	printf("start1\n");
-	while(game->map.map[x][y] != ' ' && x < len)
+	int tmp;
+	printf("check start; \n");
+	while(x < game->height && game->map.map[x][y] != ' ')
+	{
+		printf("x++; \n");
+		printf("x; %d\n", x);
 		x++;
-	printf("startxx\n");
-	printf("y return;  %3d\n", y);
- 	printf("x return;  %3d\n", x);
-	if(x >= len)
-	{
-		if(game->map.map[x][y] != '1' && x < game->len_width -1)
+		printf("x artan deger; %d\n", x);
+		if(x >= game->height)
+			return x;
+		if(game->map.map[x][y] == '\n' || game->map.map[x][y] == '\0')
 		{
-			while(game->map.map[x][y] == ' ' || game->map.map[x][y] == '\0' || game->map.map[x][y] == '\n')
+			printf("girdi1; \n");
+			printf("x; %d\n", x);
+			printf("y; %d\n", y);
+			tmp = x;
+			while(x >= 0 && (game->map.map[x][y] == '\n' || game->map.map[x][y] == '\0'))
+			{
+				printf("x--; \n");
 				x--;
-		}
-		printf("game->map.map[x][y];  %3d\n", game->map.map[x][y]);
-		if(game->map.map[x][y] == '1')
-				return -2;
-		return -1;
-	}
-	printf("start2\n");
-	printf("y return;  %3d\n", y);
- 	printf("x return;  %3d\n", x);
-	if(game->map.map[x - 1][y] != '1')// check again
-	 	return -1;
-	else
-	{
-		if(game->map.map[x][y] == ' ')
-			while(game->map.map[x][y] == ' ' && x < game->len_width )
-				x++;
-		return x;
-	}
-	printf("start3\n");
-	exit(1);
-	while(game->map.map[x][y] == ' ' && x <= len)
-		x++;
-	if(game->map.map[x][y] != '1' && game->map.map[x][y] != '\0' && game->map.map[x][y] != '\n')
-	{
-		if (x == len)
-		{
-			while(game->map.map[x][y] != '1')
-				x--;
+			}
+			printf("x; %d\n", x);
 			if(game->map.map[x][y] == '1')
 			{
-				while(x <= len)
+				printf("girdi; \n");
+				x = tmp;
+				while(x < game->height && game->map.map[x][y] != '1' && game->map.map[x][y] != '0')
 				{
+					printf("girdi x artti; \n");	
 					x++;
-					if(game->map.map[x][y] == '0')
-						return -1;
-				}
-				return x;
+				}	
+				printf("x  %d\n", x );
 			}
 			else
 				return -1;
 		}
-		else
-			return -1;
+		if(x < game->height && game->map.map[x][y] == ' ')
+		{
+			printf("space if girdi; \n");
+			if(game->map.map[x-1][y] != '1')
+				return -1;
+			else
+			{
+				printf(" segmentation fault0; \n");
+				while(x < game->height && game->map.map[x][y] == ' ')
+					x++;
+				printf(" segmentation fault1; \n");
+				printf("xxxxxx; %d\n", x);
+				if(x < game->height &&game->map.map[x][y] != '1')
+					return -1;
+				printf(" segmentation fault1; \n");
+			}
+		}
+		printf("after if; \n");
 	}
+	printf("return; \n");
 	return x;
 }
 
@@ -114,33 +111,46 @@ int vertical_check(t_game *game)
 	{
 		x = vertical_space_skip(game, y);
 		game->len_width = horizontal_length(game->map.map, x);
-		if(game->map.map[x][y] != '1' && y > game->width)
+		if(game->map.map[x][y] != '1')// check later 
 			return -1;
-		printf("test\n");
-		game->len_height = vertical_length(game->map.map, y);
-		while(x <= game->len_width)
+		//game->len_height = vertical_length(game->map.map, y);
+		//printf("len_height; %d\n", game->len_height);
+		printf("game->height; %d\n", game->height);
+		printf("xxxxxx ilk; %d\n", x);
+		printf("game->map.map[x][y]  %d; %c\n",x, game->map.map[0][y] );
+		printf("game->map.map[x][y]  %d; %c\n",1, game->map.map[1][y] );
+		printf("game->map.map[x][y]  %d; %c\n",2, game->map.map[2][y] );
+		printf("game->map.map[x][y]  %d; %c\n",3, game->map.map[3][y] );
+		printf("game->map.map[x][y]  %d; %c\n",4, game->map.map[4][y] );
+		printf("game->map.map[x][y]  %d; %c\n",5, game->map.map[5][y] );
+		printf("game->map.map[x][y]  %d; %c\n",6, game->map.map[6][y] );
+		printf("game->map.map[x][y]  %d; %c\n",7, game->map.map[7][y] );
+		printf("game->map.map[x][y]  %d; %c\n",8, game->map.map[8][y] );
+		printf("game->map.map[x][y]  %d; %c\n",9, game->map.map[9][y] );
+		printf("game->map.map[x][y]  %d; %c\n",10, game->map.map[10][y] );
+		printf("game->map.map[x][y]  %d; %c\n",11, game->map.map[11][y] );
+		printf("height: %d\n", game->height);
+		//exit(1);
+		while(x < game->height)
 		{
-			printf("y return;  %3d\n", y);
- 			printf("x return;  %3d\n", x);
-			printf("game->map.map[x][y];  %3d\n", game->map.map[x][y]);
-			if (vertical_validate(game, x, y, game->len_height) == -1)
+			if (vertical_validate(game, x, y) == -1)
+			{
+				printf("y error ; %d\n", y);
+				printf("game->map.map[x][y] %c\n", game->map.map[x][y] );
 				return -1;
-			else if (vertical_validate(game, x, y, game->len_height) == -2)
-				break;
+			}
 			else
-				x = vertical_validate(game, x, y, game->len_height);
+			{
+				x = vertical_validate(game, x, y);
+			}
 		}
 		y++;
+		printf("y artti; %d\n", y);
+		// if(y > 41)
+		// 	exit(1);
 	}
 	return 0;
 }
-
-
-
-
-
-
-
 
 
 

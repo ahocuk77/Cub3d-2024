@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 14:55:33 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/21 14:56:06 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/22 15:38:05 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,16 @@ size_t	ft_strlen2(const char *s)
 	return (i);
 }
 
+void print_map(t_game *game) {
+    int x, y;
+    for (x = 0; x < game->height; x++) {
+        for (y = 0; y < game->width; y++) {
+            printf("%c", game->map.map[x][y]);
+        }
+        printf("\n");
+    }
+}
+
 void	p_map(t_game *game, int fd)
 {
 	char *str;
@@ -101,7 +111,8 @@ void	p_map(t_game *game, int fd)
 		if(game->new_line_checker != true)
 			str = get_next_line(fd);
 		game->new_line_checker = false;
-		str = trimreplace(str, "\0\n");
+		str = trimreplace(str, "\n");
+		printf("%s\n", str);
 		//str = ft_strtrim_end(str);
 		if(str == NULL)
 			break ;
@@ -122,4 +133,11 @@ void	p_map(t_game *game, int fd)
 		game->height++;
 	}
 	printf("width: %d\n", game->width);
+	printf("\n");
+	printf("\n");
+	printf("game->map.map[x][y]  %c\n", game->map.map[1][43] );
+	printf("\n");
+	printf("\n");
+	print_map(game);
+	exit(1);
 }
