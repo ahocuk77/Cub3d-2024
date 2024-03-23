@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 14:55:33 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/23 14:34:56 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/23 16:29:46 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,17 +93,6 @@ char	*new_line_checker(t_game *game, int fd)
 
 }
 
-
-void print_map(t_game *game) {
-    int x, y;
-    for (x = 0; x < game->height; x++) {
-        for (y = 0; y < game->width; y++) {
-            printf("%c", game->map.map[x][y]);
-        }
-        printf("\n");
-    }
-}
-
 void	p_map(t_game *game, int fd)
 {
 	char *str;
@@ -118,33 +107,20 @@ void	p_map(t_game *game, int fd)
 		game->new_line_checker = false;
 		str = trimreplace(str, "\n");
 		printf("%s\n", str);
-		//str = ft_strtrim_end(str);
 		if(str == NULL)
 			break ;
 		tmp = ft_strlen2(str);
 		if(game->width < tmp)
 		{
 			game->width = ft_strlen2(str);
-			//while(str[])
 		}
 		game->height++;
 		if (ft_strlen(str) != 0 && put_map(game, str, game->height) == -1)
 		{
-			printf("String: %s\n", "put map error");
 			game->map_check = 1;
 			free(str);
 			break ;
 		}
 		free(str);
 	}
-	printf("width: %d\n", game->width);
-	printf("\n");
-	printf("\n");
-	printf("game->map.map[x][y]  %s\n", game->map.map[0] );
-	printf("zozooz %c\n", game->map.map[7][40]);
-	printf("game->map.map[x][y] %c\n", game->map.map[2][54] );
-	printf("\n");
-	printf("\n");
-	//print_map(game);
-	//exit(1);
 }
