@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   common.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:23:46 by musenov           #+#    #+#             */
-/*   Updated: 2024/03/21 21:11:27 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/22 17:31:52 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@
 # ifndef PI
 #  define PI 3.141592
 # endif
+
+// #define BPP sizeof(int32_t)
+# define BPP 4
 
 typedef enum e_dir
 {
@@ -64,7 +67,8 @@ typedef struct s_game
 	int			width;
 	int			len_width;
 	int			len_height;
-	mlx_image_t	*img;
+	mlx_image_t	*img_up;
+	mlx_image_t	*img_down;
 	mlx_t		*mlx;
 	int			texture_num[4];
 	t_wall		wall;
