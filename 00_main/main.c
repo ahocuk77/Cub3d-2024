@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:20:30 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/22 20:17:58 by musenov          ###   ########.fr       */
+/*   Updated: 2024/03/25 13:14:28 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,23 +125,64 @@ int main(int argc, char **argv)
 
 */
 
-// unsigned int		color;
-
-int	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
+int	rgba_to_color(int32_t r, int32_t g, int32_t b, int32_t a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-// color = ft_pixel(127, 255, 212, 255);
+void	draw_background(t_game *game)
+{
+	int			x;
+	int			y;
+	int			color;
 
+	color = rgba_to_color(39, 181, 245, 200);
+	y = 0;
+	while (y < WIN_H / 2)
+	{
+		x = 0;
+		while (x < WIN_W)
+		{
+			mlx_put_pixel(game->img, x++, y, color);
+		}
+		y++;
+	}
+	color = rgba_to_color(6, 170, 85, 200);
+	while (y < WIN_H)
+	{
+		x = 0;
+		while (x < WIN_W)
+		{
+			mlx_put_pixel(game->img, x++, y, color);
+		}
+		y++;
+	}
+}
+
+void	print_map(t_game *game)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (game->map.map[i])
+	{
+		j = 0;
+		while (game->map.map[i][j])
+		{
+			printf ("%d", game->map.map[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
+}
 
 int main(int argc, char **argv)
 {
 	t_game				game;
 	int					fd;
-	// unsigned int		color;
 
-	//atexit(&leaks);
 	if(argc != 2 || ft_cubcheck(argv[1]) == 1)
 	{
 		ft_putstr_fd("ERROR\n", 2);
@@ -161,14 +202,10 @@ int main(int argc, char **argv)
 		return 1;
 	}
 	game.mlx = mlx_init(WIN_W, WIN_H, "cub3D", false);
-	game.img_up = mlx_new_image(game.mlx, WIN_W, WIN_H/2);
-	game.img_down = mlx_new_image(game.mlx, WIN_W, WIN_H/2);
-	// color = ft_pixel(47, 141, 255, 200);
-	ft_memset(game.img_up->pixels, 200, game.img_up->width * game.img_up->height * BPP);
-	// color = ft_pixel(127, 255, 212, 200);
-	ft_memset(game.img_down->pixels, 100, game.img_up->width * game.img_up->height * BPP);
-	mlx_image_to_window(game.mlx, game.img_up, 0, 0);
-	mlx_image_to_window(game.mlx, game.img_down, 0, WIN_H/2);
+	game.img = mlx_new_image(game.mlx, WIN_W, WIN_H);
+	mlx_image_to_window(game.mlx, game.img, 0, 0);
+	draw_background(&game);
+	print_map(&game);
 	// open_map_file(&game, check_argv(argv));
 	// player_position(&game);
 	// init_player_direction(&game);
@@ -177,12 +214,10 @@ int main(int argc, char **argv)
 	// mlx_scroll_hook(game.mlx, (mlx_scrollfunc)ft_scroll, &game);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
-
 	free_all(&game);
 	printf("%s\n", "cub3d closed");
 	return (0);
 }
-
 
 /*
 
@@ -209,11 +244,6 @@ t_render_exit_code	start_render(t_cub *data)
 }
 
 */
-
-
-
-
-
 
 /*
 
@@ -242,10 +272,6 @@ void	ft_hooks0(t_game *game)
 }
 
 */
-
-
-
-
 
 /*
 

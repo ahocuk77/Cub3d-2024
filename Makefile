@@ -8,6 +8,11 @@ CFLAGS				:= -Wall -Werror -Wextra
 LDFLAGS				:= -flto -O3 -march=nocona
 HEADERS				:=	-I ./include -I ./lib/MLX42/include/MLX42/
 
+ifdef debug
+	CFLAGS			+= -g3
+	LDFLAGS			+= -g3
+endif
+
 ifdef FSAN0
 	CFLAGS			+= -g3 -fsanitize=address
 	LDFLAGS			+= -g3 -fsanitize=address

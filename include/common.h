@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:23:46 by musenov           #+#    #+#             */
-/*   Updated: 2024/03/22 17:31:52 by musenov          ###   ########.fr       */
+/*   Updated: 2024/03/24 18:47:28 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,7 @@ typedef struct s_game
 	int			width;
 	int			len_width;
 	int			len_height;
-	mlx_image_t	*img_up;
-	mlx_image_t	*img_down;
+	mlx_image_t	*img;
 	mlx_t		*mlx;
 	int			texture_num[4];
 	t_wall		wall;
