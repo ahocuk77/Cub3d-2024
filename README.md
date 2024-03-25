@@ -1,26 +1,45 @@
-# Cub3d-2024
+void	add_line_to_map(t_game *game, char *str, int line)
+{
+	char	**temp;
+	int		i;
 
+	temp = game->map.map;
+	game->map.map = malloc (sizeof(char *) * (line + 1));
+	i = 0;
+	while (temp && temp[i])
+	{
+		game->map.map[i] = temp[i];
+		i++;
+	}
+	game->map.map[i] = str;
+	game->map.map[i + 1] = NULL;
+	free(temp);
+}
 
-11111111111111111111111111111111111111111111
+void	read_the_map(t_game *game, int fd, char *first_str)
+{
+	char	*str;
+	int		i;
+	int		line;
 
-111110000110000000001000000000000010000000011
-
-100000001010000000100000000000100000000111111
-
-100000001101000001101000000011110010000011
-
-10000000000000000011 1000000000001 100001
-
-1100000000100000000010000000000000100001
-
-1100010000000000000000000001000000000001
-
-11111 111000110000N00000000010000000000011111
-
-10000101100000110110000000110000100000000001
-
-1000001100000000000000000000000000000011111
-
-1000001 100000000000000000000000000000001
-
-1111111 11111111111111111111111111111111
+	str = first_str;
+	if (!str)
+		error_handler(game, NO_MAP);
+	while (str)
+	{
+		i = 0;
+		skip_spaces(str, &i);
+		if (str[i] != '\n' && str[i] != '\0')
+			break ;
+		else
+			free(str);
+		str = get_next_line(fd);
+	}
+	line = 0;
+	while (str)
+	{
+		line++;
+		add_line_to_map(game, delete_slash_n(str), line);
+		str = get_next_line(fd);
+	}
+}

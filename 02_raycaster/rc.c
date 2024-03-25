@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:15:33 by musenov           #+#    #+#             */
-/*   Updated: 2024/03/25 14:24:55 by musenov          ###   ########.fr       */
+/*   Updated: 2024/03/25 19:44:31 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,27 @@ void	print_map(t_game *game)
 		}
 		printf("\n");
 		i++;
+	}
+}
+
+void	player_position(t_game *game)
+{
+	int	x;
+	int	y;
+
+	y = -1;
+	while (++y < game->height)
+	{
+		x = -1;
+		while (++x < game->width)
+		{
+			if (game->map.map[y][x] == 'N' || game->map.map[y][x] == 'E' \
+			|| game->map.map[y][x] == 'S' || game->map.map[y][x] == 'W')
+			{
+				game->player.x = (double)x;
+				game->player.y = (double)y;
+				return ;
+			}
+		}
 	}
 }

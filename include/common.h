@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:23:46 by musenov           #+#    #+#             */
-/*   Updated: 2024/03/24 18:47:28 by musenov          ###   ########.fr       */
+/*   Updated: 2024/03/25 19:47:47 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,14 @@ typedef struct s_map
 	int		size;
 
 }	t_map;
+
+typedef struct s_player_data
+{
+	char	;
+	char	player;
+	int		size;
+
+}	t_player_data;
 
 typedef struct s_game
 {
