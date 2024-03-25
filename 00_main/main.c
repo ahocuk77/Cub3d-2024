@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:20:30 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/25 13:14:28 by musenov          ###   ########.fr       */
+/*   Updated: 2024/03/25 13:24:21 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,8 @@ void	print_map(t_game *game)
 		j = 0;
 		while (game->map.map[i][j])
 		{
-			printf ("%d", game->map.map[i][j]);
+			// printf ("%d", game->map.map[i][j]);
+			ft_putchar_fd(game->map.map[i][j], 1);
 			j++;
 		}
 		printf("\n");
