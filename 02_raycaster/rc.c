@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:15:33 by musenov           #+#    #+#             */
-/*   Updated: 2024/03/25 19:44:31 by musenov          ###   ########.fr       */
+/*   Updated: 2024/03/25 20:56:40 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	print_map(t_game *game)
 		j = 0;
 		while (game->map.map[i][j])
 		{
-			// printf ("%d", game->map.map[i][j]);
 			ft_putchar_fd(game->map.map[i][j], 1);
 			j++;
 		}
@@ -66,24 +65,55 @@ void	print_map(t_game *game)
 	}
 }
 
-void	player_position(t_game *game)
+void	player_position(t_game *game) // rewrite
 {
 	int	x;
 	int	y;
+	int	len;
 
 	y = -1;
 	while (++y < game->height)
 	{
 		x = -1;
-		while (++x < game->width)
+		len = ft_strlen(game->map.map[y]);
+		while (++x < len)
 		{
 			if (game->map.map[y][x] == 'N' || game->map.map[y][x] == 'E' \
 			|| game->map.map[y][x] == 'S' || game->map.map[y][x] == 'W')
 			{
-				game->player.x = (double)x;
-				game->player.y = (double)y;
+				game->player.pos.x = x;
+				game->player.pos.y = y;
 				return ;
 			}
 		}
 	}
+}
+
+void	init_player_direction(t_game *game)
+{
+	if (game->dir == WE || game->dir == EA)
+	{
+		game->player.dir_y = 0.0;
+		game->plane_x = 0.0;
+		game->player.dir_x = -1.0;
+		game->plane_y = -0.66;
+		if (game->dir == EA)
+		{
+			game->player.dir_x = 1.0;
+			game->plane_y = 0.66;
+		}
+	}
+	else if (game->dir == NO || game->dir == SO)
+	{
+		game->player.dir_x = 0.0;
+		game->plane_y = 0.0;
+		game->player.dir_y = -1.0;
+		game->plane_x = 0.66;
+		if (game->dir == SO)
+		{
+			game->player.dir_y = 1.0;
+			game->plane_x = -0.66;
+		}
+	}
+	keypress_right_rotate(game);
 }

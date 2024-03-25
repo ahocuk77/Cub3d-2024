@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_map.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 14:55:33 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/25 16:30:48 by musenov          ###   ########.fr       */
+/*   Updated: 2024/03/25 19:52:10 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,23 +79,36 @@ int put_map(t_game *game, char *str, int line)
 {
 	int result;
 	char **temp;
-	int lastsize;
+	//int lastsize;
 	result = m_valid_check(game, str);
 	if(result == -1)
 	{
 		return -1;
 	}
-	lastsize = game->map.size;
-	game->map.size = ft_strlen(str) + game->map.size;
-	temp = malloc(sizeof(char *) * game->map.size);
-	ft_memcpy(temp, game->map.map, sizeof(char *) * lastsize);
-	temp[line] = ft_strdup(str);
-	// game->map.map = NULL;
-	if (game->map.map != NULL)
-		free(game->map.map);
-	game->map.map = temp;
+	temp = game->map.map;
+	game->map.map = malloc (sizeof(char *) * (line + 1));
+	int i = 0;
+	while (temp && temp[i])
+	{
+		game->map.map[i] = temp[i];
+		i++;
+	}	
+	game->map.map[i] = str;
+	game->map.map[i + 1] = NULL;
+	free(temp);
+	// lastsize = game->map.size;
+	// game->map.size = ft_strlen(str) + game->map.size;
+	// temp = malloc(sizeof(char *) * game->map.size);
+	// ft_memcpy(temp, game->map.map, sizeof(char *) * lastsize);
+	// temp[line] = ft_strdup(str);
+	// // game->map.map = NULL;
+	// if (game->map.map != NULL)
+	// 	free(game->map.map);
+	// game->map.map = temp;
 	return 0;
 }
+
+
 
 char	*new_line_checker(t_game *game, int fd)
 {
@@ -115,6 +128,19 @@ char	*new_line_checker(t_game *game, int fd)
 
 }
 
+void delete_slash_n(char *str)
+{
+	char *current_line = str;
+	int i = 0;
+	while (current_line && current_line[i])
+	{
+        if (current_line[i] == '\n')
+           	current_line[i] = '\0';
+        i++;
+    }
+}
+
+
 void	p_map(t_game *game, int fd)
 {
 	char *str;
@@ -127,7 +153,9 @@ void	p_map(t_game *game, int fd)
 		if(game->new_line_checker != true)
 			str = get_next_line(fd);
 		game->new_line_checker = false;
-		str = trimreplace(str, "\n");
+		//tr = trimreplace(str, "\n");
+		delete_slash_n(str);
+		//exit(1);
 		printf("%s\n", str);
 		if(str == NULL)
 			break ;
@@ -136,15 +164,18 @@ void	p_map(t_game *game, int fd)
 		{
 			game->width = ft_strlen2(str);
 		}
+		game->height++;
 		if (ft_strlen(str) != 0 && put_map(game, str, game->height) == -1)
 		{
 			game->map_check = 1;
-			free(str);
+			// free(str);
 			break ;
 		}
-		game->height++;
-		free(str);
+		
+		// free(str);
 	}
+	//free(game->map.map[game->height]);	
+	printf("map %s\n", game->map.map[1]);
 }
 
 

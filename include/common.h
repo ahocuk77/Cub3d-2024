@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:23:46 by musenov           #+#    #+#             */
-/*   Updated: 2024/03/25 19:47:47 by musenov          ###   ########.fr       */
+/*   Updated: 2024/03/25 20:21:27 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,13 @@
 #  define PI 3.141592
 # endif
 
-// #define BPP sizeof(int32_t)
-# define BPP 4
-
 typedef enum e_dir
 {
 	NO,
 	SO,
 	WE,
 	EA,
-}	t_dir;
+}	t_direction;
 
 typedef struct s_wall
 {
@@ -61,38 +58,43 @@ typedef struct s_map
 
 }	t_map;
 
+typedef struct s_position
+{
+	int			x;
+	int			y;
+}	t_position;
+
 typedef struct s_player_data
 {
-	char	;
-	char	player;
-	int		size;
-
+	t_position		pos;
+	t_direction		dir;
 }	t_player_data;
 
 typedef struct s_game
 {
-	int			height;
-	int			width;
-	int			len_width;
-	int			len_height;
-	mlx_image_t	*img;
-	mlx_t		*mlx;
-	int			texture_num[4];
-	t_wall		wall;
-	int			color_num;
-	char		*path[4];
-	int			path_num;
-	t_rgb		f_color;
-	t_rgb		c_color;
-	int			f_color_num;
-	int			c_color_num;
-	int			total_color_num;
-	char		*color_numb[3];
-	int			color_check;
-	int			texture_check;
-	int			map_check;
-	t_map		map;
-	bool		new_line_checker;
+	int					height;
+	int					width;
+	int					len_width;
+	int					len_height;
+	mlx_image_t			*img;
+	mlx_t				*mlx;
+	int					texture_num[4];
+	t_wall				wall;
+	int					color_num;
+	char				*path[4];
+	int					path_num;
+	t_rgb				f_color;
+	t_rgb				c_color;
+	int					f_color_num;
+	int					c_color_num;
+	int					total_color_num;
+	char				*color_numb[3];
+	int					color_check;
+	int					texture_check;
+	int					map_check;
+	t_map				map;
+	bool				new_line_checker;
+	t_player_data		player;
 }	t_game;
 
 #endif

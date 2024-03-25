@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 18:42:13 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/25 16:20:53 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/25 17:48:17 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void replace_spaces_with_one(t_game *game) {
     int map_height = 0;
-    while (map_height < game->height) {
+    while (map_height < game->height -1) {
         char *current_line = game->map.map[map_height];
         // while (current_line && (*current_line != '\0'))
 		int len = ft_strlen(game->map.map[map_height]);
@@ -53,16 +53,16 @@ void replace_spaces_with_one(t_game *game) {
 void map_check(t_game *game)
 {
 	printf("String: %s\n", "mapcheck start");
-	if(horizontal_check(game) == -1)
-	{
-		printf("String: %s\n", "horizontal_check error");
-		exit(1);
-	}
-	printf("String: %s\n", "horizontal_check passed");
-	if(vertical_check(game) == -1)
-	{
-		printf("String: %s\n", "vertical_check error");
-		exit(1);
-	}
+	// if(horizontal_check(game) == -1)
+	// {
+	// 	printf("String: %s\n", "horizontal_check error");
+	// 	exit(1);
+	// }
+	// printf("String: %s\n", "horizontal_check passed");
+	// if(vertical_check(game) == -1)
+	// {
+	// 	printf("String: %s\n", "vertical_check error");
+	// 	exit(1);
+	// }
 	replace_spaces_with_one(game);
 }

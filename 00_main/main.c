@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:20:30 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/25 19:44:25 by musenov          ###   ########.fr       */
+/*   Updated: 2024/03/25 21:07:19 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,3 +53,5 @@ int	main(int argc, char **argv)
 	printf("%s\n", "cub3d closed");
 	return (0);
 }
+
+
