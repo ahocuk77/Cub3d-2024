@@ -6,12 +6,23 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 14:00:34 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/21 21:16:22 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/25 14:14:02 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+int	ft_cubcheck(char *map)
+{
+	int	len;
+
+	len = ft_strlen(map);
+	if (map[len - 1] != 'b' || map[len - 2] != 'u'
+		|| map[len - 3] != 'c' || map[len - 4] != '.')
+		return (1);
+	else
+		return (0);
+}
 
 void	parser(t_game *game, int fd)
 {
@@ -37,5 +48,5 @@ void	parser(t_game *game, int fd)
 		return ;
 	}
 	close(fd);
-	//map_check(game);
+	map_check(game);
 }
