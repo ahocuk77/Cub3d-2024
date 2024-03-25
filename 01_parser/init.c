@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:12:09 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/25 15:08:07 by musenov          ###   ########.fr       */
+/*   Updated: 2024/03/25 15:45:46 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,5 @@ void	ft_init(t_game *game)
 	game->texture_check = 0;
 	game->map_check = 0;
 	game->color_check = 0;
+	game->map.map = NULL;
 }

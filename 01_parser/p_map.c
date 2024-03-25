@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_map.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 14:55:33 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/25 15:23:56 by musenov          ###   ########.fr       */
+/*   Updated: 2024/03/25 15:46:24 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int put_map(t_game *game, char *str, int line)
 	temp = malloc(sizeof(char *) * game->map.size);
 	ft_memcpy(temp, game->map.map, sizeof(char *) * lastsize);
 	temp[line] = ft_strdup(str);
+	// game->map.map = NULL;
 	if (game->map.map != NULL)
 		free(game->map.map);
 	game->map.map = temp;
