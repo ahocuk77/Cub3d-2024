@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:14:51 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/25 14:15:08 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/25 15:58:53 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ void	free_all(t_game *game)
 
 		printf("%s\n", "map deleted");
 		if(game->map.map[i] == NULL)
+		{
 			free(game->map.map);
+			break ;
+		}
 	}
 
 }
