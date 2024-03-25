@@ -46,8 +46,7 @@ PARSER				:=	./01_parser/parser.c \
 						./01_parser/horizontal_check.c \
 						./01_parser/vertical_check.c
 
-RAYCASTER			:=	
-# ./02_raycaster/
+RAYCASTER			:=	./02_raycaster/rc.c \
 
 RENDERER			:=	
 # ./03_raycaster/
