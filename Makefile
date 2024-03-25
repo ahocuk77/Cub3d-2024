@@ -39,7 +39,9 @@ PARSER				:=	./01_parser/parser.c \
 						./01_parser/utils2.c \
 						./01_parser/map_check.c \
 						./01_parser/horizontal_check.c \
-						./01_parser/vertical_check.c
+						./01_parser/vertical_check.c \
+						./01_parser/init.c \
+						./01_parser/free_all.c \
 
 RAYCASTER			:=	
 # ./02_raycaster/
