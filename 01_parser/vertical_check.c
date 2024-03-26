@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 18:58:52 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/26 17:51:31 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/26 18:44:34 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ int	vertical_space_skip(t_game *game, int y)
 			len = ft_strlen(game->map.map[x]) - 1;
 		}
 	}
-	while (game->map.map[x][y] == ' ')
+	while (x < game->height && game->map.map[x][y] == ' ')
 		x++;
+	if(x == game->height)
+		return -2;
 	while (game->map.map[x][y] != '1' && game->map.map[x][y] != '0')
 	{
 		x++;
@@ -107,6 +109,11 @@ int	vertical_check(t_game *game)
 	while (y < game->width)
 	{
 		x = vertical_space_skip(game, y);
+		if(x == -2)
+		{
+			y++;
+			continue ;
+		}
 		game->len_width = horizontal_length(game->map.map, x);
 		if (game->map.map[x][y] != '1')
 			return (-1);
