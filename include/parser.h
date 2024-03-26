@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:23:01 by musenov           #+#    #+#             */
-/*   Updated: 2024/03/25 14:15:13 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/26 17:51:43 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,11 @@ int		vertical_check(t_game *game);
 void	ft_init(t_game *game);
 int		ft_cubcheck(char *map);
 void	free_all(t_game *game);
+int		is_numeric(char *str);
+char	*handle_color_num_error(t_game *game, int j);
+size_t	ft_strlen2(const char *s);
+int		path_check(char *path);
+int	len_checker(t_game *game, int x, int y);
+int	len_checker2(t_game *game, int x, int y);
 
 #endif
