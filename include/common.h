@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:23:46 by musenov           #+#    #+#             */
-/*   Updated: 2024/03/27 16:34:02 by musenov          ###   ########.fr       */
+/*   Updated: 2024/03/27 18:55:34 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@
 
 # include <sys/time.h>
 
-# define WIN_W					1920
-# define WIN_H					1080
+# define WIN_W					640
+# define WIN_H					480
 
 # ifndef PI
 #  define PI 3.141592
 # endif
 
 # ifndef FOV
-#  define FOV 60
+#  define FOV 1.047f
 # endif
 
 
@@ -126,7 +126,16 @@ typedef struct s_game
 
 
 
-
+typedef struct s_draw
+{
+	int		line_height;
+	int		start;
+	int		end;
+	int		text_x;
+	double	text_y;
+	double	wall_x;
+	double	text_step;
+}	t_draw;
 
 
 

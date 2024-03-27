@@ -6,13 +6,31 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 13:18:22 by musenov           #+#    #+#             */
-/*   Updated: 2024/03/27 15:39:21 by musenov          ###   ########.fr       */
+/*   Updated: 2024/03/27 18:16:57 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycaster.h"
 
-static void	ft_ray_initial_calculations(t_game *game, t_ray *r, float v)
+int	ft_sign(float f)
+{
+	if (f < 0.0f)
+	{
+		if (f > -0.000001)
+			return (0);
+		else
+			return (-1);
+	}
+	else
+	{
+		if (f < 0.000001f)
+			return (0);
+		else
+			return (1);
+	}
+}
+
+void	ft_ray_initial_calculations(t_game *game, t_ray *r, float v)
 {
 	r->dx = cos(v);
 	r->dy = -sin(v);
@@ -26,7 +44,7 @@ static void	ft_ray_initial_calculations(t_game *game, t_ray *r, float v)
 		r->hor_y += 1.0f;
 }
 
-static void	ft_ray_next_step_calculation(t_game *game, t_ray *r)
+void	ft_ray_next_step_calculation(t_game *game, t_ray *r)
 {
 	if (r->sx != 0)
 	{
@@ -114,33 +132,55 @@ float	cast_ray(t_game *game, float v)
 	}
 } */
 
-void	ft_line(t_game *game, int w, float dist)
+/* void	draw_lineof_texture(t_game *game, int col, double wall_distance)
 {
-	unsigned int	*dst;
-	unsigned int	*src;
-	unsigned int	h;
-	float			src_f;
-	float			d_shift;
+	t_draw	draw;
 
-	h = (float) WIN_H / dist;
-	src_f = 0.0f;
-	d_shift = (float) game->txt[game->txt_idx].height / h;
-	if (h > WIN_H)
+	draw.line_height = (int)(SCREEN_HEIGHT / wall_distance);
+	draw.start = (SCREEN_HEIGHT / 2) - (draw.line_height / 2);
+	draw.end = (draw.line_height / 2) + (SCREEN_HEIGHT / 2);
+	if (game->wall.side == WE || game->wall.side == EA)
+		draw.wall_x = game->player.y + wall_distance * game->ray.y;
+	else
+		draw.wall_x = game->player.x + wall_distance * game->ray.x;
+	draw.wall_x -= floor(draw.wall_x);
+	draw.text_x = (int)(draw.wall_x * \
+	(double)game->wall.texture[game->wall.side].width);
+	draw.text_y = 0;
+	draw.text_step = (double)game->wall.texture[game->wall.side].height / \
+	(double)draw.line_height;
+	if (draw.start < 0)
+		draw.text_y = fabs((double)draw.start) * draw.text_step;
+	draw_column(game, &draw, col);
+} */
+
+void	draw_line(t_game *game, int col, float dist)
+{
+	t_draw	draw;
+
+	draw.line_height = (int)(WIN_H / dist);
+	draw.start = (WIN_H / 2) - (draw.line_height / 2);
+	draw.end = (draw.line_height / 2) + (WIN_H / 2);
+	draw_column(game, &draw, col);
+}
+
+
+void	draw_column(t_game *game, t_draw *draw, int col)
+{
+	unsigned int	color;
+	int				t;
+
+	t = -1;
+	while (++t < WIN_H)
 	{
-		src_f = 0.5f * (h - WIN_H) / h * game->txt[game->txt_idx].height;
-		h = WIN_H;
-	}
-	src = (unsigned int *) game->txt[game->txt_idx].addr;
-	src += (int)((float) game->txt_w * game->txt[game->txt_idx].width);
-	dst = (unsigned int *) game->img.addr + w + (WIN_H - h) / 2 * WIN_W;
-	while (h-- > 0)
-	{
-		*dst = *(src + ((int)src_f) * game->txt[game->txt_idx].width);
-		// *dst = game->txt_idx * 255 + (1 - game->txt_idx) * (255 << 8);
-		dst += WIN_W;
-		src_f += d_shift;
+		if (t >= draw->start && t <= draw->end)
+		{
+			color = rgba_to_color(205, 127, 50, 255);
+			mlx_put_pixel(game->img, col, t, color);
+		}
 	}
 }
+
 
 /* void	ft_ray_casting(t_game *game)
 {

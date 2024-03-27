@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:14:40 by musenov           #+#    #+#             */
-/*   Updated: 2024/03/27 15:28:37 by musenov          ###   ########.fr       */
+/*   Updated: 2024/03/27 18:55:26 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void	draw_lines(t_game *game)
 	while (++x < WIN_W)
 	{
 		dist = cast_ray(game, v) * cos(game->player.view_angle - v);
-		ft_line(game, x, dist);
+		// dist = cast_ray(game, v);
+		draw_line(game, x, dist);
 		// v += dv;
 		v -= dv;
 	}
@@ -63,7 +64,7 @@ void	draw_lines(t_game *game)
 
 void	render(t_game *game)
 {
-	draw_background(&game);
-	draw_lines(&game);
+	draw_background(game);
+	draw_lines(game);
 }
 

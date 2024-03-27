@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:15:33 by musenov           #+#    #+#             */
-/*   Updated: 2024/03/27 15:16:32 by musenov          ###   ########.fr       */
+/*   Updated: 2024/03/27 17:00:27 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	init_player(t_game *game)
 	int	j;
 
 	i = -1;
-	while (++i < game->height)
+	while (++i < game->map.height)
 	{
 		j = -1;
 		while (game->map.map[i][++j])
