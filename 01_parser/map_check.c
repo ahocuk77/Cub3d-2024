@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 18:42:13 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/26 15:45:55 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/27 14:44:30 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	replace_spaces_with_one(t_game *game)
 	int		i;
 
 	map_height = 0;
-	while (map_height < game->height -1)
+	while (map_height < game->map.height -1)
 	{
 		current_line = game->map.map[map_height];
 		len = ft_strlen(game->map.map[map_height]);

@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:06:33 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/26 17:50:45 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/27 15:16:47 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ int	is_numeric(char *str)
 
 char	*handle_color_num_error(t_game *game, int j)
 {
-	if (game->total_color_num > 3 || game->total_color_num < 3)
+	if (game->color.total_color_num > 3 || game->color.total_color_num < 3)
 	{
-		while (j < game->total_color_num)
-			free(game->color_numb[j++]);
+		while (j < game->color.total_color_num)
+			free(game->color.color_numb[j++]);
 		return (NULL);
 	}
 	return ("");

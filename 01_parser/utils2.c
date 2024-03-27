@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 14:49:48 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/26 17:53:48 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/27 14:49:51 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ int	len_checker(t_game *game, int x, int y)
 	len = ft_strlen(game->map.map[x]) - 1;
 	if (y > len)
 	{
-		while (y > len && x < game->height)
+		while (y > len && x < game->map.height)
 		{
 			x++;
-			if (x < game->height)
+			if (x < game->map.height)
 				len = ft_strlen(game->map.map[x]) - 1;
 		}
 	}
@@ -90,10 +90,10 @@ int	len_checker2(t_game *game, int x, int y)
 	{
 		if (game->map.map[x - 1][y] != '1')
 			return (-1);
-		while (y > len && x < game->height)
+		while (y > len && x < game->map.height)
 		{
 			x++;
-			if (x < game->height)
+			if (x < game->map.height)
 				len = ft_strlen(game->map.map[x]) - 1;
 		}
 	}

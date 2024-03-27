@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 18:50:56 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/26 15:43:11 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/27 14:42:08 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,20 +79,20 @@ int	horizontal_check(t_game *game)
 	int	y;
 
 	x = 0;
-	while (x <= game->height - 1)
+	while (x <= game->map.height - 1)
 	{
 		y = horizontal_space_skip(game, x);
 		if (game->map.map[x][y] != '1')
 			return (-1);
-		game->len_width = ft_strlen(game->map.map[x]) - 2;
-		while (y <= game->len_width)
+		game->map.len_width = ft_strlen(game->map.map[x]) - 2;
+		while (y <= game->map.len_width)
 		{
-			if (horizontal_validate(game, x, y, game->len_width) == -1)
+			if (horizontal_validate(game, x, y, game->map.len_width) == -1)
 				return (-1);
-			else if (horizontal_validate(game, x, y, game->len_width) == -2)
+			else if (horizontal_validate(game, x, y, game->map.len_width) == -2)
 				break ;
 			else
-				y = horizontal_validate(game, x, y, game->len_width);
+				y = horizontal_validate(game, x, y, game->map.len_width);
 		}
 		x++;
 	}

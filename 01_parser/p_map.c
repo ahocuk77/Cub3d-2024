@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 14:55:33 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/26 17:49:47 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/27 14:47:45 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char	*new_line_checker(t_game *game, int fd)
 			free(str);
 			str = get_next_line(fd);
 		}
-		game->new_line_checker = true;
+		game->map.new_line_checker = true;
 	}
 	return (str);
 }
@@ -102,25 +102,25 @@ void	p_map(t_game *game, int fd)
 	int		tmp;
 
 	str = new_line_checker(game, fd);
-	game->width = ft_strlen(str);
+	game->map.width = ft_strlen(str);
 	while (1)
 	{
-		if (game->new_line_checker != true)
+		if (game->map.new_line_checker != true)
 			str = get_next_line(fd);
-		game->new_line_checker = false;
+		game->map.new_line_checker = false;
 		delete_slash_n(str);
 		if (str == NULL)
 			break ;
 		tmp = ft_strlen2(str);
-		if (game->width < tmp)
-			game->width = ft_strlen2(str);
-		game->height++;
-		if (ft_strlen(str) != 0 && put_map(game, str, game->height) == -1)
+		if (game->map.width < tmp)
+			game->map.width = ft_strlen2(str);
+		game->map.height++;
+		if (ft_strlen(str) != 0 && put_map(game, str, game->map.height) == -1)
 		{
-			game->map_check = 1;
+			game->map.map_check = 1;
 			break ;
 		}
 	}
 	if (game->map.player == '\0')
-		game->map_check = 1;
+		game->map.map_check = 1;
 }

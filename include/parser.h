@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:23:01 by musenov           #+#    #+#             */
-/*   Updated: 2024/03/26 17:51:43 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/27 15:17:08 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 void	parser(t_game *game, int fd);
 void	p_texture(t_game *game, int fd);
 char	*trimreplace(char *str, char *set);
-void	p_color(t_game *game, int fd);
+void	p_color(t_game	*game, int fd);
 char	**ft_split_custom(char *s);
 void	p_map(t_game *game, int fd);
 void	map_check(t_game *game);

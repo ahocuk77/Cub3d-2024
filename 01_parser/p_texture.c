@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 14:52:16 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/26 17:56:12 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/27 14:48:59 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,18 @@ int	path_number_check(t_game *game, char *path)
 
 	i = 0;
 	len = 0;
-	game->path[game->path_num] = ft_strdup(path);
-	while (i < game->path_num)
+	game->wall.path[game->wall.path_num] = ft_strdup(path);
+	while (i < game->wall.path_num)
 	{
 		len = ft_strlen(path);
-		if (ft_strncmp(game->path[game->path_num], game->path[i], len) == 0)
+		if (ft_strncmp(game->wall.path[game->wall.path_num], game->wall.path[i], len) == 0)
 		{
-			game->path_num++;
+			game->wall.path_num++;
 			return (-1);
 		}
 		i++;
 	}
-	game->path_num++;
+	game->wall.path_num++;
 	return (0);
 }
 
@@ -39,20 +39,20 @@ char	*t_valid_check(t_game *game, char *str)
 	char	*path;
 
 	if (ft_strncmp(str, "NO", 2) == 0)
-		game->texture_num[NO]++;
+		game->wall.texture_num[NO]++;
 	else if (ft_strncmp(str, "SO", 2) == 0)
-		game->texture_num[SO]++;
+		game->wall.texture_num[SO]++;
 	else if (ft_strncmp(str, "WE", 2) == 0)
-		game->texture_num[WE]++;
+		game->wall.texture_num[WE]++;
 	else if (ft_strncmp(str, "EA", 2) == 0)
-		game->texture_num[EA]++;
+		game->wall.texture_num[EA]++;
 	else
 	{
 		ft_putendl_fd("wrong direction or missing direction!\n", 2);
 		return (NULL);
 	}
-	if (game->texture_num[NO] > 1 || game->texture_num[SO] > 1
-		||game->texture_num[WE] > 1 || game->texture_num[EA] > 1)
+	if (game->wall.texture_num[NO] > 1 || game->wall.texture_num[SO] > 1
+		||game->wall.texture_num[WE] > 1 || game->wall.texture_num[EA] > 1)
 		return (NULL);
 	path = str + 2;
 	while (*path == ' ' || *path == '\t')
@@ -93,7 +93,7 @@ int	put_texture(t_game *game, char *str, char *path)
 		return (-1);
 	if (path == NULL || path_number_check(game, path) == -1)
 	{
-		if (path == NULL && game->path_num != 0)
+		if (path == NULL && game->wall.path_num != 0)
 			printf("%s\n", "path error");
 		return (-1);
 	}
@@ -115,11 +115,11 @@ void	p_texture(t_game *game, int fd)
 		str = trimreplace(str, " \t\n");
 		if (ft_strlen(str) != 0 && put_texture(game, str, path) == -1)
 		{
-			game->texture_check = 1;
+			game->wall.texture_check = 1;
 			return (free(str));
 		}
-		if (game->texture_num[NO] == 1 && game->texture_num[SO] == 1
-			&& game->texture_num[WE] == 1 && game->texture_num[EA] == 1)
+		if (game->wall.texture_num[NO] == 1 && game->wall.texture_num[SO] == 1
+			&& game->wall.texture_num[WE] == 1 && game->wall.texture_num[EA] == 1)
 		{
 			free(str);
 			break ;
