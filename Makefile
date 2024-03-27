@@ -49,6 +49,8 @@ PARSER				:=	./01_parser/parser.c \
 						./01_parser/free_all.c \
 
 RAYCASTER			:=	./02_raycaster/rc.c \
+						./02_raycaster/rc1.c \
+						./02_raycaster/rc2.c \
 
 RENDERER			:=	
 # ./03_raycaster/

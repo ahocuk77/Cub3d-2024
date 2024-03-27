@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:23:46 by musenov           #+#    #+#             */
-/*   Updated: 2024/03/27 15:27:58 by musenov          ###   ########.fr       */
+/*   Updated: 2024/03/27 16:34:02 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 #  define FOV 60
 # endif
 
-/*
+
 
 
 
@@ -105,8 +105,9 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	int		pos_x;
-	int		pos_y;
+	float	pos_x;
+	float	pos_y;
+	float	view_angle;
 }	t_player;
 
 
@@ -126,9 +127,11 @@ typedef struct s_game
 
 
 
-*/
 
 
+
+
+/*
 
 
 typedef enum e_dir
@@ -194,6 +197,9 @@ typedef struct s_game
 
 	t_player			player;
 }	t_game;
+
+
+*/
 
 typedef struct s_ray
 {

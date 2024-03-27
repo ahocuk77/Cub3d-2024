@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 14:49:48 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/13 14:50:27 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/03/27 14:49:51 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	is_sep(char c)
 
 static int	count_words(char *s)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	while (*s)
@@ -43,8 +43,6 @@ char	**ft_split_custom(char *s)
 	int		j;
 
 	split = (char **)malloc(sizeof(char *) * (count_words(s) + 1));
-	if (!split)
-		return (NULL);
 	i = 0;
 	while (*s)
 	{
@@ -56,8 +54,6 @@ char	**ft_split_custom(char *s)
 			while (s[j] && !is_sep(s[j]))
 				j++;
 			split[i] = (char *)malloc(sizeof(char) * (j + 1));
-			if (!split[i])
-				return (NULL);
 			j = 0;
 			while (*s && !is_sep(*s))
 				split[i][j++] = *s++;
@@ -66,4 +62,40 @@ char	**ft_split_custom(char *s)
 	}
 	split[i] = NULL;
 	return (split);
+}
+
+int	len_checker(t_game *game, int x, int y)
+{
+	int	len;
+
+	len = ft_strlen(game->map.map[x]) - 1;
+	if (y > len)
+	{
+		while (y > len && x < game->map.height)
+		{
+			x++;
+			if (x < game->map.height)
+				len = ft_strlen(game->map.map[x]) - 1;
+		}
+	}
+	return (x);
+}
+
+int	len_checker2(t_game *game, int x, int y)
+{
+	int	len;
+
+	len = ft_strlen(game->map.map[x]) - 1;
+	if (y > len)
+	{
+		if (game->map.map[x - 1][y] != '1')
+			return (-1);
+		while (y > len && x < game->map.height)
+		{
+			x++;
+			if (x < game->map.height)
+				len = ft_strlen(game->map.map[x]) - 1;
+		}
+	}
+	return (x);
 }
