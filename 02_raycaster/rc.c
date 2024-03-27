@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:15:33 by musenov           #+#    #+#             */
-/*   Updated: 2024/03/25 20:56:40 by musenov          ###   ########.fr       */
+/*   Updated: 2024/03/27 13:59:09 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ void	print_map(t_game *game)
 	}
 }
 
-void	player_position(t_game *game) // rewrite
+// rewrite
+/* void	player_position(t_game *game)
 {
 	int	x;
 	int	y;
@@ -87,9 +88,31 @@ void	player_position(t_game *game) // rewrite
 			}
 		}
 	}
+} */
+void	find_position(t_game *game)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < game->height)
+	{
+		j = -1;
+		while (game->map.map[i][++j])
+		{
+			if (ft_strchr("NSWE", game->map.map[i][j]))
+			{
+				game->pos_x = (float) j + 0.5f;
+				game->pos_y = (float) i + 0.5f;
+				find_angle_view(game, game->map[i][j]);
+				return ;
+			}
+		}
+	}
 }
 
-void	init_player_direction(t_game *game)
+// rewrite
+/* void	init_player_direction(t_game *game)
 {
 	if (game->dir == WE || game->dir == EA)
 	{
@@ -116,4 +139,15 @@ void	init_player_direction(t_game *game)
 		}
 	}
 	keypress_right_rotate(game);
+} */
+static void	find_angle_view(t_game *game, const char c)
+{
+	if (c == 'E')
+		game->view = 0.0f * M_PI;
+	else if (c == 'N')
+		game->view = 0.5f * M_PI;
+	else if (c == 'W')
+		game->view = 1.0f * M_PI;
+	else if (c == 'S')
+		game->view = -0.5f * M_PI;
 }

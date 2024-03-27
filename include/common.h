@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:23:46 by musenov           #+#    #+#             */
-/*   Updated: 2024/03/25 20:21:27 by musenov          ###   ########.fr       */
+/*   Updated: 2024/03/27 14:52:40 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,108 @@
 # ifndef PI
 #  define PI 3.141592
 # endif
+
+# ifndef FOV
+#  define FOV 60
+# endif
+
+/*
+
+
+
+
+/////////////////////////// TEXTURES ///////////////////////////
+
+
+typedef enum e_direction
+{
+	NO,
+	SO,
+	WE,
+	EA,
+}	t_direction;
+
+typedef struct s_wall
+{
+	mlx_texture_t	texture[4];
+	xpm_t			*xpm[4];
+	int				texture_num[4];
+	char			*path[4];
+	int				path_num;
+	int				texture_check;
+}	t_wall;
+
+
+/////////////////////////// COLORS ///////////////////////////
+
+
+typedef struct s_rgb
+{
+	int	r;
+	int	g;
+	int	b;
+}	t_rgb;
+
+typedef struct s_color
+{
+	t_rgb				floor; // meder uses
+	t_rgb				ceiling; // meder uses
+	int					color_num;
+	int					f_color_num;
+	int					c_color_num;
+	int					total_color_num;
+	char				*color_numb[3];
+	int					color_check;
+}	t_color;
+
+
+///////////////////////////    MAP    ///////////////////////////
+
+
+typedef struct s_map
+{
+	char	**map; // meder uses
+	int		height; // meder uses
+	int		width; // meder uses
+	char	player; // player's direction - meder uses
+	int		size;
+	int		len_width;
+	int		len_height;
+	int		map_check;
+	bool	new_line_checker;
+}	t_map;
+
+
+/////////////////////////// PLAYER DATA ///////////////////////////
+
+
+typedef struct s_player
+{
+	int		pos_x;
+	int		pos_y;
+}	t_player;
+
+
+/////////////////////////// GAME DATA ///////////////////////////
+
+
+typedef struct s_game
+{
+	mlx_t				*mlx;
+	mlx_image_t			*img;
+	t_wall				wall;
+	t_color				color;
+	t_map				map;
+	t_player			player;
+}	t_game;
+
+
+
+
+*/
+
+
+
 
 typedef enum e_dir
 {
@@ -58,17 +160,12 @@ typedef struct s_map
 
 }	t_map;
 
-typedef struct s_position
+typedef struct s_player
 {
-	int			x;
-	int			y;
-}	t_position;
-
-typedef struct s_player_data
-{
-	t_position		pos;
-	t_direction		dir;
-}	t_player_data;
+	float	pos_x;
+	float	pos_y;
+	float	view_point;
+}	t_player;
 
 typedef struct s_game
 {
@@ -94,7 +191,7 @@ typedef struct s_game
 	int					map_check;
 	t_map				map;
 	bool				new_line_checker;
-	t_player_data		player;
+	t_player			player;
 }	t_game;
 
 #endif

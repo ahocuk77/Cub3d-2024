@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:20:30 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/25 21:07:19 by musenov          ###   ########.fr       */
+/*   Updated: 2024/03/27 13:57:49 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,9 @@ int	main(int argc, char **argv)
 	printf("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
 	print_map(&game);
 	printf("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
-	player_position(&game);
-	// init_player_direction(&game);
+	// player_position(&game);
+	find_position(&game);
+	init_player_direction(&game);
 	// draw(game);
 	// mlx_loop_hook(game.mlx, (void (*)(void *))ft_hooks0, &game);
 	// mlx_scroll_hook(game.mlx, (mlx_scrollfunc)ft_scroll, &game);
@@ -53,5 +54,3 @@ int	main(int argc, char **argv)
 	printf("%s\n", "cub3d closed");
 	return (0);
 }
-
-
