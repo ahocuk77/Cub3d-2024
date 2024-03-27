@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:23:46 by musenov           #+#    #+#             */
-/*   Updated: 2024/03/27 14:52:40 by musenov          ###   ########.fr       */
+/*   Updated: 2024/03/27 15:27:58 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ typedef struct s_player
 {
 	float	pos_x;
 	float	pos_y;
-	float	view_point;
+	float	view_angle;
 }	t_player;
 
 typedef struct s_game
@@ -191,7 +191,24 @@ typedef struct s_game
 	int					map_check;
 	t_map				map;
 	bool				new_line_checker;
+
 	t_player			player;
 }	t_game;
+
+typedef struct s_ray
+{
+	float	dx;
+	float	dy;
+	int		sx;
+	int		sy;
+	float	hor_x;
+	float	hor_y;
+	float	vert_x;
+	float	vert_y;
+	float	vert_dist;
+	float	hor_dist;
+	float	vert_w;
+	float	hor_w;
+}	t_ray;
 
 #endif
