@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 13:18:22 by musenov           #+#    #+#             */
-/*   Updated: 2024/03/27 18:16:57 by musenov          ###   ########.fr       */
+/*   Updated: 2024/03/31 18:47:07 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,98 +104,22 @@ float	cast_ray(t_game *game, float v)
 	}
 }
 
-/* void	ft_line(t_game *game, int w, float dist)
-{
-	unsigned int	*dst;
-	unsigned int	*src;
-	unsigned int	h;
-	float			src_f;
-	float			d_shift;
-
-	h = (float) WIN_H / dist;
-	src_f = 0.0f;
-	d_shift = (float) game->txt[game->txt_idx].height / h;
-	if (h > WIN_H)
-	{
-		src_f = 0.5f * (h - WIN_H) / h * game->txt[game->txt_idx].height;
-		h = WIN_H;
-	}
-	src = (unsigned int *) game->txt[game->txt_idx].addr;
-	src += (int)((float) game->txt_w * game->txt[game->txt_idx].width);
-	dst = (unsigned int *) game->img.addr + w + (WIN_H - h) / 2 * WIN_W;
-	while (h-- > 0)
-	{
-		*dst = *(src + ((int)src_f) * game->txt[game->txt_idx].width);
-		// *dst = game->txt_idx * 255 + (1 - game->txt_idx) * (255 << 8);
-		dst += WIN_W;
-		src_f += d_shift;
-	}
-} */
-
-/* void	draw_lineof_texture(t_game *game, int col, double wall_distance)
-{
-	t_draw	draw;
-
-	draw.line_height = (int)(SCREEN_HEIGHT / wall_distance);
-	draw.start = (SCREEN_HEIGHT / 2) - (draw.line_height / 2);
-	draw.end = (draw.line_height / 2) + (SCREEN_HEIGHT / 2);
-	if (game->wall.side == WE || game->wall.side == EA)
-		draw.wall_x = game->player.y + wall_distance * game->ray.y;
-	else
-		draw.wall_x = game->player.x + wall_distance * game->ray.x;
-	draw.wall_x -= floor(draw.wall_x);
-	draw.text_x = (int)(draw.wall_x * \
-	(double)game->wall.texture[game->wall.side].width);
-	draw.text_y = 0;
-	draw.text_step = (double)game->wall.texture[game->wall.side].height / \
-	(double)draw.line_height;
-	if (draw.start < 0)
-		draw.text_y = fabs((double)draw.start) * draw.text_step;
-	draw_column(game, &draw, col);
-} */
-
 void	draw_line(t_game *game, int col, float dist)
 {
-	t_draw	draw;
+	t_draw			draw;
+	unsigned int	color;
+	int				t;
 
 	draw.line_height = (int)(WIN_H / dist);
 	draw.start = (WIN_H / 2) - (draw.line_height / 2);
 	draw.end = (draw.line_height / 2) + (WIN_H / 2);
-	draw_column(game, &draw, col);
-}
-
-
-void	draw_column(t_game *game, t_draw *draw, int col)
-{
-	unsigned int	color;
-	int				t;
-
 	t = -1;
 	while (++t < WIN_H)
 	{
-		if (t >= draw->start && t <= draw->end)
+		if (t >= draw.start && t <= draw.end)
 		{
 			color = rgba_to_color(205, 127, 50, 255);
 			mlx_put_pixel(game->img, col, t, color);
 		}
 	}
 }
-
-
-/* void	ft_ray_casting(t_game *game)
-{
-	int		x;
-	float	dv;
-	float	v;
-
-	// v = game->view - FOV / 2;
-	v = game->view + FOV / 2;
-	dv = FOV / (WINDOW_W - 1);
-	x = -1;
-	while (++x < WINDOW_W)
-	{
-		ft_line(game, x, ft_ray(game, v) * cos(game->view - v)); // cos is for fish eye effect removal
-		// v += dv;
-		v -= dv;
-	}
-} */

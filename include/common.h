@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:23:46 by musenov           #+#    #+#             */
-/*   Updated: 2024/03/27 18:55:34 by musenov          ###   ########.fr       */
+/*   Updated: 2024/03/27 19:03:30 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # endif
 
 # ifndef FOV
-#  define FOV 1.047f
+#  define FOV 1.0471975512f
 # endif
 
 
