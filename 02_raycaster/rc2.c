@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:14:40 by musenov           #+#    #+#             */
-/*   Updated: 2024/03/31 18:43:16 by musenov          ###   ########.fr       */
+/*   Updated: 2024/03/31 19:54:58 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,23 @@ void	draw_background(t_game *game)
 	int			y;
 	int			color;
 
-	color = rgba_to_color(39, 181, 245, 200);
+	color = rgba_to_color(game->color.ceiling.r, game->color.ceiling.g, \
+							game->color.ceiling.b, 255);
 	y = 0;
 	while (y < WIN_H / 2)
 	{
 		x = 0;
 		while (x < WIN_W)
-		{
 			mlx_put_pixel(game->img, x++, y, color);
-		}
 		y++;
 	}
-	color = rgba_to_color(6, 170, 85, 200);
+	color = rgba_to_color(game->color.floor.r, game->color.floor.g, \
+							game->color.floor.b, 255);
 	while (y < WIN_H)
 	{
 		x = 0;
 		while (x < WIN_W)
-		{
 			mlx_put_pixel(game->img, x++, y, color);
-		}
 		y++;
 	}
 }
@@ -66,4 +64,3 @@ void	render(t_game *game)
 	draw_background(game);
 	draw_lines(game);
 }
-

@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:20:30 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/27 17:02:43 by musenov          ###   ########.fr       */
+/*   Updated: 2024/03/31 20:54:35 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ int	main(int argc, char **argv)
 	printf("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
 	init_player(&game);
 	render(&game);
-	// find_position(&game);
-	// init_player_direction(&game);
-	// draw(game);
-	// mlx_loop_hook(game.mlx, (void (*)(void *))ft_hooks0, &game);
-	// mlx_scroll_hook(game.mlx, (mlx_scrollfunc)ft_scroll, &game);
+	mlx_loop_hook(game.mlx, (void (*)(void *))ft_hooks, &game);
+	// mlx_mouse_hook(vars.win, mouse_move, &vars);
+	// mlx_mouse_hook(game.mlx, (void *)mouse_move, &game);
+	mlx_cursor_hook(game.mlx, (void *)func, &game);
+	// void mlx_cursor_hook(mlx_t* mlx, mlx_cursorfunc func, void* param);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
 	free_all(&game);

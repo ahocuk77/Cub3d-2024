@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:23:46 by musenov           #+#    #+#             */
-/*   Updated: 2024/03/27 19:03:30 by musenov          ###   ########.fr       */
+/*   Updated: 2024/03/31 20:06:18 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 
 # include <sys/time.h>
 
-# define WIN_W					640
-# define WIN_H					480
+# define WIN_W					1280
+# define WIN_H					720
 
 # ifndef PI
 #  define PI 3.141592
@@ -33,7 +33,17 @@
 #  define FOV 1.0471975512f
 # endif
 
+# ifndef ANGLE_STEP
+#  define ANGLE_STEP		0.003f
+# endif
 
+# ifndef LINEAR_STEP_SIDE
+#  define LINEAR_STEP_SIDE		0.02f
+# endif
+
+# ifndef LINEAR_STEP_FORW
+#  define LINEAR_STEP_FORW		0.06f
+# endif
 
 
 
@@ -124,8 +134,6 @@ typedef struct s_game
 	t_player			player;
 }	t_game;
 
-
-
 typedef struct s_draw
 {
 	int		line_height;
@@ -136,79 +144,6 @@ typedef struct s_draw
 	double	wall_x;
 	double	text_step;
 }	t_draw;
-
-
-
-
-/*
-
-
-typedef enum e_dir
-{
-	NO,
-	SO,
-	WE,
-	EA,
-}	t_direction;
-
-typedef struct s_wall
-{
-	mlx_texture_t	texture[4];
-	xpm_t			*xpm[4];
-}	t_wall;
-
-typedef struct s_rgb
-{
-	int	r;
-	int	g;
-	int	b;
-}	t_rgb;
-
-typedef struct s_map
-{
-	char	**map;
-	char	player;
-	int		size;
-
-}	t_map;
-
-typedef struct s_player
-{
-	float	pos_x;
-	float	pos_y;
-	float	view_angle;
-}	t_player;
-
-typedef struct s_game
-{
-	int					height;
-	int					width;
-	int					len_width;
-	int					len_height;
-	mlx_image_t			*img;
-	mlx_t				*mlx;
-	int					texture_num[4];
-	t_wall				wall;
-	int					color_num;
-	char				*path[4];
-	int					path_num;
-	t_rgb				f_color;
-	t_rgb				c_color;
-	int					f_color_num;
-	int					c_color_num;
-	int					total_color_num;
-	char				*color_numb[3];
-	int					color_check;
-	int					texture_check;
-	int					map_check;
-	t_map				map;
-	bool				new_line_checker;
-
-	t_player			player;
-}	t_game;
-
-
-*/
 
 typedef struct s_ray
 {
