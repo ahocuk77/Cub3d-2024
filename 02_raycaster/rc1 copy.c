@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 13:18:22 by musenov           #+#    #+#             */
-/*   Updated: 2024/04/15 19:47:51 by musenov          ###   ########.fr       */
+/*   Updated: 2024/04/15 19:43:37 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ float	cast_ray(t_game *game, float v)
 
 
 
-
+/*
 
 
 void	draw_line(t_game *game, int col, float dist)
@@ -133,11 +133,11 @@ void	draw_line(t_game *game, int col, float dist)
 }
 
 
+*/
 
 
 
 
-/* 
 
 void	draw_line(t_game *game, int col, float dist)
 {
@@ -197,7 +197,126 @@ void	draw_line(t_game *game, int col, float dist)
 }
 
 
+
+
+
+
+/* 
+
+
+void	draw_column(t_game *game, t_draw *draw, int col)
+{
+	unsigned int	color;
+	int				t;
+	uint8_t			*pixel;
+	int				num;
+
+	t = -1;
+	while (++t < SCREEN_HEIGHT)
+	{
+		if (t >= draw->start && t <= draw->end && \
+		draw->text_y < game->wall.texture[game->wall.side].height)
+		{
+			num = game->wall.texture[game->wall.side].width * 4 * \
+			(int)draw->text_y + (int)draw->text_x * 4;
+			pixel = &game->wall.texture[game->wall.side].pixels[num];
+			color = ft_pixel(pixel[0], pixel[1], pixel[2], pixel[3]);
+			mlx_put_pixel(game->img, col, t, color);
+			draw->text_y += draw->text_step;
+		}
+		else if (t < draw->start)
+			mlx_put_pixel(game->img, col, t, \
+			ft_pixel(game->c_color.r, game->c_color.g, game->c_color.b, 255));
+		else if (t > draw->end)
+			mlx_put_pixel(game->img, col, t, \
+			ft_pixel(game->f_color.r, game->f_color.g, game->f_color.b, 255));
+	}
+}
+
+
+ */
+
+
+/* 
+void	ft_line(t_game *game, int w, float dist)
+{
+	unsigned int	*dst;
+	unsigned int	*src;
+	unsigned int	h;
+	float			src_f;
+	float			d_shift;
+
+	h = (float) WINDOW_H / dist;
+	src_f = 0.0f;
+	d_shift = (float) game->txt[game->txt_idx].height / h;
+	if (h > WINDOW_H)
+	{
+		src_f = 0.5f * (h - WINDOW_H) / h * game->txt[game->txt_idx].height;
+		h = WINDOW_H;
+	}
+	src = (unsigned int *) game->txt[game->txt_idx].addr;
+	src += (int)((float) game->txt_w * game->txt[game->txt_idx].width);
+	dst = (unsigned int *) game->img.addr + w + (WINDOW_H - h) / 2 * WINDOW_W;
+	while (h-- > 0)
+	{
+		*dst = *(src + ((int)src_f) * game->txt[game->txt_idx].width);
+		// *dst = game->txt_idx * 255 + (1 - game->txt_idx) * (255 << 8);
+		dst += WINDOW_W;
+		src_f += d_shift;
+	}
+}
+
+ */
+
+
+/* 
+
+void	ft_ray_casting(t_game *game)
+{
+	int		x;
+	float	dv;
+	float	v;
+
+	// v = game->view - FOV / 2;
+	v = game->view + FOV / 2;
+	dv = FOV / (WINDOW_W - 1);
+	x = -1;
+	while (++x < WINDOW_W)
+	{
+		ft_line(game, x, ft_ray(game, v) * cos(game->view - v)); // cos is for fish eye effect removal
+		// v += dv;
+		v -= dv;
+	}
+}
  */
 
 
 
+
+/*
+
+void	set_texture_values(t_game *game, char *str, char *path)
+{
+	if (ft_strncmp(str, "NO", 2) == 0)
+	{
+		game->wall.xpm[NO] = mlx_load_xpm42(path);
+		game->wall.texture[NO] = game->wall.xpm[NO]->texture;
+	}
+	else if (ft_strncmp(str, "SO", 2) == 0)
+	{
+		game->wall.xpm[SO] = mlx_load_xpm42(path);
+		game->wall.texture[SO] = game->wall.xpm[SO]->texture;
+	}
+	else if (ft_strncmp(str, "WE", 2) == 0)
+	{
+		game->wall.xpm[WE] = mlx_load_xpm42(path);
+		game->wall.texture[WE] = game->wall.xpm[WE]->texture;
+	}
+	else
+	{
+		game->wall.xpm[EA] = mlx_load_xpm42(path);
+		game->wall.texture[EA] = game->wall.xpm[EA]->texture;
+	}
+}
+
+*/

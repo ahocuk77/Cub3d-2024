@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:15:33 by musenov           #+#    #+#             */
-/*   Updated: 2024/03/27 17:00:27 by musenov          ###   ########.fr       */
+/*   Updated: 2024/04/01 19:53:36 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	print_map(t_game *game)
 		i++;
 	}
 }
-
 
 void	find_view_angle(t_game *game, const char c)
 {

@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:19:38 by musenov           #+#    #+#             */
-/*   Updated: 2024/03/31 20:50:33 by musenov          ###   ########.fr       */
+/*   Updated: 2024/03/31 21:51:06 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ void	render(t_game *game);
 
 void	ft_hooks(t_game *game);
 void	move(t_game *game, int direction);
-void	move_forw(t_game *game, int direction);
-// int		mouse_move(int x, int y, t_game *game);
 void	*func(double xpos, double ypos, t_game *game);
 
 
