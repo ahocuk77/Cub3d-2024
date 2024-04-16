@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 13:18:22 by musenov           #+#    #+#             */
-/*   Updated: 2024/04/15 19:47:51 by musenov          ###   ########.fr       */
+/*   Updated: 2024/04/16 20:40:07 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,14 @@ void	ft_ray_next_step_calculation(t_game *game, t_ray *r)
 static float	ft_save_color(t_game *game, float dist, int color_idx, float w)
 {
 	game->wall.txt_idx = color_idx;
+	if (game->wall.txt_idx == 0)
+		printf("direction: NO\n");
+	else if (game->wall.txt_idx == 1)
+		printf("direction: SO\n");
+	else if (game->wall.txt_idx == 2)
+		printf("direction: WE\n");
+	else if (game->wall.txt_idx == 3)
+		printf("direction: EA\n");
 	game->wall.txt_w = w;
 	return (dist);
 }
@@ -122,6 +130,23 @@ void	draw_line(t_game *game, int col, float dist)
 	draw.start = (WIN_H / 2) - (draw.line_height / 2);
 	draw.end = (draw.line_height / 2) + (WIN_H / 2);
 
+
+
+	// ** // new code start
+	
+	
+/* 	
+	if (game->wall.txt_idx == WE || game->wall.txt_idx == EA)
+		draw.wall_x = game->player.pos_y + dist * game->ray.y;
+	else
+		draw.wall_x = game->player.pos_x + dist * game->ray.x;
+	 */
+	
+	
+	// ** // new code end
+
+
+
 	color = rgba_to_color(205, 127, 50, 255);
 	h = 0;
 	while (h < WIN_H)
@@ -131,73 +156,4 @@ void	draw_line(t_game *game, int col, float dist)
 		h++;
 	}
 }
-
-
-
-
-
-
-/* 
-
-void	draw_line(t_game *game, int col, float dist)
-{
-	t_draw			draw;
-	unsigned int	color;
-	int				h;
-	// uint8_t			*pixel;
-	unsigned int	*pixel;
-	// int				num;
-	unsigned int	*src;
-	float			src_f;
-	float			d_shift;
-	
-	
-	draw.line_height = (int)(WIN_H / dist);
-	draw.start = (WIN_H / 2) - (draw.line_height / 2);
-	draw.end = (draw.line_height / 2) + (WIN_H / 2);
-
-
-	src_f = 0.0f;
-	d_shift = (float) game->wall.texture[game->wall.txt_idx].height / draw.line_height;
-	if (draw.line_height > WIN_H)
-	{
-		src_f = 0.5f * (draw.line_height - WIN_H) / draw.line_height * game->wall.texture[game->wall.txt_idx].height;
-		draw.line_height = WIN_H;
-	}
-
-
-	// color = rgba_to_color(205, 127, 50, 255);
-	
-	// continue from here and look at data structure t_wall
-
-	src = (unsigned int *) &game->wall.texture[game->wall.txt_idx];
-	src += (int)((float) game->wall.txt_w * game->wall.texture[game->wall.txt_idx].width);
-	// *dst = *(src + ((int)src_f) * game->txt[game->txt_idx].width);
-	h = 0;
-	while (h < WIN_H)
-	{
-		if (h >= draw.start && h <= draw.end)
-		{
-			// pixel = &game->wall.texture[game->wall.side].pixels[num];
-			pixel = src + ((int)src_f) * game->wall.texture[game->wall.txt_idx].width;
-			color = rgba_to_color(pixel[0], pixel[1], pixel[2], pixel[3]);
-			mlx_put_pixel(game->img, col, h, color);
-			src_f += d_shift;
-
-			// num = game->wall.texture[game->wall.side].width * 4 * \
-			// (int)draw->text_y + (int)draw->text_x * 4;
-			// pixel = &game->wall.texture[game->wall.side].pixels[num];
-			// color = ft_pixel(pixel[0], pixel[1], pixel[2], pixel[3]);
-			// mlx_put_pixel(game->img, col, h, color);
-			// // mlx_put_pixel(game->img, col, t, color);
-			// draw->text_y += draw->text_step;
-		}
-		h++;
-	}
-}
-
-
- */
-
-
 
