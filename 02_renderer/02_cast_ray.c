@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 13:18:22 by musenov           #+#    #+#             */
-/*   Updated: 2024/04/18 19:19:47 by musenov          ###   ########.fr       */
+/*   Updated: 2024/04/18 20:34:21 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ float	ft_save_color(t_game *game, float dist, int color_idx, float w)
 {
 	game->wall.txt_idx = color_idx;
 	if (game->wall.txt_idx == 0)
-		printf("direction: NO\n");
+		printf("direction: NO, %d\n", NO);
 	else if (game->wall.txt_idx == 1)
-		printf("direction: SO\n");
+		printf("direction: SO, %d\n", SO);
 	else if (game->wall.txt_idx == 2)
-		printf("direction: WE\n");
+		printf("direction: WE, %d\n", WE);
 	else if (game->wall.txt_idx == 3)
-		printf("direction: EA\n");
+		printf("direction: EA, %d\n", EA);
 	game->wall.txt_w = w;
 	return (dist);
 }

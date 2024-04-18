@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:20:30 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/04/18 20:05:06 by musenov          ###   ########.fr       */
+/*   Updated: 2024/04/18 20:28:21 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 	int		fd;
-	// int		draw_lines_call_count;
 
 	if (argc != 2 || ft_cubcheck(argv[1]) == 1)
 	{
