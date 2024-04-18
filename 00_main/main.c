@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:20:30 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/31 20:54:35 by musenov          ###   ########.fr       */
+/*   Updated: 2024/04/18 20:05:06 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 	int		fd;
+	// int		draw_lines_call_count;
 
 	if (argc != 2 || ft_cubcheck(argv[1]) == 1)
 	{
@@ -36,19 +37,19 @@ int	main(int argc, char **argv)
 		free_all(&game);
 		return (1);
 	}
+
 	game.mlx = mlx_init(WIN_W, WIN_H, "cub3D", false);
 	game.img = mlx_new_image(game.mlx, WIN_W, WIN_H);
 	mlx_image_to_window(game.mlx, game.img, 0, 0);
 	printf("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
 	print_map(&game);
 	printf("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
+
 	init_player(&game);
 	render(&game);
-	mlx_loop_hook(game.mlx, (void (*)(void *))ft_hooks, &game);
-	// mlx_mouse_hook(vars.win, mouse_move, &vars);
-	// mlx_mouse_hook(game.mlx, (void *)mouse_move, &game);
-	mlx_cursor_hook(game.mlx, (void *)func, &game);
-	// void mlx_cursor_hook(mlx_t* mlx, mlx_cursorfunc func, void* param);
+
+	mlx_loop_hook(game.mlx, (void (*)(void *))keyboard_hooks, &game);
+	mlx_cursor_hook(game.mlx, (void *)cursor_hook, &game);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
 	free_all(&game);

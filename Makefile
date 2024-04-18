@@ -48,17 +48,14 @@ PARSER				:=	./01_parser/parser.c \
 						./01_parser/init.c \
 						./01_parser/free_all.c \
 
-RAYCASTER			:=	./02_raycaster/rc.c \
-						./02_raycaster/rc1.c \
-						./02_raycaster/rc2.c \
-						./02_raycaster/rc3.c \
-
-RENDERER			:=	
-# ./03_raycaster/
+RENDERER			:=	./02_renderer/00_init_player.c \
+						./02_renderer/01_render.c \
+						./02_renderer/02_cast_ray.c \
+						./02_renderer/03_hooks.c \
+						./02_renderer/utils.c
 
 SRCS				:=	$(MAIN) \
 						$(PARSER) \
-						$(RAYCASTER) \
 						$(RENDERER)
 
 OBJ_DIR				:=	./obj/

@@ -1,34 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rc1.c                                              :+:      :+:    :+:   */
+/*   02_cast_ray.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 13:18:22 by musenov           #+#    #+#             */
-/*   Updated: 2024/04/16 20:40:07 by musenov          ###   ########.fr       */
+/*   Updated: 2024/04/18 19:19:47 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "raycaster.h"
-
-int	ft_sign(float f)
-{
-	if (f < 0.0f)
-	{
-		if (f > -0.000001)
-			return (0);
-		else
-			return (-1);
-	}
-	else
-	{
-		if (f < 0.000001f)
-			return (0);
-		else
-			return (1);
-	}
-}
+#include "renderer.h"
 
 void	ft_ray_initial_calculations(t_game *game, t_ray *r, float v)
 {
@@ -70,7 +52,7 @@ void	ft_ray_next_step_calculation(t_game *game, t_ray *r)
 		r->hor_dist = INFINITY;
 }
 
-static float	ft_save_color(t_game *game, float dist, int color_idx, float w)
+float	ft_save_color(t_game *game, float dist, int color_idx, float w)
 {
 	game->wall.txt_idx = color_idx;
 	if (game->wall.txt_idx == 0)
@@ -120,40 +102,4 @@ float	cast_ray(t_game *game, float v)
 
 
 
-void	draw_line(t_game *game, int col, float dist)
-{
-	t_draw			draw;
-	unsigned int	color;
-	int				h;
-
-	draw.line_height = (int)(WIN_H / dist);
-	draw.start = (WIN_H / 2) - (draw.line_height / 2);
-	draw.end = (draw.line_height / 2) + (WIN_H / 2);
-
-
-
-	// ** // new code start
-	
-	
-/* 	
-	if (game->wall.txt_idx == WE || game->wall.txt_idx == EA)
-		draw.wall_x = game->player.pos_y + dist * game->ray.y;
-	else
-		draw.wall_x = game->player.pos_x + dist * game->ray.x;
-	 */
-	
-	
-	// ** // new code end
-
-
-
-	color = rgba_to_color(205, 127, 50, 255);
-	h = 0;
-	while (h < WIN_H)
-	{
-		if (h >= draw.start && h <= draw.end)
-			mlx_put_pixel(game->img, col, h, color);
-		h++;
-	}
-}
 

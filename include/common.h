@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:23:46 by musenov           #+#    #+#             */
-/*   Updated: 2024/04/15 19:37:33 by musenov          ###   ########.fr       */
+/*   Updated: 2024/04/18 19:56:04 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 
 # include <sys/time.h>
 
-# define WIN_W					1280
-# define WIN_H					720
+# define WIN_W					360
+# define WIN_H					200
 
 # ifndef PI
 #  define PI 3.141592

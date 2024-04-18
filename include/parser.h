@@ -6,14 +6,13 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:23:01 by musenov           #+#    #+#             */
-/*   Updated: 2024/03/27 16:36:43 by musenov          ###   ########.fr       */
+/*   Updated: 2024/04/18 19:22:07 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-// # include "common.h"
 # include "get_next_line.h"
 
 void	parser(t_game *game, int fd);
