@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 13:18:22 by musenov           #+#    #+#             */
-/*   Updated: 2024/04/18 20:34:21 by musenov          ###   ########.fr       */
+/*   Updated: 2024/04/19 17:44:10 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	ft_ray_initial_calculations(t_game *game, t_ray *r, float v)
 {
 	r->dx = cos(v);
 	r->dy = -sin(v);
-	r->sx = ft_sign(r->dx);
-	r->sy = ft_sign(r->dy);
+	r->sx = get_sign(r->dx);
+	r->sy = get_sign(r->dy);
 	r->vert_x = (int) game->player.pos_x;
 	if (r->sx > 0)
 		r->vert_x += 1.0f;
@@ -30,7 +30,8 @@ void	ft_ray_next_step_calculation(t_game *game, t_ray *r)
 {
 	if (r->sx != 0)
 	{
-		r->vert_y = game->player.pos_y + r->dy / r->dx * (r->vert_x - game->player.pos_x);
+		r->vert_y = game->player.pos_y + r->dy / r->dx * \
+					(r->vert_x - game->player.pos_x);
 		r->vert_dist = sqrt(pow(game->player.pos_x - r->vert_x, 2.0)
 				+ pow(game->player.pos_y - r->vert_y, 2.0));
 		r->vert_w = r->vert_y - (int) r->vert_y;
@@ -41,7 +42,8 @@ void	ft_ray_next_step_calculation(t_game *game, t_ray *r)
 		r->vert_dist = INFINITY;
 	if (r->sy != 0)
 	{
-		r->hor_x = game->player.pos_x + r->dx / r->dy * (r->hor_y - game->player.pos_y);
+		r->hor_x = game->player.pos_x + r->dx / r->dy * \
+					(r->hor_y - game->player.pos_y);
 		r->hor_dist = sqrt(pow(game->player.pos_x - r->hor_x, 2.0)
 				+ pow(game->player.pos_y - r->hor_y, 2.0));
 		r->hor_w = r->hor_x - (int) r->hor_x;
@@ -54,6 +56,7 @@ void	ft_ray_next_step_calculation(t_game *game, t_ray *r)
 
 float	ft_save_color(t_game *game, float dist, int color_idx, float w)
 {
+	(void)w;
 	game->wall.txt_idx = color_idx;
 	if (game->wall.txt_idx == 0)
 		printf("direction: NO, %d\n", NO);
@@ -95,11 +98,4 @@ float	cast_ray(t_game *game, float v)
 		}
 	}
 }
-
-
-
-
-
-
-
 

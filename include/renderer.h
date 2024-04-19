@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:19:38 by musenov           #+#    #+#             */
-/*   Updated: 2024/04/18 19:20:57 by musenov          ###   ########.fr       */
+/*   Updated: 2024/04/19 17:04:24 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	keyboard_hooks(t_game *game);
 
 // utils.c
 
-int		ft_sign(float f);
+int		get_sign(float f);
 int		rgba_to_color(int32_t r, int32_t g, int32_t b, int32_t a);
 void	print_map(t_game *game);
 

@@ -6,28 +6,20 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 18:44:07 by musenov           #+#    #+#             */
-/*   Updated: 2024/04/18 19:22:37 by musenov          ###   ########.fr       */
+/*   Updated: 2024/04/19 17:06:27 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "renderer.h"
 
-int	ft_sign(float f)
+int	get_sign(float f)
 {
-	if (f < 0.0f)
-	{
-		if (f > -0.000001)
-			return (0);
-		else
-			return (-1);
-	}
+	if (f < -0.001f)
+		return (-1);
+	else if (f > 0.001f)
+		return (1);
 	else
-	{
-		if (f < 0.000001f)
-			return (0);
-		else
-			return (1);
-	}
+		return (0);
 }
 
 int	rgba_to_color(int32_t r, int32_t g, int32_t b, int32_t a)

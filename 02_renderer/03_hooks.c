@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:55:04 by musenov           #+#    #+#             */
-/*   Updated: 2024/04/18 20:22:56 by musenov          ###   ########.fr       */
+/*   Updated: 2024/04/19 17:04:52 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ void	move(t_game *game, int direction)
 	angle = game->player.view_angle - direction * M_PI / 2;
 	dx = LINEAR_STEP_SIDE * cos(angle);
 	dy = LINEAR_STEP_SIDE * sin(angle);
-	dist = cast_ray(game, ft_sign(dy) * M_PI / 2);
+	dist = cast_ray(game, get_sign(dy) * M_PI / 2);
 	if (dist * dist < dy * dy)
 		dy = 0.0f;
-	dist = cast_ray(game, (1 - (ft_sign(dx) + 1) / 2) * M_PI);
+	dist = cast_ray(game, (1 - (get_sign(dx) + 1) / 2) * M_PI);
 	if (dist * dist < dx * dx)
 		dx = 0.0f;
 	dist = cast_ray(game, angle);
 	if (dist * dist < dy * dy + dx * dx)
-		if (ft_sign(dy) * ft_sign(dx) != 0)
+		if (get_sign(dy) * get_sign(dx) != 0)
 			dy = 0.0f;
 	game->player.pos_x += dx;
 	game->player.pos_y -= dy;
@@ -46,15 +46,15 @@ void	move_forw(t_game *game, int direction)
 	angle = game->player.view_angle - direction * M_PI / 2;
 	dx = LINEAR_STEP_FORW * cos(angle);
 	dy = LINEAR_STEP_FORW * sin(angle);
-	dist = cast_ray(game, ft_sign(dy) * M_PI / 2);
+	dist = cast_ray(game, get_sign(dy) * M_PI / 2);
 	if (dist * dist < dy * dy)
 		dy = 0.0f;
-	dist = cast_ray(game, (1 - (ft_sign(dx) + 1) / 2) * M_PI);
+	dist = cast_ray(game, (1 - (get_sign(dx) + 1) / 2) * M_PI);
 	if (dist * dist < dx * dx)
 		dx = 0.0f;
 	dist = cast_ray(game, angle);
 	if (dist * dist < dy * dy + dx * dx)
-		if (ft_sign(dy) * ft_sign(dx) != 0)
+		if (get_sign(dy) * get_sign(dx) != 0)
 			dy = 0.0f;
 	game->player.pos_x += dx;
 	game->player.pos_y -= dy;
