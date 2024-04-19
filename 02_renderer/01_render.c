@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:14:40 by musenov           #+#    #+#             */
-/*   Updated: 2024/04/18 20:04:45 by musenov          ###   ########.fr       */
+/*   Updated: 2024/04/19 12:47:43 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,19 +55,27 @@ void	draw_line(t_game *game, int col, float dist)
 	// ** // new code start
 	
 	
-/* 	
+	/*
+
 	if (game->wall.txt_idx == WE || game->wall.txt_idx == EA)
 		draw.wall_x = game->player.pos_y + dist * game->ray.y;
 	else
 		draw.wall_x = game->player.pos_x + dist * game->ray.x;
-	 */
+
+	*/
 	
 	
 	// ** // new code end
 
 
-
-	color = rgba_to_color(205, 127, 50, 255);
+	if (game->wall.txt_idx == 0)
+		color = rgba_to_color(235, 233, 20, 255);
+	else if (game->wall.txt_idx == 1)
+		color = rgba_to_color(93, 106, 235, 255);
+	else if (game->wall.txt_idx == 2)
+		color = rgba_to_color(209, 255, 194, 255);
+	else if (game->wall.txt_idx == 3)
+		color = rgba_to_color(234, 56, 56, 255);
 	h = 0;
 	while (h < WIN_H)
 	{
