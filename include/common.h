@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:23:46 by musenov           #+#    #+#             */
-/*   Updated: 2024/04/18 19:56:04 by musenov          ###   ########.fr       */
+/*   Updated: 2024/04/20 16:44:34 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 
 # include <sys/time.h>
 
-# define WIN_W					360
-# define WIN_H					200
+# define WIN_W					10
+# define WIN_H					5
 
 # ifndef PI
 #  define PI 3.141592
@@ -45,11 +45,7 @@
 #  define LINEAR_STEP_FORW		0.06f
 # endif
 
-
-
-
 /////////////////////////// TEXTURES ///////////////////////////
-
 
 typedef enum e_direction
 {
@@ -72,11 +68,7 @@ typedef struct s_wall
 	int				txt_idx;
 
 	// t_img			txt[4];
-
 }	t_wall;
-
-
-
 
 /*
 
@@ -110,13 +102,9 @@ typedef struct s_game
 
 }	t_game;
 
-
 */
 
-
-
 /////////////////////////// COLORS ///////////////////////////
-
 
 typedef struct s_rgb
 {
@@ -137,9 +125,7 @@ typedef struct s_color
 	int					color_check;
 }	t_color;
 
-
 ///////////////////////////    MAP    ///////////////////////////
-
 
 typedef struct s_map
 {
@@ -154,9 +140,7 @@ typedef struct s_map
 	bool	new_line_checker;
 }	t_map;
 
-
 /////////////////////////// PLAYER DATA ///////////////////////////
-
 
 typedef struct s_player
 {
@@ -165,9 +149,7 @@ typedef struct s_player
 	float	view_angle;
 }	t_player;
 
-
 /////////////////////////// GAME DATA ///////////////////////////
-
 
 typedef struct s_game
 {
