@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:19:38 by musenov           #+#    #+#             */
-/*   Updated: 2024/04/20 15:37:36 by musenov          ###   ########.fr       */
+/*   Updated: 2024/04/20 18:36:28 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	render(t_game *game);
 // 02_cast_ray.c
 
 // void	ft_ray_initial_calculations(t_game *game, t_ray *r, float v);
+void	ray_start_calcs(t_game *game, t_ray *r, float v);
 // void	ft_ray_next_step_calculation(t_game *game, t_ray *r);
 float	ft_save_color(t_game *game, float dist, int color_idx, float w);
 void	dist_to_vert_grid_lines(t_game *game, t_ray *r);
