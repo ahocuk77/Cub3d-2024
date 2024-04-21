@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 13:18:22 by musenov           #+#    #+#             */
-/*   Updated: 2024/04/20 19:20:19 by musenov          ###   ########.fr       */
+/*   Updated: 2024/04/21 15:32:24 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ float	get_color(t_game *game, float dist, int color_idx, float w)
 {
 	// (void)w;
 	game->wall.txt_idx = color_idx;
-	if (game->wall.txt_idx == 0)
+/* 	if (game->wall.txt_idx == 0)
 		printf("direction: NO, %d\n", NO);
 	else if (game->wall.txt_idx == 1)
 		printf("direction: SO, %d\n", SO);
 	else if (game->wall.txt_idx == 2)
 		printf("direction: WE, %d\n", WE);
 	else if (game->wall.txt_idx == 3)
-		printf("direction: EA, %d\n", EA);
+		printf("direction: EA, %d\n", EA); */
 	game->wall.txt_w = w;
 	return (dist);
 }
@@ -217,3 +217,50 @@ float	cast_ray(t_game *game, float v)
 }
 
 */
+
+
+
+
+
+
+
+
+
+
+
+/* 
+void	draw_map(t_game *game)
+{
+	int		i;
+	double	camera_x;
+	t_coord	distance;
+
+	i = -1;
+	while (++i < SCREEN_WIDTH)
+	{
+		camera_x = 2 * i / (double)SCREEN_WIDTH - 1;
+		game->ray.x = game->player.dir_x + game->plane_x * camera_x;
+		game->ray.y = game->player.dir_y + game->plane_y * camera_x;
+		if (game->ray.x == 0)
+			game->ray.delta_x = 1e30; // increment which sums up to distance to the wall
+		else
+			game->ray.delta_x = fabs(1 / game->ray.x); // increment
+		if (game->ray.y == 0)
+			game->ray.delta_y = 1e30; // increment
+		else
+			game->ray.delta_y = fabs(1 / game->ray.y); // increment
+		distance = dda(game);
+		if (game->wall.side == EA || game->wall.side == WE)
+			// here distance.x is distance to vertical grid-line, i.e. hor distance
+			// draw_lineof_texture(game, i, distance.x);
+			draw_lineof_texture(game, i, distance.x - game->ray.delta_x);
+		else
+			// here distance.y is distance to horizontal grid-line, i.e. vert distance
+			// draw_lineof_texture(game, i, distance.y);
+			draw_lineof_texture(game, i, distance.y - game->ray.delta_y);
+	}
+}
+
+ */
+
+
