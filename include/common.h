@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:23:46 by musenov           #+#    #+#             */
-/*   Updated: 2024/04/20 18:37:03 by musenov          ###   ########.fr       */
+/*   Updated: 2024/04/21 14:06:56 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,20 @@
 
 /////////////////////////// TEXTURES ///////////////////////////
 
-typedef enum e_direction
+/* typedef enum e_direction
 {
 	NO,
 	SO,
 	WE,
 	EA,
+}	t_direction; */
+
+typedef enum e_direction
+{
+	WE,
+	NO,
+	EA,
+	SO,
 }	t_direction;
 
 typedef struct s_wall
@@ -69,40 +77,6 @@ typedef struct s_wall
 
 	// t_img			txt[4];
 }	t_wall;
-
-/*
-
-typedef struct s_game
-{
-	char	**all_map;
-	char	**trim_map;
-	int		max_h;
-	char	*path_nswe[4];
-	char	**map;
-	int		only_map_h;
-	int		map_l;
-
-	int		color_ceiling;
-	int		color_floor;
-
-	float	pos_x;
-	float	pos_y;
-	float	view;
-	float	txt_w;
-	int		txt_idx;
-
-	void	*mlx;
-	void	*win;
-	t_img	img;  // <=================
-	t_img	txt[4]; // <=================
-
-	t_img	npc_img;
-	t_img	wall_img;
-	int		minimap_on;
-
-}	t_game;
-
-*/
 
 /////////////////////////// COLORS ///////////////////////////
 
@@ -149,28 +123,8 @@ typedef struct s_player
 	float	view_angle;
 }	t_player;
 
-/////////////////////////// GAME DATA ///////////////////////////
 
-typedef struct s_game
-{
-	mlx_t				*mlx;
-	mlx_image_t			*img;
-	t_wall				wall;
-	t_color				color;
-	t_map				map;
-	t_player			player;
-}	t_game;
-
-typedef struct s_draw
-{
-	int		line_height;
-	int		start;
-	int		end;
-	int		text_x;
-	double	text_y;
-	double	wall_x;
-	double	text_step;
-}	t_draw;
+/////////////////////////// RAY DATA ///////////////////////////
 
 typedef struct s_ray
 {
@@ -187,5 +141,31 @@ typedef struct s_ray
 	float	vert_w;
 	float	hor_w;
 }	t_ray;
+
+/////////////////////////// GAME DATA ///////////////////////////
+
+typedef struct s_game
+{
+	mlx_t				*mlx;
+	mlx_image_t			*img;
+	t_wall				wall;
+	t_color				color;
+	t_map				map;
+	t_player			player;
+	t_ray				ray;
+}	t_game;
+
+typedef struct s_draw
+{
+	int		line_height;
+	int		start;
+	int		end;
+	int		text_x;
+	double	text_y;
+	double	wall_x;
+	double	text_step;
+}	t_draw;
+
+
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 13:18:22 by musenov           #+#    #+#             */
-/*   Updated: 2024/04/20 18:36:11 by musenov          ###   ########.fr       */
+/*   Updated: 2024/04/20 19:20:19 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "renderer.h"
 
-float	ft_save_color(t_game *game, float dist, int color_idx, float w)
+float	get_color(t_game *game, float dist, int color_idx, float w)
 {
 	// (void)w;
 	game->wall.txt_idx = color_idx;
@@ -122,8 +122,6 @@ void	dist_to_hor_grid_lines(t_game *game, t_ray *r)
 
 */
 
-
-
 void	dist_to_hor_grid_lines(t_game *game, t_ray *r)
 {
 	if (r->sy != 0)
@@ -137,8 +135,6 @@ void	dist_to_hor_grid_lines(t_game *game, t_ray *r)
 	else
 		r->hor_dist = INFINITY;
 }
-
-
 
 /*
 
@@ -167,23 +163,10 @@ float	cast_ray(t_game *game, float v)
 
 */
 
-
 float	cast_ray(t_game *game, float v)
 {
 	t_ray	r;
 
-	/*
-	r.dx = cos(v);
-	r.dy = -sin(v);
-	r.sx = get_sign(r.dx);
-	r.sy = get_sign(r.dy);
-	r.vert_x = (int) game->player.pos_x;
-	if (r.sx > 0)
-		r.vert_x += 1.0f;
-	r.hor_y = (int) game->player.pos_y;
-	if (r.sy > 0)
-		r.hor_y += 1.0f;
-	*/
 	ray_start_calcs(game, &r, v);
 	while (1)
 	{
@@ -192,22 +175,19 @@ float	cast_ray(t_game *game, float v)
 		if (r.vert_dist < r.hor_dist)
 		{
 			if (game->map.map[(int)r.vert_y][(int)r.vert_x + (r.sx - 1) / 2] == '1')
-				return (ft_save_color(game, r.vert_dist, r.sx + 1, r.vert_w));
+				return (get_color(game, r.vert_dist, r.sx + 1, r.vert_w));
 			else
 				r.vert_x += r.sx;
 		}
 		else
 		{
 			if (game->map.map[(int)r.hor_y + (r.sy - 1) / 2][(int)r.hor_x] == '1')
-				return (ft_save_color(game, r.hor_dist, r.sy + 2, r.hor_w));
+				return (get_color(game, r.hor_dist, r.sy + 2, r.hor_w));
 			else
 				r.hor_y += r.sy;
 		}
 	}
 }
-
-
-
 
 /*
 
