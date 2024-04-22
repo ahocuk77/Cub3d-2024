@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:14:40 by musenov           #+#    #+#             */
-/*   Updated: 2024/04/21 15:37:09 by musenov          ###   ########.fr       */
+/*   Updated: 2024/04/22 20:35:14 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,14 @@ void	draw_line(t_game *game, int col, float dist)
 	draw.start = (WIN_H / 2) - (draw.line_height / 2);
 	draw.end = (draw.line_height / 2) + (WIN_H / 2);
 
-	if (game->wall.txt_idx == 0 || game->wall.txt_idx == 2)
+/* 	if (game->wall.txt_idx == 0 || game->wall.txt_idx == 2)
 		draw.wall_x = game->player.pos_y + dist * game->ray.dy;
 	else
-		draw.wall_x = game->player.pos_x + dist * game->ray.dx;
+		draw.wall_x = game->player.pos_x + dist * game->ray.dx; */
 
-	draw.wall_x = game->player.pos_y + dist * game->ray.dy;
-	draw.wall_x -= floor(draw.wall_x);
+
+	// draw.wall_x -= floor(draw.wall_x);
+	draw.wall_x = game->wall.txt_w;
 	draw.text_x = (int)(draw.wall_x * (double)game->wall.texture[game->wall.txt_idx].width);
 	draw.text_y = 0;
 	draw.text_step = (double)game->wall.texture[game->wall.txt_idx].height / (double)draw.line_height;
