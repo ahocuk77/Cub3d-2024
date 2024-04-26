@@ -32,7 +32,7 @@ int main(int argc, char **argv)
 	map_w(&game, fd);
 	close(fd);
 	fd = open(argv[1], O_RDONLY);
-	parser(&game, fd, argv[1]);
+	parser(&game, fd);
 	if(game.wall.texture_check == 1 || game.color.color_check == 1 || game.map.map_check == 1)
 	{
 		free_all(&game);

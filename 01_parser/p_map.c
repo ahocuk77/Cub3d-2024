@@ -56,7 +56,7 @@ char *ft_strcpy(char *dst, const char *src)
 
 char *ft_strcat(char *dst, const char *src) {
     size_t i = 0;
-    size_t len_dst = strlen(dst);
+    size_t len_dst = ft_strlen(dst);
     
     while (src[i] != '\0') {
         dst[len_dst + i] = src[i];
@@ -77,7 +77,7 @@ int	put_map(t_game *game, char *str, int line)
 	result = m_valid_check(game, str);
 	if (result == -1)
 		return (-1);
-	int str_length = strlen(str);
+	int str_length = ft_strlen(str);
 	int required_spaces = game->map.width - str_length;
 	if (required_spaces > 0) {
 		char *temp_str = malloc(sizeof(char) * (game->map.width + 1));
