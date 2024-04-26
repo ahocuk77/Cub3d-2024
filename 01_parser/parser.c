@@ -24,9 +24,32 @@ int	ft_cubcheck(char *map)
 		return (0);
 }
 
+void	map_w(t_game *game, int fd)
+{
+	char	*str;
+	int		tmp;
+	int i = 0;
+
+	str = new_line_checker(game, fd);
+	game->map.width = ft_strlen(str);
+	while (1)
+	{
+		printf("%d\n", i);
+		i++;
+		if (game->map.new_line_checker != true)
+			str = get_next_line(fd);
+		game->map.new_line_checker = false;
+		delete_slash_n(str);
+		if (str == NULL)
+			break ;
+		tmp = ft_strlen2(str);
+		if (game->map.width < tmp)
+			game->map.width = ft_strlen2(str);
+	}
+}
+
 void	parser(t_game *game, int fd)
 {
-
 	p_texture(game, fd);
 	if (game->wall.texture_check == 1)
 	{

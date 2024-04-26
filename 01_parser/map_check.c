@@ -20,7 +20,7 @@ void	replace_spaces_with_one(t_game *game)
 	int		i;
 
 	map_height = 0;
-	while (map_height < game->map.height -1)
+	while (map_height < game->map.height)
 	{
 		current_line = game->map.map[map_height];
 		len = ft_strlen(game->map.map[map_height]);
@@ -29,7 +29,11 @@ void	replace_spaces_with_one(t_game *game)
 		{
 			if (current_line[i] == ' ' || current_line[i] == '\n'
 				|| current_line[i] == '\0')
+			{
+				if(current_line[i] == '\0')
+					break;
 				current_line[i] = '1';
+			}
 			i++;
 		}
 		map_height++;
