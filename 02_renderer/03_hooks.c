@@ -6,13 +6,13 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:55:04 by musenov           #+#    #+#             */
-/*   Updated: 2024/05/02 21:56:28 by musenov          ###   ########.fr       */
+/*   Updated: 2024/05/02 22:27:35 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "renderer.h"
 
-void	move(t_game *game, int direction)
+/* void	move(t_game *game, int direction)
 {
 	float	dist;
 	float	dx;
@@ -34,7 +34,55 @@ void	move(t_game *game, int direction)
 			dy = 0.0f;
 	game->player.pos_x += dx;
 	game->player.pos_y -= dy;
+} */
+
+
+
+
+bool isCollisionAhead(t_game *game, float angle, float dx, float dy) {
+	// Collision detection logic.
+
+	// Check direct path.
+	float dist = cast_ray(game, angle);
+	if (dist * dist < dx * dx + dy * dy) {
+		return true;
+	}
+
+	// Additional checks can be performed here if needed for walls or obstacles.
+
+	return false;
 }
+
+
+
+
+
+void move(t_game *game, int direction) {
+	// Constants for angle adjustment and movement.
+	const float angleOffset = direction * M_PI / 2;
+	const float stepSize = LINEAR_STEP_SIDE;
+
+	// Calculate the new movement angle.
+	float moveAngle = game->player.view_angle - angleOffset;
+
+	// Calculate movement deltas using the movement angle.
+	float dx = stepSize * cos(moveAngle);
+	float dy = stepSize * sin(moveAngle);
+
+	// Perform collision detection in the movement direction.
+	if (isCollisionAhead(game, moveAngle, dx, dy)) {
+		dx = 0.0f;
+		dy = 0.0f;
+	}
+
+	// Update player position.
+	game->player.pos_x += dx;
+	game->player.pos_y -= dy;  // Note: Consider coordinate system orientation.
+}
+
+
+
+
 
 void	move_forw(t_game *game, int direction)
 {

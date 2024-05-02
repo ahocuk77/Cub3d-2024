@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:19:38 by musenov           #+#    #+#             */
-/*   Updated: 2024/05/02 22:16:00 by musenov          ###   ########.fr       */
+/*   Updated: 2024/05/02 22:27:54 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	move(t_game *game, int direction);
 void	move_forw(t_game *game, int direction);
 void	*cursor_hook(double xpos, double ypos, t_game *game);
 void	keyboard_hooks(t_game *game);
+
+bool	isCollisionAhead(t_game *game, float angle, float dx, float dy);
 
 // utils.c
 
