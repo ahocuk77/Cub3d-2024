@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 13:18:22 by musenov           #+#    #+#             */
-/*   Updated: 2024/05/02 21:49:42 by musenov          ###   ########.fr       */
+/*   Updated: 2024/05/02 21:53:30 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,7 @@
 
 float	get_color(t_game *game, float dist, int color_idx, float w)
 {
-	// (void)w;
 	game->wall.txt_idx = color_idx;
-/* 	if (game->wall.txt_idx == 0)
-		printf("direction: NO, %d\n", NO);
-	else if (game->wall.txt_idx == 1)
-		printf("direction: SO, %d\n", SO);
-	else if (game->wall.txt_idx == 2)
-		printf("direction: WE, %d\n", WE);
-	else if (game->wall.txt_idx == 3)
-		printf("direction: EA, %d\n", EA); */
 	game->wall.txt_w = w;
 	return (dist);
 }
@@ -44,33 +35,21 @@ void	ray_start_calcs(t_game *game, t_ray *r, float v)
 
 void	calculate_dist_to_vert_grid_line(t_game *game, t_ray *r)
 {
-	r->vert_y = game->player.pos_y + (r->dy / r->dx) * (r->vert_x - game->player.pos_x);
-	r->vert_dist = sqrt(pow(game->player.pos_x - r->vert_x, 2.0) + pow(game->player.pos_y - r->vert_y, 2.0));
+	r->vert_y = game->player.pos_y + (r->dy / r->dx) * \
+				(r->vert_x - game->player.pos_x);
+	r->vert_dist = sqrt(pow(game->player.pos_x - r->vert_x, 2.0) + \
+					pow(game->player.pos_y - r->vert_y, 2.0));
 	r->vert_w = r->vert_y - (int) r->vert_y;
 	if (r->sx > 0)
 		r->vert_w = 1 - r->vert_w;
 }
 
-/*
-
-this solution will worj if we have a map which is fully filled, i.e. rectangular.
-i am  calculating dist_to_vert_grid_lines continuosly until the wall is reached, but
-the map is not rectangular therefore this doesnt work.
-
-*/
 void	dist_to_vert_grid_lines(t_game *game, t_ray *r)
 {
 	while (1)
 	{
 		if (r->sx != 0)
-		{
-/* 			r->vert_y = game->player.pos_y + (r->dy / r->dx) * (r->vert_x - game->player.pos_x);
-			r->vert_dist = sqrt(pow(game->player.pos_x - r->vert_x, 2.0) + pow(game->player.pos_y - r->vert_y, 2.0));
-			r->vert_w = r->vert_y - (int) r->vert_y;
-			if (r->sx > 0)
-				r->vert_w = 1 - r->vert_w; */
 			calculate_dist_to_vert_grid_line(game, r);
-		}
 		else
 		{
 			r->vert_dist = INFINITY;
@@ -79,7 +58,8 @@ void	dist_to_vert_grid_lines(t_game *game, t_ray *r)
 		if ((int)r->vert_x >= 0 && (int)r->vert_x < game->map.width && \
 			(int)r->vert_y >= 0 && (int)r->vert_y < game->map.height)
 		{
-			if (game->map.map[(int)r->vert_y][(int)r->vert_x + (r->sx - 1) / 2] == '1')
+			if (game->map.map[(int)r->vert_y] \
+								[(int)r->vert_x + (r->sx - 1) / 2] == '1')
 				break ;
 			else
 				r->vert_x += r->sx;
@@ -92,55 +72,23 @@ void	dist_to_vert_grid_lines(t_game *game, t_ray *r)
 	}
 }
 
-
-
-
-
-
-
-/*
-
-void	dist_to_vert_grid_lines(t_game *game, t_ray *r)
-{
-	if (r->sx != 0)
-	{
-		r->vert_y = game->player.pos_y + r->dy / r->dx * (r->vert_x - game->player.pos_x);
-		r->vert_dist = sqrt(pow(game->player.pos_x - r->vert_x, 2.0) + pow(game->player.pos_y - r->vert_y, 2.0));
-		r->vert_w = r->vert_y - (int) r->vert_y;
-		if (r->sx > 0)
-			r->vert_w = 1 - r->vert_w;
-	}
-	else
-		r->vert_dist = INFINITY;
-}
-
-*/
-
 void	calculate_dist_to_hor_grid_line(t_game *game, t_ray *r)
 {
-	r->hor_x = game->player.pos_x + (r->dx / r->dy) * (r->hor_y - game->player.pos_y);
-	r->hor_dist = sqrt(pow(game->player.pos_x - r->hor_x, 2.0) + pow(game->player.pos_y - r->hor_y, 2.0));
+	r->hor_x = game->player.pos_x + (r->dx / r->dy) * \
+				(r->hor_y - game->player.pos_y);
+	r->hor_dist = sqrt(pow(game->player.pos_x - r->hor_x, 2.0) + \
+					pow(game->player.pos_y - r->hor_y, 2.0));
 	r->hor_w = r->hor_x - (int) r->hor_x;
 	if (r->sy < 0)
 		r->hor_w = 1 - r->hor_w;
 }
-
-
-
 
 void	dist_to_hor_grid_lines(t_game *game, t_ray *r)
 {
 	while (1)
 	{
 		if (r->sy != 0)
-		{
-/* 			r->hor_x = game->player.pos_x + (r->dx / r->dy) * (r->hor_y - game->player.pos_y);
-			r->hor_dist = sqrt(pow(game->player.pos_x - r->hor_x, 2.0) + pow(game->player.pos_y - r->hor_y, 2.0));
-			r->hor_w = r->hor_x - (int) r->hor_x;
-			if (r->sy < 0)
-				r->hor_w = 1 - r->hor_w; */
 			calculate_dist_to_hor_grid_line(game, r);
-		}
 		else
 		{
 			r->hor_dist = INFINITY;
@@ -149,7 +97,8 @@ void	dist_to_hor_grid_lines(t_game *game, t_ray *r)
 		if ((int)r->hor_x >= 0 && (int)r->hor_x < game->map.width && \
 			(int)r->hor_y >= 0 && (int)r->hor_y < game->map.height)
 		{
-			if (game->map.map[(int)r->hor_y + (r->sy - 1) / 2][(int)r->hor_x] == '1')
+			if (game->map.map[(int)r->hor_y + (r->sy - 1) / 2] \
+								[(int)r->hor_x] == '1')
 				break ;
 			else
 				r->hor_y += r->sy;
@@ -162,107 +111,10 @@ void	dist_to_hor_grid_lines(t_game *game, t_ray *r)
 	}
 }
 
-
-
-
-
-
-/* void	dist_to_hor_grid_lines(t_game *game, t_ray *r)
-{
-	if (r->sy != 0)
-	{
-		r->hor_x = game->player.pos_x + r->dx / r->dy * (r->hor_y - game->player.pos_y);
-		r->hor_dist = sqrt(pow(game->player.pos_x - r->hor_x, 2.0) + pow(game->player.pos_y - r->hor_y, 2.0));
-		r->hor_w = r->hor_x - (int) r->hor_x;
-		if (r->sy < 0)
-			r->hor_w = 1 - r->hor_w;
-	}
-	else
-		r->hor_dist = INFINITY;
-}
- */
-
-
-
-
-/*
-
-///////////////////////////////////////////// from chatGPT
-
-static void dist_to_vert_grid_lines(t_game *game, t_ray *r) {
-	while (1) {
-		if (r->sx != 0) {
-			r->vert_y = game->player.pos_y + r->dy / r->dx * (r->vert_x - game->player.pos_x);
-			r->vert_dist = sqrt(pow(game->player.pos_x - r->vert_x, 2.0)
-								+ pow(game->player.pos_y - r->vert_y, 2.0));
-			r->vert_w = r->vert_y - (int)r->vert_y;
-			if (r->sx > 0)
-				r->vert_w = 1 - r->vert_w;
-		} else {
-			r->vert_dist = INFINITY;
-			break;
-		}
-		if ((int)r->vert_x >= 0 && (int)r->vert_x < game->map.width &&
-			(int)r->vert_y >= 0 && (int)r->vert_y < game->map.height) {
-			if (game->map.map[(int)r->vert_y][(int)r->vert_x + (r->sx - 1) / 2] == '1') {
-				break;
-			} else {
-				r->vert_x += r->sx;
-			}
-		} else {
-			r->vert_dist = INFINITY;
-			break;
-		}
-	}
-}
-
-
-static void dist_to_hor_grid_lines(t_game *game, t_ray *r) {
-	while (1) {
-		if (r->sy != 0) {
-			r->hor_x = game->player.pos_x + r->dx / r->dy * (r->hor_y - game->player.pos_y);
-			r->hor_dist = sqrt(pow(game->player.pos_x - r->hor_x, 2.0)
-							   + pow(game->player.pos_y - r->hor_y, 2.0));
-			r->hor_w = r->hor_x - (int)r->hor_x;
-			if (r->sy < 0)
-				r->hor_w = 1 - r->hor_w;
-		} else {
-			r->hor_dist = INFINITY;
-			break;
-		}
-		if ((int)r->hor_x >= 0 && (int)r->hor_x < game->map.width &&
-			(int)r->hor_y >= 0 && (int)r->hor_y < game->map.height) {
-			if (game->map.map[(int)r->hor_y + (r->sy - 1) / 2][(int)r->hor_x] == '1') {
-				break;
-			} else {
-				r->hor_y += r->sy;
-			}
-		} else {
-			r->hor_dist = INFINITY;
-			break;
-		}
-	}
-}
-
-
-*/
-
-
-
-
-
-
-
-
-
-
-
-
 float	cast_ray(t_game *game, float v)
 {
 	t_ray	r;
 
-	// ft_ray_initial_calculations(game, &r, v);
 	r.dx = cos(v);
 	r.dy = -sin(v);
 	r.sx = get_sign(r.dx);
@@ -280,296 +132,3 @@ float	cast_ray(t_game *game, float v)
 	else
 		return (get_color(game, r.hor_dist, r.sy + 2, r.hor_w));
 }
-
-
-
-
-
-/* float	cast_ray(t_game *game, float v)
-{
-	t_ray	r;
-
-	ray_start_calcs(game, &r, v);
-	while (1)
-	{
-		dist_to_vert_grid_lines(game, &r);
-		dist_to_hor_grid_lines(game, &r);
-		if (r.vert_dist < r.hor_dist)
-		{
-			if (game->map.map[(int)r.vert_y][(int)r.vert_x + (r.sx - 1) / 2] == '1')
-				return (get_color(game, r.vert_dist, r.sx + 1, r.vert_w));
-			else
-				r.vert_x += r.sx;
-		}
-		else
-		{
-			if (game->map.map[(int)r.hor_y + (r.sy - 1) / 2][(int)r.hor_x] == '1')
-				return (get_color(game, r.hor_dist, r.sy + 2, r.hor_w));
-			else
-				r.hor_y += r.sy;
-		}
-	}
-} */
-
-
-
-
-
-/*
-
-float	cast_ray(t_game *game, float v)
-{
-	t_ray	r;
-
-	ft_ray_initial_calculations(game, &r, v);
-	while (1)
-	{
-		ft_ray_next_step_calculation(game, &r);
-		if (r.vert_dist < r.hor_dist)
-		{
-			if (game->map.map[(int)r.vert_y][(int)r.vert_x + (r.sx - 1) / 2] == '1')
-				return (ft_save_color(game, r.vert_dist, r.sx + 1, r.vert_w));
-			else
-				r.vert_x += r.sx;
-		}
-		else
-		{
-			if (game->map.map[(int)r.hor_y + (r.sy - 1) / 2][(int)r.hor_x] == '1')
-				return (ft_save_color(game, r.hor_dist, r.sy + 2, r.hor_w));
-			else
-				r.hor_y += r.sy;
-		}
-	}
-}
-
-*/
-
-
-
-
-
-
-
-
-
-
-
-/* 
-void	draw_map(t_game *game)
-{
-	int		i;
-	double	camera_x;
-	t_coord	distance;
-
-	i = -1;
-	while (++i < SCREEN_WIDTH)
-	{
-		camera_x = 2 * i / (double)SCREEN_WIDTH - 1;
-		game->ray.x = game->player.dir_x + game->plane_x * camera_x;
-		game->ray.y = game->player.dir_y + game->plane_y * camera_x;
-		if (game->ray.x == 0)
-			game->ray.delta_x = 1e30; // increment which sums up to distance to the wall
-		else
-			game->ray.delta_x = fabs(1 / game->ray.x); // increment
-		if (game->ray.y == 0)
-			game->ray.delta_y = 1e30; // increment
-		else
-			game->ray.delta_y = fabs(1 / game->ray.y); // increment
-		distance = dda(game);
-		if (game->wall.side == EA || game->wall.side == WE)
-			// here distance.x is distance to vertical grid-line, i.e. hor distance
-			// draw_lineof_texture(game, i, distance.x);
-			draw_lineof_texture(game, i, distance.x - game->ray.delta_x);
-		else
-			// here distance.y is distance to horizontal grid-line, i.e. vert distance
-			// draw_lineof_texture(game, i, distance.y);
-			draw_lineof_texture(game, i, distance.y - game->ray.delta_y);
-	}
-}
-
- */
-
-
-/* 
-
-
-static void	ft_ray_initial_calculations(t_game *game, t_ray *r, float v)
-{
-	r->dx = cos(v);
-	r->dy = -sin(v);
-	r->sx = ft_sign(r->dx);
-	r->sy = ft_sign(r->dy);
-	r->vert_x = (int) game->pos_x;
-	if (r->sx > 0)
-		r->vert_x += 1.0f;
-	r->hor_y = (int) game->pos_y;
-	if (r->sy > 0)
-		r->hor_y += 1.0f;
-}
-
-static void	ft_ray_next_step_calculation(t_game *game, t_ray *r)
-{
-	if (r->sx != 0)
-	{
-		r->vert_y = game->pos_y + r->dy / r->dx * (r->vert_x - game->pos_x);
-		r->vert_dist = sqrt(pow(game->pos_x - r->vert_x, 2.0)
-				+ pow(game->pos_y - r->vert_y, 2.0));
-		r->vert_w = r->vert_y - (int) r->vert_y;
-		if (r->sx > 0)
-			r->vert_w = 1 - r->vert_w;
-	}
-	else
-		r->vert_dist = INFINITY;
-	if (r->sy != 0)
-	{
-		r->hor_x = game->pos_x + r->dx / r->dy * (r->hor_y - game->pos_y);
-		r->hor_dist = sqrt(pow(game->pos_x - r->hor_x, 2.0)
-				+ pow(game->pos_y - r->hor_y, 2.0));
-		r->hor_w = r->hor_x - (int) r->hor_x;
-		if (r->sy < 0)
-			r->hor_w = 1 - r->hor_w;
-	}
-	else
-		r->hor_dist = INFINITY;
-}
-
-static float	ft_save_color(t_game *game, float dist, int color_idx, float w)
-{
-	game->txt_idx = color_idx;
-	game->txt_w = w;
-	return (dist);
-}
-
-float	ft_ray(t_game *game, float v)
-{
-	t_ray	r;
-
-	ft_ray_initial_calculations(game, &r, v);
-	while (1)
-	{
-		ft_ray_next_step_calculation(game, &r);
-		if (r.vert_dist < r.hor_dist)
-		{
-			if (game->map[(int)r.vert_y][(int)r.vert_x + (r.sx - 1) / 2] == '1')
-				return (ft_save_color(game, r.vert_dist, r.sx + 1, r.vert_w));
-			else
-				r.vert_x += r.sx;
-		}
-		else
-		{
-			if (game->map[(int)r.hor_y + (r.sy - 1) / 2][(int)r.hor_x] == '1')
-				return (ft_save_color(game, r.hor_dist, r.sy + 2, r.hor_w));
-			else
-				r.hor_y += r.sy;
-		}
-	}
-}
-
-void	ft_line(t_game *game, int w, float dist)
-{
-	unsigned int	*dst;
-	unsigned int	*src;
-	unsigned int	h;
-	float			src_f;
-	float			d_shift;
-
-	h = (float) WINDOW_H / dist;
-	src_f = 0.0f;
-	d_shift = (float) game->txt[game->txt_idx].height / h;
-	if (h > WINDOW_H)
-	{
-		src_f = 0.5f * (h - WINDOW_H) / h * game->txt[game->txt_idx].height;
-		h = WINDOW_H;
-	}
-	src = (unsigned int *) game->txt[game->txt_idx].addr;
-	src += (int)((float) game->txt_w * game->txt[game->txt_idx].width);
-	dst = (unsigned int *) game->img.addr + w + (WINDOW_H - h) / 2 * WINDOW_W;
-	while (h-- > 0)
-	{
-		*dst = *(src + ((int)src_f) * game->txt[game->txt_idx].width);
-		// *dst = game->txt_idx * 255 + (1 - game->txt_idx) * (255 << 8);
-		dst += WINDOW_W;
-		src_f += d_shift;
-	}
-}
-
-void	ft_ray_casting(t_game *game)
-{
-	int		x;
-	float	dv;
-	float	v;
-
-	// v = game->view - FOV / 2;
-	v = game->view + FOV / 2;
-	dv = FOV / (WINDOW_W - 1);
-	x = -1;
-	while (++x < WINDOW_W)
-	{
-		ft_line(game, x, ft_ray(game, v) * cos(game->view - v)); // cos is for fish eye effect removal
-		// v += dv;
-		v -= dv;
-	}
-}
- */
-
-
-
-
-
-
-
-
-
-/* 
-
-// new main function
-
-int main(int argc, char **argv)
-{
-	t_game game;
-	int fd;	
-	
-	if(argc != 2 || ft_cubcheck(argv[1]) == 1)
-	{
-		ft_putstr_fd("ERROR\n", 2);
-		return 1;
-	}
-	ft_init(&game);
-	fd = open(argv[1], O_RDONLY);
-	if(fd < 0)
-	{
-		ft_putstr_fd("Wrong file\n", 2);
-		return 1;
-	}
-	map_w(&game, fd);
-	close(fd);
-	fd = open(argv[1], O_RDONLY);
-	parser(&game, fd);
-	if(game.wall.texture_check == 1 || game.color.color_check == 1 || game.map.map_check == 1)
-	{
-		free_all(&game);
-		return 1;
-	}
-	game.mlx = mlx_init(WIN_W, WIN_H, "cub3D", false);
-	game.img = mlx_new_image(game.mlx, WIN_W, WIN_H);
-	mlx_image_to_window(game.mlx, game.img, 0, 0);
-	draw_background(&game);
-	print_map(&game);
-	//exit(1);
-	// open_map_file(&game, check_argv(argv));
-	// player_position(&game);
-	// init_player_direction(&game);
-	// draw(game);
-	// mlx_loop_hook(game.mlx, (void (*)(void *))ft_hooks0, &game);
-	// mlx_scroll_hook(game.mlx, (mlx_scrollfunc)ft_scroll, &game);
-	mlx_loop(game.mlx);
-	mlx_terminate(game.mlx);
-	free_all(&game);
-	printf("%s\n", "cub3d closed");
-	// system("leaks cub3D");
-	return (0);
-}
-
- */
-
-

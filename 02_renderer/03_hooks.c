@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:55:04 by musenov           #+#    #+#             */
-/*   Updated: 2024/04/19 17:04:52 by musenov          ###   ########.fr       */
+/*   Updated: 2024/05/02 21:56:28 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	*cursor_hook(double xpos, double ypos, t_game *game)
 	render(game);
 	return (0);
 }
-
 
 void	keyboard_hooks(t_game *game)
 {
