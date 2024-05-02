@@ -41,15 +41,55 @@ int	m_valid_check(t_game *game, char *str)
 	return (0);
 }
 
+
+char *ft_strcpy(char *dst, const char *src)
+{
+    size_t i = 0;
+
+    while (src[i] != '\0') {
+        dst[i] = src[i];
+        i++;
+    }
+    dst[i] = '\0';
+    return dst;
+}
+
+char *ft_strcat(char *dst, const char *src) {
+    size_t i = 0;
+    size_t len_dst = ft_strlen(dst);
+    
+    while (src[i] != '\0') {
+        dst[len_dst + i] = src[i];
+        i++;
+    }
+    dst[len_dst + i] = '\0';
+    return dst;
+}
+
 int	put_map(t_game *game, char *str, int line)
 {
 	int		result;
 	char	**temp;
 	int		i;
+	int		j;
 
+	j = 0;
 	result = m_valid_check(game, str);
 	if (result == -1)
 		return (-1);
+	int str_length = ft_strlen(str);
+	int required_spaces = game->map.width - str_length;
+	if (required_spaces > 0) {
+		char *temp_str = malloc(sizeof(char) * (game->map.width + 1));
+		ft_strcpy(temp_str, str);
+		while(j < required_spaces)
+		{
+			ft_strcat(temp_str, " ");
+			j++;
+		}
+		str = temp_str;
+	}
+
 	temp = game->map.map;
 	game->map.map = malloc (sizeof(char *) * (line + 1));
 	i = 0;
@@ -99,10 +139,8 @@ void	delete_slash_n(char *str)
 void	p_map(t_game *game, int fd)
 {
 	char	*str;
-	int		tmp;
 
 	str = new_line_checker(game, fd);
-	game->map.width = ft_strlen(str);
 	while (1)
 	{
 		if (game->map.new_line_checker != true)
@@ -111,9 +149,6 @@ void	p_map(t_game *game, int fd)
 		delete_slash_n(str);
 		if (str == NULL)
 			break ;
-		tmp = ft_strlen2(str);
-		if (game->map.width < tmp)
-			game->map.width = ft_strlen2(str);
 		game->map.height++;
 		if (ft_strlen(str) != 0 && put_map(game, str, game->map.height) == -1)
 		{
