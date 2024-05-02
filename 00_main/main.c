@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:20:30 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/04/18 20:28:21 by musenov          ###   ########.fr       */
+/*   Updated: 2024/05/02 20:55:24 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ int	main(int argc, char **argv)
 		ft_putstr_fd("Wrong file\n", 2);
 		return (1);
 	}
+
+	map_w(&game, fd);
+	close(fd);
+	fd = open(argv[1], O_RDONLY);
+
 	parser(&game, fd);
 	if (game.wall.texture_check == 1 || game.color.color_check == 1 \
 									|| game.map.map_check == 1)

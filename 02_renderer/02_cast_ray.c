@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 13:18:22 by musenov           #+#    #+#             */
-/*   Updated: 2024/04/22 20:33:45 by musenov          ###   ########.fr       */
+/*   Updated: 2024/05/02 21:15:42 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,11 @@ void	ray_start_calcs(t_game *game, t_ray *r, float v)
 }
 
 
-/*
+
+
+
+
+
 
 // // this solution will worj if we have a map which is fully filled, i.e. rectangular.
 // // i am  calculating dist_to_vert_grid_lines continuosly until the wall is reached, but
@@ -66,7 +70,8 @@ void	dist_to_vert_grid_lines(t_game *game, t_ray *r)
 			r->vert_dist = INFINITY;
 			break ;
 		}
-		if ((int)r->vert_x >= 0 && (int)r->vert_x < game->map.width && (int)r->vert_y >= 0 && (int)r->vert_y < game->map.height)
+		if ((int)r->vert_x >= 0 && (int)r->vert_x < game->map.width && \
+			(int)r->vert_y >= 0 && (int)r->vert_y < game->map.height)
 		{
 			if (game->map.map[(int)r->vert_y][(int)r->vert_x + (r->sx - 1) / 2] == '1')
 				break ;
@@ -74,11 +79,20 @@ void	dist_to_vert_grid_lines(t_game *game, t_ray *r)
 				r->vert_x += r->sx;
 		}
 		else
+		{
+			r->vert_dist = INFINITY;
 			break ;
+		}
 	}
 }
 
-*/
+
+
+
+
+
+
+/*
 
 void	dist_to_vert_grid_lines(t_game *game, t_ray *r)
 {
@@ -94,7 +108,12 @@ void	dist_to_vert_grid_lines(t_game *game, t_ray *r)
 		r->vert_dist = INFINITY;
 }
 
-/*
+*/
+
+
+
+
+
 
 void	dist_to_hor_grid_lines(t_game *game, t_ray *r)
 {
@@ -113,16 +132,28 @@ void	dist_to_hor_grid_lines(t_game *game, t_ray *r)
 			r->hor_dist = INFINITY;
 			break ;
 		}
-		if (game->map.map[(int)r->hor_y + (r->sy - 1) / 2][(int)r->hor_x] == '1')
-			break ;
+		if ((int)r->hor_x >= 0 && (int)r->hor_x < game->map.width && \
+			(int)r->hor_y >= 0 && (int)r->hor_y < game->map.height)
+		{
+			if (game->map.map[(int)r->hor_y + (r->sy - 1) / 2][(int)r->hor_x] == '1')
+				break ;
+			else
+				r->hor_y += r->sy;
+		}
 		else
-			r->hor_y += r->sy;
+		{
+			r->hor_dist = INFINITY;
+			break;
+		}
 	}
 }
 
-*/
 
-void	dist_to_hor_grid_lines(t_game *game, t_ray *r)
+
+
+
+
+/* void	dist_to_hor_grid_lines(t_game *game, t_ray *r)
 {
 	if (r->sy != 0)
 	{
@@ -135,8 +166,83 @@ void	dist_to_hor_grid_lines(t_game *game, t_ray *r)
 	else
 		r->hor_dist = INFINITY;
 }
+ */
+
+
+
 
 /*
+
+///////////////////////////////////////////// from chatGPT
+
+static void dist_to_vert_grid_lines(t_game *game, t_ray *r) {
+	while (1) {
+		if (r->sx != 0) {
+			r->vert_y = game->player.pos_y + r->dy / r->dx * (r->vert_x - game->player.pos_x);
+			r->vert_dist = sqrt(pow(game->player.pos_x - r->vert_x, 2.0)
+								+ pow(game->player.pos_y - r->vert_y, 2.0));
+			r->vert_w = r->vert_y - (int)r->vert_y;
+			if (r->sx > 0)
+				r->vert_w = 1 - r->vert_w;
+		} else {
+			r->vert_dist = INFINITY;
+			break;
+		}
+		if ((int)r->vert_x >= 0 && (int)r->vert_x < game->map.width &&
+			(int)r->vert_y >= 0 && (int)r->vert_y < game->map.height) {
+			if (game->map.map[(int)r->vert_y][(int)r->vert_x + (r->sx - 1) / 2] == '1') {
+				break;
+			} else {
+				r->vert_x += r->sx;
+			}
+		} else {
+			r->vert_dist = INFINITY;
+			break;
+		}
+	}
+}
+
+
+static void dist_to_hor_grid_lines(t_game *game, t_ray *r) {
+	while (1) {
+		if (r->sy != 0) {
+			r->hor_x = game->player.pos_x + r->dx / r->dy * (r->hor_y - game->player.pos_y);
+			r->hor_dist = sqrt(pow(game->player.pos_x - r->hor_x, 2.0)
+							   + pow(game->player.pos_y - r->hor_y, 2.0));
+			r->hor_w = r->hor_x - (int)r->hor_x;
+			if (r->sy < 0)
+				r->hor_w = 1 - r->hor_w;
+		} else {
+			r->hor_dist = INFINITY;
+			break;
+		}
+		if ((int)r->hor_x >= 0 && (int)r->hor_x < game->map.width &&
+			(int)r->hor_y >= 0 && (int)r->hor_y < game->map.height) {
+			if (game->map.map[(int)r->hor_y + (r->sy - 1) / 2][(int)r->hor_x] == '1') {
+				break;
+			} else {
+				r->hor_y += r->sy;
+			}
+		} else {
+			r->hor_dist = INFINITY;
+			break;
+		}
+	}
+}
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
 
 float	cast_ray(t_game *game, float v)
 {
@@ -156,14 +262,16 @@ float	cast_ray(t_game *game, float v)
 	dist_to_vert_grid_lines(game, &r);
 	dist_to_hor_grid_lines(game, &r);
 	if (r.vert_dist < r.hor_dist)
-		return (ft_save_color(game, r.vert_dist, r.sx + 1, r.vert_w));
+		return (get_color(game, r.vert_dist, r.sx + 1, r.vert_w));
 	else
-		return (ft_save_color(game, r.hor_dist, r.sy + 2, r.hor_w));
+		return (get_color(game, r.hor_dist, r.sy + 2, r.hor_w));
 }
 
-*/
 
-float	cast_ray(t_game *game, float v)
+
+
+
+/* float	cast_ray(t_game *game, float v)
 {
 	t_ray	r;
 
@@ -187,7 +295,11 @@ float	cast_ray(t_game *game, float v)
 				r.hor_y += r.sy;
 		}
 	}
-}
+} */
+
+
+
+
 
 /*
 
@@ -385,3 +497,65 @@ void	ft_ray_casting(t_game *game)
 	}
 }
  */
+
+
+
+
+
+
+
+
+
+/* 
+
+// new main function
+
+int main(int argc, char **argv)
+{
+	t_game game;
+	int fd;	
+	
+	if(argc != 2 || ft_cubcheck(argv[1]) == 1)
+	{
+		ft_putstr_fd("ERROR\n", 2);
+		return 1;
+	}
+	ft_init(&game);
+	fd = open(argv[1], O_RDONLY);
+	if(fd < 0)
+	{
+		ft_putstr_fd("Wrong file\n", 2);
+		return 1;
+	}
+	map_w(&game, fd);
+	close(fd);
+	fd = open(argv[1], O_RDONLY);
+	parser(&game, fd);
+	if(game.wall.texture_check == 1 || game.color.color_check == 1 || game.map.map_check == 1)
+	{
+		free_all(&game);
+		return 1;
+	}
+	game.mlx = mlx_init(WIN_W, WIN_H, "cub3D", false);
+	game.img = mlx_new_image(game.mlx, WIN_W, WIN_H);
+	mlx_image_to_window(game.mlx, game.img, 0, 0);
+	draw_background(&game);
+	print_map(&game);
+	//exit(1);
+	// open_map_file(&game, check_argv(argv));
+	// player_position(&game);
+	// init_player_direction(&game);
+	// draw(game);
+	// mlx_loop_hook(game.mlx, (void (*)(void *))ft_hooks0, &game);
+	// mlx_scroll_hook(game.mlx, (mlx_scrollfunc)ft_scroll, &game);
+	mlx_loop(game.mlx);
+	mlx_terminate(game.mlx);
+	free_all(&game);
+	printf("%s\n", "cub3d closed");
+	// system("leaks cub3D");
+	return (0);
+}
+
+ */
+
+
