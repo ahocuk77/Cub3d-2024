@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:19:38 by musenov           #+#    #+#             */
-/*   Updated: 2024/04/21 14:06:05 by musenov          ###   ########.fr       */
+/*   Updated: 2024/05/02 21:35:39 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ float	get_color(t_game *game, float dist, int color_idx, float w);
 void	dist_to_vert_grid_lines(t_game *game, t_ray *r);
 void	dist_to_hor_grid_lines(t_game *game, t_ray *r);
 float	cast_ray(t_game *game, float v);
+
+void	calculate_dist_to_hor_grid_line(t_game *game, t_ray *r);
+void	calculate_dist_to_vert_grid_line(t_game *game, t_ray *r);
 
 // 03_hooks.c
 

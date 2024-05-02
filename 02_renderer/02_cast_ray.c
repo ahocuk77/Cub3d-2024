@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 13:18:22 by musenov           #+#    #+#             */
-/*   Updated: 2024/05/02 21:15:42 by musenov          ###   ########.fr       */
+/*   Updated: 2024/05/02 21:49:42 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,28 +42,34 @@ void	ray_start_calcs(t_game *game, t_ray *r, float v)
 		r->hor_y += 1.0f;
 }
 
+void	calculate_dist_to_vert_grid_line(t_game *game, t_ray *r)
+{
+	r->vert_y = game->player.pos_y + (r->dy / r->dx) * (r->vert_x - game->player.pos_x);
+	r->vert_dist = sqrt(pow(game->player.pos_x - r->vert_x, 2.0) + pow(game->player.pos_y - r->vert_y, 2.0));
+	r->vert_w = r->vert_y - (int) r->vert_y;
+	if (r->sx > 0)
+		r->vert_w = 1 - r->vert_w;
+}
 
+/*
 
+this solution will worj if we have a map which is fully filled, i.e. rectangular.
+i am  calculating dist_to_vert_grid_lines continuosly until the wall is reached, but
+the map is not rectangular therefore this doesnt work.
 
-
-
-
-
-// // this solution will worj if we have a map which is fully filled, i.e. rectangular.
-// // i am  calculating dist_to_vert_grid_lines continuosly until the wall is reached, but
-// // the map is not rectangular therefore this doesnt work.
-
+*/
 void	dist_to_vert_grid_lines(t_game *game, t_ray *r)
 {
 	while (1)
 	{
 		if (r->sx != 0)
 		{
-			r->vert_y = game->player.pos_y + (r->dy / r->dx) * (r->vert_x - game->player.pos_x);
+/* 			r->vert_y = game->player.pos_y + (r->dy / r->dx) * (r->vert_x - game->player.pos_x);
 			r->vert_dist = sqrt(pow(game->player.pos_x - r->vert_x, 2.0) + pow(game->player.pos_y - r->vert_y, 2.0));
 			r->vert_w = r->vert_y - (int) r->vert_y;
 			if (r->sx > 0)
-				r->vert_w = 1 - r->vert_w;
+				r->vert_w = 1 - r->vert_w; */
+			calculate_dist_to_vert_grid_line(game, r);
 		}
 		else
 		{
@@ -110,7 +116,14 @@ void	dist_to_vert_grid_lines(t_game *game, t_ray *r)
 
 */
 
-
+void	calculate_dist_to_hor_grid_line(t_game *game, t_ray *r)
+{
+	r->hor_x = game->player.pos_x + (r->dx / r->dy) * (r->hor_y - game->player.pos_y);
+	r->hor_dist = sqrt(pow(game->player.pos_x - r->hor_x, 2.0) + pow(game->player.pos_y - r->hor_y, 2.0));
+	r->hor_w = r->hor_x - (int) r->hor_x;
+	if (r->sy < 0)
+		r->hor_w = 1 - r->hor_w;
+}
 
 
 
@@ -121,11 +134,12 @@ void	dist_to_hor_grid_lines(t_game *game, t_ray *r)
 	{
 		if (r->sy != 0)
 		{
-			r->hor_x = game->player.pos_x + (r->dx / r->dy) * (r->hor_y - game->player.pos_y);
+/* 			r->hor_x = game->player.pos_x + (r->dx / r->dy) * (r->hor_y - game->player.pos_y);
 			r->hor_dist = sqrt(pow(game->player.pos_x - r->hor_x, 2.0) + pow(game->player.pos_y - r->hor_y, 2.0));
 			r->hor_w = r->hor_x - (int) r->hor_x;
 			if (r->sy < 0)
-				r->hor_w = 1 - r->hor_w;
+				r->hor_w = 1 - r->hor_w; */
+			calculate_dist_to_hor_grid_line(game, r);
 		}
 		else
 		{
@@ -143,7 +157,7 @@ void	dist_to_hor_grid_lines(t_game *game, t_ray *r)
 		else
 		{
 			r->hor_dist = INFINITY;
-			break;
+			break ;
 		}
 	}
 }
