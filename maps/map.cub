@@ -5,7 +5,8 @@
 NO ./textures/no_wall.xpm42     
 SO ./textures/so_wall.xpm42
 WE ./textures/we_wall.xpm42
-EA ./textures/ea_wall.xpm42      
+EA ./textures/ea_wall.xpm42     
+ 
 
 
 F 190,178,123

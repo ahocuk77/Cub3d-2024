@@ -6,11 +6,22 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 18:06:47 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/05/03 19:42:37 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/05/03 21:41:53 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+char	*handle_color_num_error2(t_game *game, int j)
+{
+	if (game->color.total_color_num > 3 || game->color.total_color_num < 3)
+	{
+		while (j < game->color.total_color_num)
+			free(game->color.color_numb[j++]);
+		return (NULL);
+	}
+	return ("");
+}
 
 char	*take_color(t_game *game, char *str)
 {
@@ -27,7 +38,7 @@ char	*take_color(t_game *game, char *str)
 	{
 		fr = str_new[game->color.total_color_num];
 		if (is_numeric(fr) == -1 || ft_atoi(fr) == 0)
-			game->color.total_color_num = 10000;
+			return (handle_color_num_error2(game,j));
 		if (game->color.total_color_num < 3)
 			game->color.color_numb[game->color.total_color_num] = ft_strdup(fr);
 		game->color.total_color_num++;
