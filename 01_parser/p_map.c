@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 14:55:33 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/27 14:47:45 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/05/03 17:26:24 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	put_map(t_game *game, char *str, int line)
 	result = m_valid_check(game, str);
 	if (result == -1)
 		return (-1);
-	int str_length = ft_strlen(str);
+	int str_length = ft_strlen2(str);
 	int required_spaces = game->map.width - str_length;
 	if (required_spaces > 0) {
 		char *temp_str = malloc(sizeof(char) * (game->map.width + 1));
@@ -87,6 +87,7 @@ int	put_map(t_game *game, char *str, int line)
 			ft_strcat(temp_str, " ");
 			j++;
 		}
+		free(str);
 		str = temp_str;
 	}
 
