@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:14:40 by musenov           #+#    #+#             */
-/*   Updated: 2024/05/02 22:07:33 by musenov          ###   ########.fr       */
+/*   Updated: 2024/05/03 13:12:45 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,6 @@ void	draw_line(t_game *game, int col, float dist)
 	uint8_t			*pixel;
 	int				num;
 
-/* 	draw.line_height = (int)(WIN_H / dist);
-	draw.start = (WIN_H / 2) - (draw.line_height / 2);
-	draw.end = (draw.line_height / 2) + (WIN_H / 2);
-	draw.wall_x = game->wall.txt_w;
-	draw.text_x = (int)(draw.wall_x * \
-					(double)game->wall.texture[game->wall.txt_idx].width);
-	draw.text_y = 0;
-	draw.text_step = (double)game->wall.texture[game->wall.txt_idx].height / \
-						(double)draw.line_height;
-	if (draw.start < 0)
-		draw.text_y = fabs((double)draw.start) * draw.text_step; */
 	preliminary_calcs(&draw, game, dist);
 	h = 0;
 	while (h < WIN_H)

@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:23:46 by musenov           #+#    #+#             */
-/*   Updated: 2024/04/21 14:31:56 by musenov          ###   ########.fr       */
+/*   Updated: 2024/05/03 13:25:58 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,7 @@
 # endif
 
 # ifndef FOV
-#  define FOV 1.0471975512f
-# endif
-
-# ifndef ANGLE_STEP
-#  define ANGLE_STEP		0.003f
-# endif
-
-# ifndef LINEAR_STEP_SIDE
-#  define LINEAR_STEP_SIDE		0.02f
-# endif
-
-# ifndef LINEAR_STEP_FORW
-#  define LINEAR_STEP_FORW		0.06f
+#  define FOV 1.0472f
 # endif
 
 /////////////////////////// TEXTURES ///////////////////////////
@@ -71,11 +59,9 @@ typedef struct s_wall
 	char			*path[4];
 	int				path_num;
 	int				texture_check;
-
 	float			txt_w;
 	int				txt_idx;
 
-	// t_img			txt[4];
 }	t_wall;
 
 /////////////////////////// COLORS ///////////////////////////

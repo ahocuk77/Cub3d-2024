@@ -50,7 +50,8 @@ PARSER				:=	./01_parser/parser.c \
 
 RENDERER			:=	./02_renderer/00_init_player.c \
 						./02_renderer/01_render.c \
-						./02_renderer/02_cast_ray.c \
+						./02_renderer/02_cast_ray_00.c \
+						./02_renderer/02_cast_ray_01.c \
 						./02_renderer/03_hooks.c \
 						./02_renderer/utils.c
 

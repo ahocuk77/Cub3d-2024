@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:15:33 by musenov           #+#    #+#             */
-/*   Updated: 2024/05/02 21:56:02 by musenov          ###   ########.fr       */
+/*   Updated: 2024/05/03 13:19:39 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	find_view_angle(t_game *game, const char c)
 {
 	if (c == 'E')
-		game->player.view_angle = 0.0f * M_PI;
+		game->player.view_angle = 0.0f * PI;
 	else if (c == 'N')
-		game->player.view_angle = 0.5f * M_PI;
+		game->player.view_angle = 0.5f * PI;
 	else if (c == 'W')
-		game->player.view_angle = 1.0f * M_PI;
+		game->player.view_angle = 1.0f * PI;
 	else if (c == 'S')
-		game->player.view_angle = -0.5f * M_PI;
+		game->player.view_angle = -0.5f * PI;
 }
 
 void	init_player(t_game *game)
