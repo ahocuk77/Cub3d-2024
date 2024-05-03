@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:55:04 by musenov           #+#    #+#             */
-/*   Updated: 2024/05/03 13:24:55 by musenov          ###   ########.fr       */
+/*   Updated: 2024/05/03 19:03:31 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	move(t_game *game, int direction, bool forwd)
 	if (forwd)
 		step = 0.06f;
 	else
-		step = 0.02f;
+		step = 0.04f;
 	dx = step * cos(move_angle);
 	dy = step * sin(move_angle);
 	if (collision_ahead(game, move_angle, dx, dy))
