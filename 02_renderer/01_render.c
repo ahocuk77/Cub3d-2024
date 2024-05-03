@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:14:40 by musenov           #+#    #+#             */
-/*   Updated: 2024/05/03 13:12:45 by musenov          ###   ########.fr       */
+/*   Updated: 2024/05/03 17:26:22 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	draw_line(t_game *game, int col, float dist)
 	uint8_t			*pixel;
 	int				num;
 
+	int				max_index;
+
 	preliminary_calcs(&draw, game, dist);
 	h = 0;
 	while (h < WIN_H)
@@ -70,10 +72,20 @@ void	draw_line(t_game *game, int col, float dist)
 		{
 			num = game->wall.texture[game->wall.txt_idx].width * 4 * \
 							(int)draw.text_y + (int)draw.text_x * 4;
-			pixel = &game->wall.texture[game->wall.txt_idx].pixels[num];
-			color = rgba_to_color(pixel[0], pixel[1], pixel[2], pixel[3]);
-			mlx_put_pixel(game->img, col, h, color);
-			draw.text_y += draw.text_step;
+			max_index = game->wall.texture[game->wall.txt_idx].width * \
+						game->wall.texture[game->wall.txt_idx].height * 4;
+			if (num >= 0 && num < max_index)
+			{
+				pixel = &game->wall.texture[game->wall.txt_idx].pixels[num];
+				color = rgba_to_color(pixel[0], pixel[1], pixel[2], pixel[3]);
+				mlx_put_pixel(game->img, col, h, color);
+				draw.text_y += draw.text_step;
+			}
+			else
+			{
+				printf("num is beyond limits and equals to -> %d\n", num);
+				printf("while max_index is: %d\n", max_index);
+			}
 		}
 		h++;
 	}
