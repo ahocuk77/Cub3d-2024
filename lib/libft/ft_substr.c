@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 16:15:40 by ahocuk            #+#    #+#             */
-/*   Updated: 2022/12/11 18:29:12 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/05/03 20:18:27 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 
 	if (!s)
 		return (0);
-	if (ft_strlen(s) < start) {
+	if (ft_strlen(s) < start)
+	{
 		ret = malloc(1);
 		ret[0] = '\0';
-		return ret;
+		return (ret);
 	}
 	if (ft_strlen(s + start) < len)
 		len = ft_strlen(s + start);
