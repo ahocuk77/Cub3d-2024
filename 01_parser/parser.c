@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 14:00:34 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/05/03 19:59:45 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/05/03 20:25:32 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,12 @@ void	map_w(t_game *game, int fd)
 {
 	char	*str;
 	int		tmp;
-	int		i;
 
-	i = 0;
 	str = new_line_checker(game, fd);
 	game->map.width = ft_strlen(str);
 	free(str);
 	while (1)
 	{
-		printf("%d\n", i);
-		i++;
 		str = get_next_line(fd);
 		game->map.new_line_checker = false;
 		if (str == NULL)
