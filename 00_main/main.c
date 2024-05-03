@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:20:30 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/05/03 15:29:47 by musenov          ###   ########.fr       */
+/*   Updated: 2024/05/03 18:30:17 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,10 @@ int	main(int argc, char **argv)
 	free_all(&game);
 	printf("%s\n", "cub3d closed");
 	return (0);
+}
+
+void	render(t_game *game)
+{
+	draw_background(game);
+	draw_lines(game);
 }

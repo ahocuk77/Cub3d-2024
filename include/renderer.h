@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:19:38 by musenov           #+#    #+#             */
-/*   Updated: 2024/05/03 14:20:50 by musenov          ###   ########.fr       */
+/*   Updated: 2024/05/03 18:31:39 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ void	init_direction(t_game *game, char c);
 
 void	draw_background(t_game *game);
 void	preliminary_calcs(t_draw *draw, t_game *game, float dist);
+void	draw_line_norminette_25_lines_requirement(t_game *game, int col, \
+													t_draw *draw, int *h);
 void	draw_line(t_game *game, int col, float dist);
 void	draw_lines(t_game *game);
-void	render(t_game *game);
 
 // 02_cast_ray_00.c
 
@@ -53,5 +54,9 @@ void	keyboard_hooks(t_game *game);
 int		get_sign(float f);
 int		rgba_to_color(int32_t r, int32_t g, int32_t b, int32_t a);
 void	print_map(t_game *game);
+
+// main.c
+
+void	render(t_game *game);
 
 #endif

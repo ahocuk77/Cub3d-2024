@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:14:40 by musenov           #+#    #+#             */
-/*   Updated: 2024/05/03 17:26:22 by musenov          ###   ########.fr       */
+/*   Updated: 2024/05/03 18:30:22 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,39 +54,38 @@ void	preliminary_calcs(t_draw *draw, t_game *game, float dist)
 		draw->text_y = fabs((double)draw->start) * draw->text_step;
 }
 
-void	draw_line(t_game *game, int col, float dist)
+void	draw_line_norminette_25_lines_requirement(t_game *game, int col, \
+													t_draw *draw, int *h)
 {
-	t_draw			draw;
+	int				max_index;
 	unsigned int	color;
-	int				h;
 	uint8_t			*pixel;
 	int				num;
 
-	int				max_index;
+	num = game->wall.texture[game->wall.txt_idx].width * 4 * \
+					(int)draw->text_y + (int)draw->text_x * 4;
+	max_index = game->wall.texture[game->wall.txt_idx].width * \
+				game->wall.texture[game->wall.txt_idx].height * 4;
+	if (num >= 0 && num < max_index)
+	{
+		pixel = &game->wall.texture[game->wall.txt_idx].pixels[num];
+		color = rgba_to_color(pixel[0], pixel[1], pixel[2], pixel[3]);
+		mlx_put_pixel(game->img, col, *h, color);
+		draw->text_y += draw->text_step;
+	}
+}
+
+void	draw_line(t_game *game, int col, float dist)
+{
+	t_draw			draw;
+	int				h;
 
 	preliminary_calcs(&draw, game, dist);
 	h = 0;
 	while (h < WIN_H)
 	{
 		if (h >= draw.start && h <= draw.end)
-		{
-			num = game->wall.texture[game->wall.txt_idx].width * 4 * \
-							(int)draw.text_y + (int)draw.text_x * 4;
-			max_index = game->wall.texture[game->wall.txt_idx].width * \
-						game->wall.texture[game->wall.txt_idx].height * 4;
-			if (num >= 0 && num < max_index)
-			{
-				pixel = &game->wall.texture[game->wall.txt_idx].pixels[num];
-				color = rgba_to_color(pixel[0], pixel[1], pixel[2], pixel[3]);
-				mlx_put_pixel(game->img, col, h, color);
-				draw.text_y += draw.text_step;
-			}
-			else
-			{
-				printf("num is beyond limits and equals to -> %d\n", num);
-				printf("while max_index is: %d\n", max_index);
-			}
-		}
+			draw_line_norminette_25_lines_requirement(game, col, &draw, &h);
 		h++;
 	}
 }
@@ -110,10 +109,4 @@ void	draw_lines(t_game *game)
 		v -= dv;
 		x++;
 	}
-}
-
-void	render(t_game *game)
-{
-	draw_background(game);
-	draw_lines(game);
 }
