@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:23:46 by musenov           #+#    #+#             */
-/*   Updated: 2024/05/03 13:25:58 by musenov          ###   ########.fr       */
+/*   Updated: 2024/05/03 15:29:32 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,6 @@
 # endif
 
 /////////////////////////// TEXTURES ///////////////////////////
-
-/* typedef enum e_direction
-{
-	NO,
-	SO,
-	WE,
-	EA,
-}	t_direction; */
 
 typedef enum e_direction
 {
@@ -75,8 +67,8 @@ typedef struct s_rgb
 
 typedef struct s_color
 {
-	t_rgb				floor; // meder uses
-	t_rgb				ceiling; // meder uses
+	t_rgb				floor;
+	t_rgb				ceiling;
 	int					color_num;
 	int					f_color_num;
 	int					c_color_num;
@@ -89,10 +81,10 @@ typedef struct s_color
 
 typedef struct s_map
 {
-	char	**map; // meder uses
-	int		height; // meder uses
-	int		width; // meder uses
-	char	player; // player's direction - meder uses
+	char	**map;
+	int		height;
+	int		width;
+	char	player;
 	int		size;
 	int		len_width;
 	int		len_height;
@@ -108,7 +100,6 @@ typedef struct s_player
 	float	pos_y;
 	float	view_angle;
 }	t_player;
-
 
 /////////////////////////// RAY DATA ///////////////////////////
 
@@ -151,7 +142,5 @@ typedef struct s_draw
 	double	wall_x;
 	double	text_step;
 }	t_draw;
-
-
 
 #endif

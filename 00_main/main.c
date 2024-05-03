@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:20:30 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/05/02 20:55:24 by musenov          ###   ########.fr       */
+/*   Updated: 2024/05/03 15:29:47 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,10 @@ int	main(int argc, char **argv)
 	game.mlx = mlx_init(WIN_W, WIN_H, "cub3D", false);
 	game.img = mlx_new_image(game.mlx, WIN_W, WIN_H);
 	mlx_image_to_window(game.mlx, game.img, 0, 0);
-	printf("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
-	print_map(&game);
-	printf("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
-
 	init_player(&game);
+	init_direction(&game, \
+				game.map.map[(int)game.player.pos_y][(int)game.player.pos_x]);
 	render(&game);
-
 	mlx_loop_hook(game.mlx, (void (*)(void *))keyboard_hooks, &game);
 	mlx_cursor_hook(game.mlx, (void *)cursor_hook, &game);
 	mlx_loop(game.mlx);

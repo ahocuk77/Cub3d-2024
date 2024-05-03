@@ -6,42 +6,44 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:15:33 by musenov           #+#    #+#             */
-/*   Updated: 2024/05/03 13:19:39 by musenov          ###   ########.fr       */
+/*   Updated: 2024/05/03 14:25:31 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "renderer.h"
-
-void	find_view_angle(t_game *game, const char c)
-{
-	if (c == 'E')
-		game->player.view_angle = 0.0f * PI;
-	else if (c == 'N')
-		game->player.view_angle = 0.5f * PI;
-	else if (c == 'W')
-		game->player.view_angle = 1.0f * PI;
-	else if (c == 'S')
-		game->player.view_angle = -0.5f * PI;
-}
 
 void	init_player(t_game *game)
 {
 	int	i;
 	int	j;
 
-	i = -1;
-	while (++i < game->map.height)
+	i = 0;
+	while (i < game->map.height)
 	{
-		j = -1;
-		while (game->map.map[i][++j])
+		j = 0;
+		while (game->map.map[i][j])
 		{
-			if (ft_strchr("NSWE", game->map.map[i][j]))
+			if (game->map.map[i][j] == 'E' || game->map.map[i][j] == 'S' || \
+				game->map.map[i][j] == 'W' || game->map.map[i][j] == 'N')
 			{
-				game->player.pos_x = (float) j + 0.5f;
-				game->player.pos_y = (float) i + 0.5f;
-				find_view_angle(game, game->map.map[i][j]);
+				game->player.pos_x = (float)j;
+				game->player.pos_y = (float)i;
 				return ;
 			}
+			j++;
 		}
+		i++;
 	}
+}
+
+void	init_direction(t_game *game, char c)
+{
+	if (c == 'E')
+		game->player.view_angle = 0.0f * PI;
+	if (c == 'S')
+		game->player.view_angle = -0.5f * PI;
+	if (c == 'W')
+		game->player.view_angle = 1.0f * PI;
+	if (c == 'N')
+		game->player.view_angle = 0.5f * PI;
 }

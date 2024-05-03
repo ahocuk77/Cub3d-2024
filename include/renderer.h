@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:19:38 by musenov           #+#    #+#             */
-/*   Updated: 2024/05/03 13:42:33 by musenov          ###   ########.fr       */
+/*   Updated: 2024/05/03 14:20:50 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 // 00_init_player.c
 
-void	find_view_angle(t_game *game, const char c);
 void	init_player(t_game *game);
+void	init_direction(t_game *game, char c);
 
 // 01_render.c
 
@@ -27,7 +27,6 @@ void	preliminary_calcs(t_draw *draw, t_game *game, float dist);
 void	draw_line(t_game *game, int col, float dist);
 void	draw_lines(t_game *game);
 void	render(t_game *game);
-
 
 // 02_cast_ray_00.c
 
