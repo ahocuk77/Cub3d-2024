@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:20:43 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/05/03 18:31:30 by musenov          ###   ########.fr       */
+/*   Updated: 2024/05/03 19:18:43 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,6 @@
 # include "renderer.h"
 
 int		main(int argc, char **argv);
+int		parse_and_init(int argc, char **argv, t_game *game);
 
 #endif

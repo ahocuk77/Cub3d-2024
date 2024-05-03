@@ -6,7 +6,7 @@
 /*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 13:54:58 by musenov           #+#    #+#             */
-/*   Updated: 2024/03/21 19:29:05 by musenov          ###   ########.fr       */
+/*   Updated: 2024/05/03 19:13:35 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ char	*ft_strnew(size_t size)
 	*(str + 0) = '\0';
 	return (str);
 }
-
 
 char	*ft_strjoin_gnl(char const *s1, char const *s2)
 {

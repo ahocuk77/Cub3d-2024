@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:23:01 by musenov           #+#    #+#             */
-/*   Updated: 2024/03/27 15:17:08 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/05/03 19:24:31 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int		is_numeric(char *str);
 char	*handle_color_num_error(t_game *game, int j);
 size_t	ft_strlen2(const char *s);
 int		path_check(char *path);
-int	len_checker(t_game *game, int x, int y);
-int	len_checker2(t_game *game, int x, int y);
+int		len_checker(t_game *game, int x, int y);
+int		len_checker2(t_game *game, int x, int y);
 void	delete_slash_n(char *str);
 char	*new_line_checker(t_game *game, int fd);
 void	map_w(t_game *game, int fd);
