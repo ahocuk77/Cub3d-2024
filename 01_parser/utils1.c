@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:06:33 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/27 15:16:47 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/05/03 17:01:59 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ size_t	ft_strlen2(const char *s)
 	size_t	i;
 
 	i = 0;
-	while (s[i] != '\0')
+	while (s[i] != '\0' && s[i] != '\n')
 		i++;
 	return (i);
 }

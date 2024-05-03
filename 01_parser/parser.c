@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 14:00:34 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/27 15:40:43 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/05/03 17:34:46 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,25 @@ void	map_w(t_game *game, int fd)
 	int		tmp;
 	int i = 0;
 
-	str = new_line_checker(game, fd);
-	game->map.width = ft_strlen(str);
+	//str = new_line_checker(game, fd);
+	//game->map.width = ft_strlen(str);
 	while (1)
 	{
 		printf("%d\n", i);
 		i++;
-		if (game->map.new_line_checker != true)
-			str = get_next_line(fd);
-		game->map.new_line_checker = false;
-		delete_slash_n(str);
+		// if (game->map.new_line_checker != true)
+		// 	str = get_next_line(fd);
+		str = get_next_line(fd);
+		//game->map.new_line_checker = false;
+		// delete_slash_n(str);
 		if (str == NULL)
 			break ;
 		tmp = ft_strlen2(str);
 		if (game->map.width < tmp)
 			game->map.width = ft_strlen2(str);
+		free(str);
 	}
+	free(str);
 }
 
 void	parser(t_game *game, int fd)
