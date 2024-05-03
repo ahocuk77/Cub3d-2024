@@ -29,6 +29,9 @@ int main(int argc, char **argv)
 		ft_putstr_fd("Wrong file\n", 2);
 		return 1;
 	}
+	map_w(&game, fd);
+	close(fd);
+	fd = open(argv[1], O_RDONLY);
 	parser(&game, fd);
 	if(game.wall.texture_check == 1 || game.color.color_check == 1 || game.map.map_check == 1)
 	{
@@ -40,6 +43,7 @@ int main(int argc, char **argv)
 	mlx_image_to_window(game.mlx, game.img, 0, 0);
 	draw_background(&game);
 	print_map(&game);
+	//exit(1);
 	// open_map_file(&game, check_argv(argv));
 	// player_position(&game);
 	// init_player_direction(&game);

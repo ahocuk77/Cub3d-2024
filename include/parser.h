@@ -34,5 +34,8 @@ size_t	ft_strlen2(const char *s);
 int		path_check(char *path);
 int	len_checker(t_game *game, int x, int y);
 int	len_checker2(t_game *game, int x, int y);
+void	delete_slash_n(char *str);
+char	*new_line_checker(t_game *game, int fd);
+void	map_w(t_game *game, int fd);
 
 #endif
