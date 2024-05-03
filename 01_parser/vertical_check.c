@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 18:58:52 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/27 14:50:21 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/05/03 20:00:43 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int	vertical_space_skip(t_game *game, int y)
 	}
 	while (x < game->map.height && game->map.map[x][y] == ' ')
 		x++;
-	if(x == game->map.height)
-		return -2;
+	if (x == game->map.height)
+		return (-2);
 	while (game->map.map[x][y] != '1' && game->map.map[x][y] != '0')
 	{
 		x++;
@@ -109,7 +109,7 @@ int	vertical_check(t_game *game)
 	while (y < game->map.width)
 	{
 		x = vertical_space_skip(game, y);
-		if(x == -2)
+		if (x == -2)
 		{
 			y++;
 			continue ;

@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 14:55:33 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/05/03 17:26:24 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/05/03 20:11:18 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,48 +41,37 @@ int	m_valid_check(t_game *game, char *str)
 	return (0);
 }
 
-
-char *ft_strcpy(char *dst, const char *src)
+char	*ft_strcat(char *dst, const char *src)
 {
-    size_t i = 0;
+	size_t	i;
+	size_t	len_dst;
 
-    while (src[i] != '\0') {
-        dst[i] = src[i];
-        i++;
-    }
-    dst[i] = '\0';
-    return dst;
+	i = 0;
+	len_dst = ft_strlen(dst);
+	while (src[i] != '\0')
+	{
+		dst[len_dst + i] = src[i];
+		i++;
+	}
+	dst[len_dst + i] = '\0';
+	return (dst);
 }
 
-char *ft_strcat(char *dst, const char *src) {
-    size_t i = 0;
-    size_t len_dst = ft_strlen(dst);
-    
-    while (src[i] != '\0') {
-        dst[len_dst + i] = src[i];
-        i++;
-    }
-    dst[len_dst + i] = '\0';
-    return dst;
-}
-
-int	put_map(t_game *game, char *str, int line)
+char	*put_map_spaces(t_game *game, char *str)
 {
-	int		result;
-	char	**temp;
-	int		i;
+	char	*temp_str;
 	int		j;
+	int		str_length;
+	int		required_spaces;
 
+	str_length = ft_strlen2(str);
+	required_spaces = game->map.width - str_length;
 	j = 0;
-	result = m_valid_check(game, str);
-	if (result == -1)
-		return (-1);
-	int str_length = ft_strlen2(str);
-	int required_spaces = game->map.width - str_length;
-	if (required_spaces > 0) {
-		char *temp_str = malloc(sizeof(char) * (game->map.width + 1));
+	if (required_spaces > 0)
+	{
+		temp_str = malloc(sizeof(char) * (game->map.width + 1));
 		ft_strcpy(temp_str, str);
-		while(j < required_spaces)
+		while (j < required_spaces)
 		{
 			ft_strcat(temp_str, " ");
 			j++;
@@ -90,7 +79,19 @@ int	put_map(t_game *game, char *str, int line)
 		free(str);
 		str = temp_str;
 	}
+	return (str);
+}
 
+int	put_map(t_game *game, char *str, int line)
+{
+	int		result;
+	char	**temp;
+	int		i;
+
+	result = m_valid_check(game, str);
+	if (result == -1)
+		return (-1);
+	str = put_map_spaces(game, str);
 	temp = game->map.map;
 	game->map.map = malloc (sizeof(char *) * (line + 1));
 	i = 0;
@@ -103,38 +104,6 @@ int	put_map(t_game *game, char *str, int line)
 	game->map.map[i + 1] = NULL;
 	free(temp);
 	return (0);
-}
-
-char	*new_line_checker(t_game *game, int fd)
-{
-	char	*str;
-
-	str = get_next_line(fd);
-	if (str[0] == '\n')
-	{
-		while (str[0] == '\n')
-		{
-			free(str);
-			str = get_next_line(fd);
-		}
-		game->map.new_line_checker = true;
-	}
-	return (str);
-}
-
-void	delete_slash_n(char *str)
-{
-	char	*current_line;
-	int		i;
-
-	current_line = str;
-	i = 0;
-	while (current_line && current_line[i])
-	{
-		if (current_line[i] == '\n')
-			current_line[i] = '\0';
-		i++;
-	}
 }
 
 void	p_map(t_game *game, int fd)

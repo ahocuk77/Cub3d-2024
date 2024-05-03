@@ -42,6 +42,7 @@ PARSER				:=	./01_parser/parser.c \
 						./01_parser/p_color.c \
 						./01_parser/p_map.c \
 						./01_parser/utils2.c \
+						./01_parser/utils3.c \
 						./01_parser/map_check.c \
 						./01_parser/horizontal_check.c \
 						./01_parser/vertical_check.c \

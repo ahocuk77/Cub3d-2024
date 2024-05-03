@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 18:42:13 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/27 14:44:30 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/05/03 19:41:11 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	replace_spaces_with_one(t_game *game)
 			if (current_line[i] == ' ' || current_line[i] == '\n'
 				|| current_line[i] == '\0')
 			{
-				if(current_line[i] == '\0')
-					break;
+				if (current_line[i] == '\0')
+					break ;
 				current_line[i] = '1';
 			}
 			i++;

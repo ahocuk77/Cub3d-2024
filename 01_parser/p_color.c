@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 18:06:47 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/27 15:40:47 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/05/03 19:42:37 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*take_color(t_game *game, char *str)
 {
 	char	**str_new;
-	char	*first;
+	char	*fr;
 	int		j;
 
 	j = 0;
@@ -25,11 +25,11 @@ char	*take_color(t_game *game, char *str)
 	str_new = ft_split_custom(str);
 	while (str_new[game->color.total_color_num] != NULL)
 	{
-		first = str_new[game->color.total_color_num];
-		if (is_numeric(first) == -1 || ft_atoi(first) == 0)
+		fr = str_new[game->color.total_color_num];
+		if (is_numeric(fr) == -1 || ft_atoi(fr) == 0)
 			game->color.total_color_num = 10000;
 		if (game->color.total_color_num < 3)
-			game->color.color_numb[game->color.total_color_num] = ft_strdup(first);
+			game->color.color_numb[game->color.total_color_num] = ft_strdup(fr);
 		game->color.total_color_num++;
 	}
 	while (str_new[j] != NULL)

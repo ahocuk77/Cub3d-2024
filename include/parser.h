@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:23:01 by musenov           #+#    #+#             */
-/*   Updated: 2024/05/03 19:24:31 by musenov          ###   ########.fr       */
+/*   Updated: 2024/05/03 20:11:39 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ int		len_checker2(t_game *game, int x, int y);
 void	delete_slash_n(char *str);
 char	*new_line_checker(t_game *game, int fd);
 void	map_w(t_game *game, int fd);
+char	*ft_strcpy(char *dst, const char *src);
 
 #endif

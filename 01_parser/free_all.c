@@ -6,24 +6,16 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:14:51 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/27 14:41:41 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/05/03 19:40:19 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	free_all(t_game *game)
+void	free_all2(t_game *game)
 {
 	int	i;
 
-	i = 0;
-	printf("%s\n", "memory free start");
-	while (i < game->wall.path_num)
-	{
-		printf("%s\n", game->wall.path[i]);
-		free(game->wall.path[i]);
-		i++;
-	}
 	i = 0;
 	if (game->wall.path_num < 4 && game->wall.path_num != 0)
 	{
@@ -42,6 +34,19 @@ void	free_all(t_game *game)
 			i++;
 		}
 	}
+}
+
+void	free_all(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	while (i < game->wall.path_num)
+	{
+		free(game->wall.path[i]);
+		i++;
+	}
+	free_all2(game);
 	i = 0;
 	if (game->map.map == NULL)
 		return ;
@@ -52,16 +57,3 @@ void	free_all(t_game *game)
 	}
 	free(game->map.map);
 }
-
-	// while(game->map.map[i] != NULL)
-	// {
-	// 	free(game->map.map[i]);
-	// 	i++;
-
-	// 	printf("%s\n", "map deleted");
-	// 	if(game->map.map[i] == NULL)
-	// 	{
-	// 		free(game->map.map);
-	// 		break ;
-	// 	}
-	// }

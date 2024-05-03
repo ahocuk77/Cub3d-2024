@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:20:30 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/05/03 19:24:05 by musenov          ###   ########.fr       */
+/*   Updated: 2024/05/03 19:45:08 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	main(int argc, char **argv)
 	mlx_terminate(game.mlx);
 	free_all(&game);
 	printf("%s\n", "cub3d closed");
+	system("leaks cub3D");
 	return (0);
 }
 

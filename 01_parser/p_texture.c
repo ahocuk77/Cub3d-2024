@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 14:52:16 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/27 14:48:59 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/05/03 19:58:56 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	path_number_check(t_game *game, char *path)
 	while (i < game->wall.path_num)
 	{
 		len = ft_strlen(path);
-		if (ft_strncmp(game->wall.path[game->wall.path_num], game->wall.path[i], len) == 0)
+		if (ft_strncmp(game->wall.path[game->wall.path_num], \
+			game->wall.path[i], len) == 0)
 		{
 			game->wall.path_num++;
 			return (-1);
@@ -119,7 +120,8 @@ void	p_texture(t_game *game, int fd)
 			return (free(str));
 		}
 		if (game->wall.texture_num[NO] == 1 && game->wall.texture_num[SO] == 1
-			&& game->wall.texture_num[WE] == 1 && game->wall.texture_num[EA] == 1)
+			&& game->wall.texture_num[WE] == 1 && \
+			game->wall.texture_num[EA] == 1)
 		{
 			free(str);
 			break ;
