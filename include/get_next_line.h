@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 19:48:54 by musenov           #+#    #+#             */
-/*   Updated: 2024/05/03 16:18:36 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/05/03 16:30:57 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,3 +37,4 @@ gcc -Wall -Wextra -Werror -D BUFF_SIZE=42 bonus2.c
 char	*get_next_line(int fd);
 
 #endif
+
