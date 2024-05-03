@@ -3,21 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 23:24:27 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/21 20:41:51 by musenov          ###   ########.fr       */
+/*   Updated: 2024/05/03 20:18:49 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-
-
-// # ifndef BUFFER_SIZE
-// #  define BUFFER_SIZE 41
-// # endif
-
 
 # include <stdlib.h>
 # include <unistd.h>

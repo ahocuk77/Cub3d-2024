@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 14:00:34 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/25 14:14:02 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/05/03 20:25:32 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,44 @@ int	ft_cubcheck(char *map)
 		return (0);
 }
 
+void	map_w(t_game *game, int fd)
+{
+	char	*str;
+	int		tmp;
+
+	str = new_line_checker(game, fd);
+	game->map.width = ft_strlen(str);
+	free(str);
+	while (1)
+	{
+		str = get_next_line(fd);
+		game->map.new_line_checker = false;
+		if (str == NULL)
+			break ;
+		tmp = ft_strlen2(str);
+		if (game->map.width < tmp)
+			game->map.width = ft_strlen2(str);
+		free(str);
+	}
+	free(str);
+}
+
 void	parser(t_game *game, int fd)
 {
 	p_texture(game, fd);
-	if(game->texture_check == 1)
+	if (game->wall.texture_check == 1)
 	{
 		close(fd);
 		return ;
 	}
-	printf("color%s\n", "enter");
 	p_color(game, fd);
-	if(game->color_check == 1)
+	if (game->color.color_check == 1)
 	{
 		close(fd);
 		return ;
 	}
-	printf("color%s\n", "exit");
 	p_map(game, fd);
-	printf("map%s\n", "exit");
-	if(game->map_check == 1)
+	if (game->map.map_check == 1)
 	{
 		close(fd);
 		return ;

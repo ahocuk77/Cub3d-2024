@@ -6,61 +6,92 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 14:55:33 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/03/23 16:29:46 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/05/03 20:11:18 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
 int	m_valid_check(t_game *game, char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	if(str[0] == '\n')
+	if (str[0] == '\n')
 	{
 		printf("String: %s\n", "empty line");
-		return -1;
+		return (-1);
 	}
-	while(str[i] != '\n' && str[i] != '\0')
+	while (str[i] != '\n' && str[i] != '\0')
 	{
-		if(str[i] != '0' && str[i] != '1')
+		if (str[i] != '0' && str[i] != '1')
 		{
-			if(str[i] != 'N' && str[i] != 'S' && str[i] != 'E' && str[i] != 'W'
+			if (str[i] != 'N' && str[i] != 'S' && str[i] != 'E' && str[i] != 'W'
 				&& str[i] != ' ')
-				return -1;
-			if(str[i] != '\t' && str[i] != ' ')
+				return (-1);
+			if (str[i] != '\t' && str[i] != ' ')
 			{
-				if(game->map.player != '\0')
-					return -1;
+				if (game->map.player != '\0')
+					return (-1);
 				game->map.player = str[i];
 			}
 		}
 		i++;
 	}
-	return 0;
+	return (0);
 }
-size_t	ft_strlen2(const char *s)
+
+char	*ft_strcat(char *dst, const char *src)
 {
 	size_t	i;
+	size_t	len_dst;
 
 	i = 0;
-	while (s[i] != '\0') // maybe we can add \n 
+	len_dst = ft_strlen(dst);
+	while (src[i] != '\0')
+	{
+		dst[len_dst + i] = src[i];
 		i++;
-	return (i);
+	}
+	dst[len_dst + i] = '\0';
+	return (dst);
 }
 
-int put_map(t_game *game, char *str, int line)
+char	*put_map_spaces(t_game *game, char *str)
 {
-	int result;
-	char **temp;
-	// int lastsize;
+	char	*temp_str;
+	int		j;
+	int		str_length;
+	int		required_spaces;
+
+	str_length = ft_strlen2(str);
+	required_spaces = game->map.width - str_length;
+	j = 0;
+	if (required_spaces > 0)
+	{
+		temp_str = malloc(sizeof(char) * (game->map.width + 1));
+		ft_strcpy(temp_str, str);
+		while (j < required_spaces)
+		{
+			ft_strcat(temp_str, " ");
+			j++;
+		}
+		free(str);
+		str = temp_str;
+	}
+	return (str);
+}
+
+int	put_map(t_game *game, char *str, int line)
+{
+	int		result;
+	char	**temp;
 	int		i;
 
 	result = m_valid_check(game, str);
-	if(result == -1)
-	{
-		return -1;
-	}
+	if (result == -1)
+		return (-1);
+	str = put_map_spaces(game, str);
 	temp = game->map.map;
 	game->map.map = malloc (sizeof(char *) * (line + 1));
 	i = 0;
@@ -69,58 +100,32 @@ int put_map(t_game *game, char *str, int line)
 		game->map.map[i] = temp[i];
 		i++;
 	}
-	game->map.map[i] = ft_strdup(str);
+	game->map.map[i] = str;
 	game->map.map[i + 1] = NULL;
 	free(temp);
-	return 0;
-}	
-
-char	*new_line_checker(t_game *game, int fd)
-{
-	char *str;
-
-	str = get_next_line(fd);
-	if(str[0] == '\n')
-	{
-		while(str[0] == '\n')
-		{
-			free(str);
-			str = get_next_line(fd);
-		}
-		game->new_line_checker = true;
-	}
-	return (str);
-
+	return (0);
 }
 
 void	p_map(t_game *game, int fd)
 {
-	char *str;
-	int tmp;
+	char	*str;
 
 	str = new_line_checker(game, fd);
-	game->width = ft_strlen(str);
-	while(1)
+	while (1)
 	{
-		if(game->new_line_checker != true)
+		if (game->map.new_line_checker != true)
 			str = get_next_line(fd);
-		game->new_line_checker = false;
-		str = trimreplace(str, "\n");
-		printf("%s\n", str);
-		if(str == NULL)
+		game->map.new_line_checker = false;
+		delete_slash_n(str);
+		if (str == NULL)
 			break ;
-		tmp = ft_strlen2(str);
-		if(game->width < tmp)
+		game->map.height++;
+		if (ft_strlen(str) != 0 && put_map(game, str, game->map.height) == -1)
 		{
-			game->width = ft_strlen2(str);
-		}
-		game->height++;
-		if (ft_strlen(str) != 0 && put_map(game, str, game->height) == -1)
-		{
-			game->map_check = 1;
-			free(str);
+			game->map.map_check = 1;
 			break ;
 		}
-		free(str);
 	}
+	if (game->map.player == '\0')
+		game->map.map_check = 1;
 }

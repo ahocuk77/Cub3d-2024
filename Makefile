@@ -8,6 +8,11 @@ CFLAGS				:= -Wall -Werror -Wextra
 LDFLAGS				:= -flto -O3 -march=nocona
 HEADERS				:=	-I ./include -I ./lib/MLX42/include/MLX42/
 
+ifdef debug
+	CFLAGS			+= -g3
+	LDFLAGS			+= -g3
+endif
+
 ifdef FSAN0
 	CFLAGS			+= -g3 -fsanitize=address
 	LDFLAGS			+= -g3 -fsanitize=address
@@ -37,21 +42,22 @@ PARSER				:=	./01_parser/parser.c \
 						./01_parser/p_color.c \
 						./01_parser/p_map.c \
 						./01_parser/utils2.c \
+						./01_parser/utils3.c \
 						./01_parser/map_check.c \
 						./01_parser/horizontal_check.c \
 						./01_parser/vertical_check.c \
 						./01_parser/init.c \
 						./01_parser/free_all.c \
 
-RAYCASTER			:=	
-# ./02_raycaster/
-
-RENDERER			:=	
-# ./03_raycaster/
+RENDERER			:=	./02_renderer/00_init_player.c \
+						./02_renderer/01_render.c \
+						./02_renderer/02_cast_ray_00.c \
+						./02_renderer/02_cast_ray_01.c \
+						./02_renderer/03_hooks.c \
+						./02_renderer/utils.c
 
 SRCS				:=	$(MAIN) \
 						$(PARSER) \
-						$(RAYCASTER) \
 						$(RENDERER)
 
 OBJ_DIR				:=	./obj/
