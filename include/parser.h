@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:23:01 by musenov           #+#    #+#             */
-/*   Updated: 2024/05/03 20:11:39 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/05/04 19:02:25 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ void	delete_slash_n(char *str);
 char	*new_line_checker(t_game *game, int fd);
 void	map_w(t_game *game, int fd);
 char	*ft_strcpy(char *dst, const char *src);
+char	*handle_color_num_error2(t_game *game, int j, char **str_new);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:20:30 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/05/04 18:17:28 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/05/04 19:04:01 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int argc, char **argv)
 	mlx_terminate(game.mlx);
 	free_all(&game);
 	printf("%s\n", "cub3d closed");
-	//system("leaks cub3D");
+	system("leaks cub3D");
 	return (0);
 }
 
@@ -59,7 +59,6 @@ int	parse_and_init(int argc, char **argv, t_game *game)
 									|| game->map.map_check == 1)
 	{
 		free_all(game);
-		
 		return (1);
 	}
 	return (0);

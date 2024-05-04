@@ -6,25 +6,11 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 18:06:47 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/05/04 17:58:58 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/05/04 19:02:08 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-char	*handle_color_num_error2(t_game *game, int j)
-{
-	if (game->color.total_color_num > 3 || game->color.total_color_num < 3)
-	{
-		while (j < game->color.total_color_num)
-			free(game->color.color_numb[j++]);
-		return (NULL);
-	}
-	free(game->color.color_numb[0]);
-	free(game->color.color_numb[1]);
-	free(game->color.color_numb[2]);
-	return (NULL);
-}
 
 char	*take_color(t_game *game, char *str)
 {
@@ -41,13 +27,7 @@ char	*take_color(t_game *game, char *str)
 	{
 		fr = str_new[game->color.total_color_num];
 		if (is_numeric(fr) == -1 || ft_atoi(fr) == 0)
-		{
-			handle_color_num_error2(game,j);
-			while (str_new[j] != NULL)
-				free (str_new[j++]);
-			free (str_new);
-			return (NULL);
-		}
+			return (handle_color_num_error2(game, j, str_new));
 		if (game->color.total_color_num < 3)
 			game->color.color_numb[game->color.total_color_num] = ft_strdup(fr);
 		game->color.total_color_num++;

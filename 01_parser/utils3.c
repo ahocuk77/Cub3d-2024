@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:10:33 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/05/03 20:11:24 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/05/04 19:02:38 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,22 @@ char	*ft_strcpy(char *dst, const char *src)
 	}
 	dst[i] = '\0';
 	return (dst);
+}
+
+char	*handle_color_num_error2(t_game *game, int j, char **str_new)
+{
+	if (game->color.total_color_num > 3 || game->color.total_color_num < 3)
+	{
+		while (j < game->color.total_color_num)
+			free(game->color.color_numb[j++]);
+		j = 0;
+		while (str_new[j] != NULL)
+			free (str_new[j++]);
+		free (str_new);
+		return (NULL);
+	}
+	free(game->color.color_numb[0]);
+	free(game->color.color_numb[1]);
+	free(game->color.color_numb[2]);
+	return (NULL);
 }
