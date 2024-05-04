@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: musenov <musenov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:20:30 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/05/04 19:04:01 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/05/04 19:46:25 by musenov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,23 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
-int	parse_and_init(int argc, char **argv, t_game *game)
+int	init_arg_check(int argc, char **argv, t_game *game)
 {
-	int		fd;
-
 	if (argc != 2 || ft_cubcheck(argv[1]) == 1)
 	{
 		ft_putstr_fd("ERROR\n", 2);
 		return (1);
 	}
 	ft_init(game);
+	return (0);
+}
+
+int	parse_and_init(int argc, char **argv, t_game *game)
+{
+	int		fd;
+
+	if (init_arg_check(argc, argv, game))
+		return (1);
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 	{
@@ -58,11 +65,14 @@ int	parse_and_init(int argc, char **argv, t_game *game)
 	if (game->wall.texture_check == 1 || game->color.color_check == 1 \
 									|| game->map.map_check == 1)
 	{
+		printf("Wrong map\n");
 		free_all(game);
 		return (1);
 	}
 	return (0);
 }
+
+/* system("leaks cub3D"); */
 
 void	render(t_game *game)
 {
