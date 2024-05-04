@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:14:51 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/05/03 21:36:00 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/05/04 18:14:35 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@ void	free_all2(t_game *game)
 	{
 		while (i < game->wall.path_num -2)
 		{
-			mlx_delete_xpm42(game->wall.xpm[i]);
+			//mlx_delete_xpm42(game->wall.xpm[i]);
 			i++;
 		}
-		mlx_delete_xpm42(game->wall.xpm[i]);
+		//mlx_delete_xpm42(game->wall.xpm[i]);
 	}
 	else
 	{
 		while (i < game->wall.path_num)
 		{
-			mlx_delete_xpm42(game->wall.xpm[i]);
+			//mlx_delete_xpm42(game->wall.xpm[i]);
 			i++;
 		}
 	}
@@ -41,7 +41,7 @@ void	free_all(t_game *game)
 	int	i;
 
 	i = 0;
-	while (i < game->wall.path_num)
+	while (i < game->wall.path_num -1)
 	{
 		free(game->wall.path[i]);
 		i++;
