@@ -6,7 +6,7 @@
 /*   By: ahocuk <ahocuk@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 18:06:47 by ahocuk            #+#    #+#             */
-/*   Updated: 2024/05/03 19:42:37 by ahocuk           ###   ########.fr       */
+/*   Updated: 2024/05/04 19:02:08 by ahocuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*take_color(t_game *game, char *str)
 	{
 		fr = str_new[game->color.total_color_num];
 		if (is_numeric(fr) == -1 || ft_atoi(fr) == 0)
-			game->color.total_color_num = 10000;
+			return (handle_color_num_error2(game, j, str_new));
 		if (game->color.total_color_num < 3)
 			game->color.color_numb[game->color.total_color_num] = ft_strdup(fr);
 		game->color.total_color_num++;

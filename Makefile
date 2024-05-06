@@ -8,30 +8,6 @@ CFLAGS				:= -Wall -Werror -Wextra
 LDFLAGS				:= -flto -O3 -march=nocona
 HEADERS				:=	-I ./include -I ./lib/MLX42/include/MLX42/
 
-ifdef debug
-	CFLAGS			+= -g3
-	LDFLAGS			+= -g3
-endif
-
-ifdef FSAN0
-	CFLAGS			+= -g3 -fsanitize=address
-	LDFLAGS			+= -g3 -fsanitize=address
-endif
-
-ifdef FSAN1
-	CFLAGS			+= -g3
-	LDFLAGS			+= -g3
-	LDFLAGS			+= -L ../LeakSanitizer -llsan -lc++ -Wno-gnu-include-next
-	HEADERS			+= -I ../LeakSanitizer
-endif
-
-ifdef FSAN
-	CFLAGS			+= -g3 -fsanitize=address
-	LDFLAGS			+= -g3 -fsanitize=address
-	LDFLAGS			+= -L ../LeakSanitizer -llsan -lc++ -Wno-gnu-include-next
-	HEADERS			+= -I ../LeakSanitizer
-endif
-
 MAIN				:=	./00_main/main.c \
 						./00_main/get_next_line.c \
 						./00_main/get_next_line_utils.c \
